@@ -1,0 +1,5 @@
+Revision history for Music-Intervals
+
+{{$NEXT}}
+    - Ported functionality from the intervals script.
+    - Minted by Dist::Zilla
