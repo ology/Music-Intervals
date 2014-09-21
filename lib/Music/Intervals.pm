@@ -21,7 +21,8 @@ use Music::Ratios;
 
 =head1 DESCRIPTION
 
-A C<Music::Intervals> mathematically breaks-down musical intervals and chords.
+A C<Music::Intervals> object shows the mathematical break-down of musical
+intervals and chords.
 
 =cut
 
