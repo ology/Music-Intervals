@@ -5,7 +5,7 @@ use warnings;
 our $VERSION = '0.01';
 
 use Moo;
-use Math::Combinatorics;
+use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
 use Music::Chord::Namer qw(chordname);
 use MIDI::Pitch qw(name2freq);
@@ -70,17 +70,12 @@ sub process
 {
     my $self = shift;
 
-    *chromatic_sort = Sort::ArbBiLex::maker( join ' ', @{ $self->scale } );
-
     my %x;
 
-    for my $c ( combine( $self->size, @{ $self->notes } ) )
+    for my $c ( combinations( $self->notes, $self->size ) )
     {
-        my %dyads = $self->dyads($c);
+#        my %dyads = $self->dyads($c);
 
-        @$c = chromatic_sort(@$c);
-
-        # 
         if ( $self->chords )
         {
             # Do we know any named chords?
@@ -90,18 +85,8 @@ sub process
             @chordname = grep { !/no-root/ } @chordname unless $self->rootless;
 
             # Set the names of this chord combination.
-            $self->add_chord_name( "@$c" => \@chordname ) if @chordname;
+            $self->chord_names->{"@$c"} = \@chordname if @chordname;
         }
-    }
-}
-
-sub add_chord_name
-{
-    my $self = shift;
-    my %args = @_;
-    for my $arg ( keys %args )
-    {
-        $self->chord_names->{$arg} = $args{$arg};
     }
 }
 
@@ -112,8 +97,7 @@ sub dyads {
     my $n = $self->_note_index;
     my $r = $self->_ratio_index;
 
-    # Sort the dyads into the scale.
-    my @pairs = map { [ chromatic_sort(@$_) ] } combine( 2, @$c );
+    my @pairs = combine( 2, @$c );
 
     my %dyads;
     for my $i (@pairs) {
