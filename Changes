@@ -1,6 +1,9 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Improved documentation.
+
+0.0102 2014-09-25
     - Fixed the distribution meta sources.
 
 0.0101 2014-09-25
