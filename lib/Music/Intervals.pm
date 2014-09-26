@@ -63,9 +63,13 @@ has _note_index  => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
 has _ratio_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
     return { map { $_ => $Music::Ratios::ratio->{$_}{ratio} } @{ $self->notes } } },
 );
+has _ratio_name_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
+    return { map { $Music::Ratios::ratio->{$_}{ratio} => $Music::Ratios::ratio->{$_}{name} } keys %$Music::Ratios::ratio } },
+);
 
 has chord_names => ( is => 'rw', default => sub { {} } );
 has natural_frequencies => ( is => 'rw', default => sub { {} } );
+has natural_intervals => ( is => 'rw', default => sub { {} } );
 
 sub process
 {
@@ -97,13 +101,16 @@ sub process
                 $self->natural_frequencies->{"@$c"} =
                     { map { $_ => { $self->_ratio_index->{$_} => $Music::Ratios::ratio->{$_}{name} } } @$c };
             }
-            if ( $self->intervals )
+            if ( $self->interval )
             {
-#                { map { $_ => {
-#                    $dyads{$_}->{natural} => $ratios{ $dyads{$_}->{natural} }
-#                      || eval $dyads{$_}->{natural} }
-#                    } keys %dyads
-#                }
+                $self->natural_intervals->{"@$c"} = {
+                    map {
+                        $_ => {
+                            $dyads{$_}->{natural} => $self->_ratio_name_index->{ $dyads{$_}->{natural} }
+                        }
+                    } keys %dyads
+                };
+
             }
         }
     }
@@ -116,7 +123,7 @@ sub dyads {
     my $n = $self->_note_index;
     my $r = $self->_ratio_index;
 
-    my @pairs = combine( 2, @$c );
+    my @pairs = combinations( $c, 2 );
 
     my %dyads;
     for my $i (@pairs) {
