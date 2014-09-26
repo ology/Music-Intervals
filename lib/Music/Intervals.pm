@@ -65,6 +65,7 @@ has _ratio_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
 );
 
 has chord_names => ( is => 'rw', default => sub { {} } );
+has natural_frequencies => ( is => 'rw', default => sub { {} } );
 
 sub process
 {
@@ -86,6 +87,15 @@ sub process
 
             # Set the names of this chord combination.
             $self->chord_names->{"@$c"} = \@chordname if @chordname;
+        }
+
+        if ( $self->justin )
+        {
+            if ( $self->freqs )
+            {
+                $self->natural_frequencies->{"@$c"} =
+                    { map { $_ => { $self->_ratio_index->{$_} => $Music::Ratios::ratio->{$_}{name} } } @$c };
+            }
         }
     }
 }
