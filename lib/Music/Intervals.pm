@@ -73,9 +73,10 @@ sub process
 
     my %x;
 
-    for my $c ( combinations( $self->notes, $self->size ) )
+    my $iter = combinations( $self->notes, $self->size );
+    while (my $c = $iter->next)
     {
-#        my %dyads = $self->dyads($c);
+        my %dyads = $self->dyads($c);
 
         if ( $self->chords )
         {
@@ -95,6 +96,14 @@ sub process
             {
                 $self->natural_frequencies->{"@$c"} =
                     { map { $_ => { $self->_ratio_index->{$_} => $Music::Ratios::ratio->{$_}{name} } } @$c };
+            }
+            if ( $self->intervals )
+            {
+#                { map { $_ => {
+#                    $dyads{$_}->{natural} => $ratios{ $dyads{$_}->{natural} }
+#                      || eval $dyads{$_}->{natural} }
+#                    } keys %dyads
+#                }
             }
         }
     }
