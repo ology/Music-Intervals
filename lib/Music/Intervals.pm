@@ -43,6 +43,11 @@ use Music::Intervals::Ratios;
 A C<Music::Intervals> object shows the mathematical break-down of musical
 intervals and chords.
 
+This module reveals the "guts" of chords within a given tonality.  By guts I
+mean, the measurements of the notes and the intervals between them.  Both just
+intonation (ratio) and equal temperament (decimal) are handled, with over 400
+intervals, too!
+
 =cut
 
 =head1 METHODS
@@ -291,5 +296,11 @@ For the time being, you will need to look at the source of
 C<Music::Intervals::Ratios> for the note and interval names.
 
 L<https://github.com/ology/Music/blob/master/intervals>
+
+L<http://en.wikipedia.org/wiki/List_of_musical_intervals>
+
+L<http://en.wikipedia.org/wiki/Equal_temperament>
+
+L<http://en.wikipedia.org/wiki/Just_intonation>
 
 =cut
