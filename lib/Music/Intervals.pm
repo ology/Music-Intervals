@@ -48,20 +48,35 @@ intervals and chords.
 =over
 
 =item cents: 0
+
 =item chords: 0
+
 =item equalt: 0
+
 =item freqs: 0
+
 =item interval: 0
+
 =item justin: 0
+
 =item numeric: 0
+
 =item prime: 0
+
 =item rootless: 0
+
 =item octave: 4
+
 =item concert: 440
+
 =item size: 3
+
 =item tonic: C
+
 =item semitones: 12
+
 =item temper: semitones * 100 / log(2)
+
 =item notes: [ C D E F G A B ]
 
 =back
