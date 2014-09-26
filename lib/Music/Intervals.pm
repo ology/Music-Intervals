@@ -266,6 +266,9 @@ __END__
 
 =head1 SEE ALSO
 
+For the time being, you will need to look at the source of
+C<Music::Intervals::Ratios> for the note and interval names.
+
 L<https://github.com/ology/Music/blob/master/intervals>
 
 =cut
