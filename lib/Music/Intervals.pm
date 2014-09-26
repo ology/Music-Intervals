@@ -70,6 +70,7 @@ has _ratio_name_index => ( is => 'ro', lazy => 1, default => sub { my $self = sh
 has chord_names => ( is => 'rw', default => sub { {} } );
 has natural_frequencies => ( is => 'rw', default => sub { {} } );
 has natural_intervals => ( is => 'rw', default => sub { {} } );
+has natural_cents => ( is => 'rw', default => sub { {} } );
 
 sub process
 {
@@ -110,6 +111,14 @@ sub process
                         }
                     } keys %dyads
                 };
+
+            }
+            if ( $self->cents )
+            {
+                $self->natural_cents->{"@$c"} = {
+                    map {
+                        $_ => log( eval $dyads{$_}->{natural} ) * $self->temper
+                    } keys %dyads };
 
             }
         }
