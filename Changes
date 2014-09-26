@@ -1,5 +1,8 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Fixed the distribution meta sources.
+
+0.0101 2014-09-25
     - Ported functionality from the intervals script.
     - Minted by Dist::Zilla
