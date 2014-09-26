@@ -1,8 +1,8 @@
-package Music::Ratios;
+package Music::Intervals::Ratios;
 use strict;
 use warnings;
 
-#> perl -Ilib -MMusic::Ratios -le'$x=shift;print $Music::Ratios::ratio->{$x}{name}' C
+#> perl -Ilib -MMusic::Intervals::Ratios -le'$x=shift;print $Music::Intervals::Ratios::ratio->{$x}{name}' C
 #unison, perfect prime, tonic
 
 # Note ratios, names and descriptions:

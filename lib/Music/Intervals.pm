@@ -10,9 +10,8 @@ use Math::Factor::XS qw( prime_factors );
 use Music::Chord::Namer qw(chordname);
 use MIDI::Pitch qw(name2freq);
 use Number::Fraction;
-use Sort::ArbBiLex;
 use Music::Scales;
-use Music::Ratios;
+use Music::Intervals::Ratios;
 
 =head1 SYNOPSIS
 
@@ -55,16 +54,16 @@ has notes     => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
     return [ get_scale_notes( $self->tonic ) ] },
 );
 has scale     => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    return [ map { eval "$Music::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } ] },
+    return [ map { eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } ] },
 );
 has _note_index  => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    return { map { $_ => eval "$Music::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } } },
+    return { map { $_ => eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } } },
 );
 has _ratio_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    return { map { $_ => $Music::Ratios::ratio->{$_}{ratio} } @{ $self->notes } } },
+    return { map { $_ => $Music::Intervals::Ratios::ratio->{$_}{ratio} } @{ $self->notes } } },
 );
 has _ratio_name_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    return { map { $Music::Ratios::ratio->{$_}{ratio} => $Music::Ratios::ratio->{$_}{name} } keys %$Music::Ratios::ratio } },
+    return { map { $Music::Intervals::Ratios::ratio->{$_}{ratio} => $Music::Intervals::Ratios::ratio->{$_}{name} } keys %$Music::Intervals::Ratios::ratio } },
 );
 
 has chord_names => ( is => 'rw', default => sub { {} } );
@@ -104,7 +103,7 @@ sub process
             if ( $self->freqs )
             {
                 $self->natural_frequencies->{"@$c"} =
-                    { map { $_ => { $self->_ratio_index->{$_} => $Music::Ratios::ratio->{$_}{name} } } @$c };
+                    { map { $_ => { $self->_ratio_index->{$_} => $Music::Intervals::Ratios::ratio->{$_}{name} } } @$c };
             }
             if ( $self->interval )
             {
