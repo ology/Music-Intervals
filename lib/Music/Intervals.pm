@@ -72,6 +72,9 @@ has natural_frequencies => ( is => 'rw', default => sub { {} } );
 has natural_intervals => ( is => 'rw', default => sub { {} } );
 has natural_cents => ( is => 'rw', default => sub { {} } );
 has natural_prime_factors => ( is => 'rw', default => sub { {} } );
+has eq_tempered_frequencies => ( is => 'rw', default => sub { {} } );
+has eq_tempered_intervals => ( is => 'rw', default => sub { {} } );
+has eq_tempered_cents => ( is => 'rw', default => sub { {} } );
 
 sub process
 {
@@ -129,6 +132,34 @@ sub process
                         $_ => {
                             $dyads{$_}->{natural} => scalar ratio_factorize( $dyads{$_}->{natural} )
                         }
+                    } keys %dyads
+                };
+            }
+        }
+
+        if ( $self->equalt )
+        {
+            if ( $self->freqs )
+            {
+                $self->eq_tempered_frequencies->{"@$c"} = {
+                    map {
+                        $_ => name2freq( $_ . $self->octave ) || eval $self->_ratio_index->{$_}
+                    } @$c
+                };
+            }
+            if ( $self->interval )
+            {
+                $self->eq_tempered_intervals->{"@$c"} = {
+                    map {
+                        $_ => $dyads{$_}->{eq_tempered}
+                    } keys %dyads
+                };
+            }
+            if ( $self->cents )
+            {
+                $self->eq_tempered_cents->{"@$c"} = {
+                    map {
+                        $_ => log( $dyads{$_}->{eq_tempered} ) * $self->temper
                     } keys %dyads
                 };
             }
