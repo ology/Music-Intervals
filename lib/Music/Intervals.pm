@@ -2,13 +2,13 @@ package Music::Intervals;
 # ABSTRACT: Mathematical breakdown of musical intervals
 use strict;
 use warnings;
-our $VERSION = '0.01';
+our $VERSION = '0.0101';
 
 use Moo;
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
-use Music::Chord::Namer qw(chordname);
-use MIDI::Pitch qw(name2freq);
+use Music::Chord::Namer qw( chordname );
+use MIDI::Pitch qw( name2freq );
 use Number::Fraction;
 use Music::Scales;
 use Music::Intervals::Ratios;
@@ -17,11 +17,23 @@ use Music::Intervals::Ratios;
 
   use Music::Intervals;
   $x = Music::Intervals->new(%arguments);
+  $x->process;
+  # Then:
+  $x->chord_names;
+  $x->natural_frequencies;
+  $x->natural_intervals;
+  $x->natural_cents;
+  $x->natural_prime_factors;
+  $x->eq_tempered_frequencies;
+  $x->eq_tempered_intervals;
+  $x->eq_tempered_cents;
 
 =head1 DESCRIPTION
 
 A C<Music::Intervals> object shows the mathematical break-down of musical
 intervals and chords.
+
+* More to come...
 
 =cut
 
@@ -30,6 +42,25 @@ intervals and chords.
 =head2 new()
 
   $x = Music::Intervals->new(%arguments);
+
+Attributes and defaults:
+
+ cents: 0
+ chords: 0
+ equalt: 0
+ freqs: 0
+ interval: 0
+ justin: 0
+ numeric: 0
+ prime: 0
+ rootless: 0
+ octave: 4
+ concert: 440
+ size: 3
+ tonic: C
+ semitones: 12
+ temper: semitones * 100 / log(2)
+ notes: [ C D E F G A B ]
 
 =cut
 
