@@ -90,6 +90,19 @@ that produces sane results.
 
 =item notes: [ C D E F G A B ] - actual notes to use in the computation
 
+The list of notes may be any of the keys in the L<Music::Intervals::Ratios>
+C<ratio> hashref.  This is very very long and contains useful intervals such as
+those of the common scale and even the Pythagorean intervals, too.
+
+A few examples:
+
+ [qw( C E G )]
+ [qw( C pM3 pM7 )]
+ [qw( C D D\# )]
+ [qw( C D Eb )]
+ [qw( C D D\# Eb E E\# Fb F )]
+ [qw( C 11h 7h )]
+
 =back
 
 =cut
