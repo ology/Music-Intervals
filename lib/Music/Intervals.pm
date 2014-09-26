@@ -43,24 +43,28 @@ intervals and chords.
 
   $x = Music::Intervals->new(%arguments);
 
-Attributes and defaults:
+=head2 Attributes and defaults
 
- cents: 0
- chords: 0
- equalt: 0
- freqs: 0
- interval: 0
- justin: 0
- numeric: 0
- prime: 0
- rootless: 0
- octave: 4
- concert: 440
- size: 3
- tonic: C
- semitones: 12
- temper: semitones * 100 / log(2)
- notes: [ C D E F G A B ]
+=over
+
+=item cents: 0
+=item chords: 0
+=item equalt: 0
+=item freqs: 0
+=item interval: 0
+=item justin: 0
+=item numeric: 0
+=item prime: 0
+=item rootless: 0
+=item octave: 4
+=item concert: 440
+=item size: 3
+=item tonic: C
+=item semitones: 12
+=item temper: semitones * 100 / log(2)
+=item notes: [ C D E F G A B ]
+
+=back
 
 =cut
 
