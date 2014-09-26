@@ -43,8 +43,6 @@ use Music::Intervals::Ratios;
 A C<Music::Intervals> object shows the mathematical break-down of musical
 intervals and chords.
 
-* More to come...
-
 =cut
 
 =head1 METHODS
