@@ -74,9 +74,9 @@ intervals, too!
 
 =item prime: 0 - prime factorization
 
-=item rootless: 0 - show chordnames with no root
+=item rootless: 0 - show chord names with no root
 
-=item octave: 4 - use the 4th octave
+=item octave: 4 - use the fourth octave
 
 =item concert: 440 - concert pitch
 
