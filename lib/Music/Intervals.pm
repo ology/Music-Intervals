@@ -2,7 +2,7 @@ package Music::Intervals;
 # ABSTRACT: Mathematical breakdown of musical intervals
 use strict;
 use warnings;
-our $VERSION = '0.0102';
+our $VERSION = '0.0103';
 
 use Moo;
 use Algorithm::Combinatorics qw( combinations );
@@ -16,7 +16,17 @@ use Music::Intervals::Ratios;
 =head1 SYNOPSIS
 
   use Music::Intervals;
-  $m = Music::Intervals->new(%arguments);
+  $m = Music::Intervals->new(
+    notes => [qw( C E G B )],
+    size => 3,
+    chords => 1,
+    justin => 1,
+    equalt => 1,
+    freqs => 1,
+    interval => 1,
+    cents => 1,
+    prime => 1,
+  );
   $m->process;
   # Then print Dumper any of:
   $m->chord_names;
@@ -47,37 +57,38 @@ intervals and chords.
 
 =over
 
-=item cents: 0
+=item cents: 0 - divisions of the octave
 
-=item chords: 0
+=item chords: 0 - chord names
 
-=item equalt: 0
+=item equalt: 0 - equal temperament
 
-=item freqs: 0
+=item freqs: 0 - frequencies
 
-=item interval: 0
+=item interval: 0 - note intervals
 
-=item justin: 0
+=item justin: 0 - just intonation
 
-=item numeric: 0
+=item prime: 0 - prime factorization
 
-=item prime: 0
+=item rootless: 0 - show chordnames with no root
 
-=item rootless: 0
+=item octave: 4 - use the 4th octave
 
-=item octave: 4
+=item concert: 440 - concert pitch
 
-=item concert: 440
+=item size: 3 - chord size
 
-=item size: 3
+=item tonic: C - root of the computations
 
-=item tonic: C
+* Currently (and for the foreseeable future) this will remain the only value
+that produces sane results.
 
-=item semitones: 12
+=item semitones: 12 - number of notes in the scale
 
-=item temper: semitones * 100 / log(2)
+=item temper: semitones * 100 / log(2) - physical distance between notes
 
-=item notes: [ C D E F G A B ]
+=item notes: [ C D E F G A B ] - actual notes to use in the computation
 
 =back
 
@@ -89,7 +100,6 @@ has equalt    => ( is => 'ro', default => sub { 0 } );
 has freqs     => ( is => 'ro', default => sub { 0 } );
 has interval  => ( is => 'ro', default => sub { 0 } );
 has justin    => ( is => 'ro', default => sub { 0 } );
-has numeric   => ( is => 'ro', default => sub { 0 } );
 has prime     => ( is => 'ro', default => sub { 0 } );
 has rootless  => ( is => 'ro', default => sub { 0 } );
 has octave    => ( is => 'ro', default => sub { 4 } );
