@@ -71,6 +71,7 @@ has chord_names => ( is => 'rw', default => sub { {} } );
 has natural_frequencies => ( is => 'rw', default => sub { {} } );
 has natural_intervals => ( is => 'rw', default => sub { {} } );
 has natural_cents => ( is => 'rw', default => sub { {} } );
+has natural_prime_factors => ( is => 'rw', default => sub { {} } );
 
 sub process
 {
@@ -121,11 +122,22 @@ sub process
                     } keys %dyads };
 
             }
+            if ( $self->prime )
+            {
+                $self->natural_prime_factors->{"@$c"} = {
+                    map {
+                        $_ => {
+                            $dyads{$_}->{natural} => scalar ratio_factorize( $dyads{$_}->{natural} )
+                        }
+                    } keys %dyads
+                };
+            }
         }
     }
 }
 
-sub dyads {
+sub dyads
+{
     my $self = shift;
     my ($c) = @_;
 
@@ -152,6 +164,21 @@ sub dyads {
     }
 
     return %dyads;
+}
+
+sub ratio_factorize {
+    my $dyad = shift;
+
+    my ( $numerator, $denominator ) = split /\//, $dyad;
+    $numerator   = [ prime_factors($numerator) ];
+    $denominator = [ prime_factors($denominator) ];
+
+    return wantarray
+        ? ( $numerator, $denominator )
+        : sprintf( '(%s) / (%s)',
+            join( '*', @$numerator ),
+            join( '*', @$denominator )
+        );
 }
 
 1;
