@@ -15,9 +15,6 @@ use Music::Intervals::Ratios;
 
 =head1 SYNOPSIS
 
-  # Available intervals (the "notes" attribute below):
-  perl -MData::Dumper -MMusic::Intervals::Ratios -e'print Dumper $Music::Intervals::Ratios::ratio'
-
   use Music::Intervals;
   $m = Music::Intervals->new(
     notes => [qw( C E G B )],
@@ -40,6 +37,12 @@ use Music::Intervals::Ratios;
   $m->eq_tempered_frequencies;
   $m->eq_tempered_intervals;
   $m->eq_tempered_cents;
+
+  # Show a known interval
+  $ratio = $m->ratio($interval_name);
+
+  # Show all the known intervals (the "notes" attribute above):
+  perl -MData::Dumper -MMusic::Intervals::Ratios -e'print Dumper $Music::Intervals::Ratios::ratio'
 
 =head1 DESCRIPTION
 
