@@ -63,8 +63,6 @@ intervals, too!
 
 =item cents: 0 - divisions of the octave
 
-=item chords: 0 - chord names
-
 =item equalt: 0 - equal temperament
 
 =item freqs: 0 - frequencies
@@ -151,14 +149,14 @@ sub process
             if ( $self->freqs )
             {
                 $self->natural_frequencies->{"@$c"} =
-                    { map { $_ => { $_ => $Music::Intervals::Ratios::ratio->{$_} } } @$c };
+                    { map { $_ => { $_ => $Music::Intervals::Ratio::ratio->{$_} } } @$c };
             }
             if ( $self->interval )
             {
                 $self->natural_intervals->{"@$c"} = {
                     map {
                         $_ => {
-                            $dyads{$_}->{natural} => $Music::Intervals::Ratios::ratio->{ $dyads{$_}->{natural} }
+                            $dyads{$_}->{natural} => $Music::Intervals::Ratio::ratio->{ $dyads{$_}->{natural} }
                         }
                     } keys %dyads
                 };
