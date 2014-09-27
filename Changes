@@ -1,6 +1,7 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Added a bunch of interval ratios.
 
 0.03  2014-09-27
     - Added full tests for the C E G triad.
