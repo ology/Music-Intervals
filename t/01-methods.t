@@ -19,7 +19,7 @@ is_deeply $obj->by_name('C'), { ratio => '1/1', name => 'unison, perfect prime, 
 is_deeply $obj->by_name('c'), undef, 'undef by_name';
 
 is_deeply $obj->by_ratio('27/25'),
-    { key => 'Db', name => 'large limma, BP small semitone (minor second), alternate Renaissance half-step' },
+    { symbol => 'Db', name => 'large limma, BP small semitone (minor second), alternate Renaissance half-step' },
     'by_ratio';
 
 my $chord = 'C E G';
