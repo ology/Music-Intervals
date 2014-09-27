@@ -307,6 +307,21 @@ sub ratio_factorize {
         );
 }
 
+=head2 ratio()
+
+ $ratio = $m->ratio('C');
+ # { ratio => '1/1', name => 'unison, perfect prime, tonic' }
+
+Return a known ratio or undef.
+
+=cut
+
+sub ratio
+{
+    my ( $self, $name ) = @_;
+    return $Music::Intervals::Ratios::ratio->{$name};
+}
+
 1;
 __END__
 
