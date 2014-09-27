@@ -165,7 +165,11 @@ has _ratio_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
     return { map { $_ => $Music::Intervals::Ratios::ratio->{$_}{ratio} } @{ $self->notes } } },
 );
 has _ratio_name_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    return { map { $Music::Intervals::Ratios::ratio->{$_}{ratio} => $Music::Intervals::Ratios::ratio->{$_}{name} } keys %$Music::Intervals::Ratios::ratio } },
+    return {
+        map { $Music::Intervals::Ratios::ratio->{$_}{ratio} => {
+            key  => $_,
+            name => $Music::Intervals::Ratios::ratio->{$_}{name} }
+        } keys %$Music::Intervals::Ratios::ratio } },
 );
 
 has chord_names => ( is => 'rw', default => sub { {} } );
@@ -212,7 +216,7 @@ sub process
                 $self->natural_intervals->{"@$c"} = {
                     map {
                         $_ => {
-                            $dyads{$_}->{natural} => $self->_ratio_name_index->{ $dyads{$_}->{natural} }
+                            $dyads{$_}->{natural} => $self->_ratio_name_index->{ $dyads{$_}->{natural} }{name}
                         }
                     } keys %dyads
                 };
