@@ -18,7 +18,9 @@ for my $n ( 0 .. @$scale - 1 )
 is_deeply $obj->by_name('C'), { ratio => '1/1', name => 'unison, perfect prime, tonic' }, 'by_name';
 is_deeply $obj->by_name('c'), undef, 'undef by_name';
 
-like $obj->by_ratio('27/25'), qr/^large limma/, 'by_ratio';
+is_deeply $obj->by_ratio('27/25'),
+    { key => 'Db', name => 'large limma, BP small semitone (minor second), alternate Renaissance half-step' },
+    'by_ratio';
 
 my $chord = 'C E G';
 $obj = Music::Intervals->new(
