@@ -167,8 +167,8 @@ has _ratio_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
 has _ratio_name_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
     return {
         map { $Music::Intervals::Ratios::ratio->{$_}{ratio} => {
-            key  => $_,
-            name => $Music::Intervals::Ratios::ratio->{$_}{name} }
+            symbol => $_,
+            name   => $Music::Intervals::Ratios::ratio->{$_}{name} }
         } keys %$Music::Intervals::Ratios::ratio } },
 );
 
