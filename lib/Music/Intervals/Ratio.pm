@@ -2,7 +2,6 @@ package Music::Intervals::Ratio;
 use strict;
 use warnings;
 
-# Note ratios and descriptions:
 our $ratio = {
     '1/1' => q|C unison, perfect prime, tonic|,
     '2/1' => q|C' octave|,
