@@ -15,8 +15,8 @@ for my $n ( 0 .. @$scale - 1 )
     is sprintf('%.3f', $obj->scale->[$n]), $scale->[$n], "scale $n";
 }
 
-is_deeply $obj->ratio('C'), { ratio => '1/1', name => 'unison, perfect prime, tonic' }, 'ratio';
-is_deeply $obj->ratio('c'), undef, 'undef ratio';
+is_deeply $obj->by_name('C'), { ratio => '1/1', name => 'unison, perfect prime, tonic' }, 'ratio';
+is_deeply $obj->by_name('c'), undef, 'undef ratio';
 
 my $chord = 'C E G';
 $obj = Music::Intervals->new(
