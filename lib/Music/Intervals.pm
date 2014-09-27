@@ -109,6 +109,8 @@ A few examples:
  [qw( C D D\# Eb E E\# Fb F )]
  [qw( C 11h 7h )]
 
+Note that case matters.
+
 =back
 
 =cut
