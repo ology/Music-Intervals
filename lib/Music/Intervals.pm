@@ -252,16 +252,13 @@ sub dyads
     my $self = shift;
     my ($c) = @_;
 
-    my $n = $self->_note_index;
-    my $r = $self->_ratio_index;
-
     my @pairs = combinations( $c, 2 );
 
     my %dyads;
     for my $i (@pairs) {
         # Construct our "dyadic" fraction.
-        my $numerator   = Number::Fraction->new( $r->{ $i->[1] } );
-        my $denominator = Number::Fraction->new( $r->{ $i->[0] } );
+        my $numerator   = Number::Fraction->new( $self->_ratio_index->{ $i->[1] } );
+        my $denominator = Number::Fraction->new( $self->_ratio_index->{ $i->[0] } );
         my $fraction = $numerator / $denominator;
 
         # Calculate both natural and equal temperament values for our ratio.
@@ -269,8 +266,8 @@ sub dyads
             natural => $fraction->to_string(),
             # The value is either the known pitch ratio or the numerical evaluation of the fraction.
             eq_tempered =>
-              ( name2freq( $i->[1] . $self->octave ) || $n->{ $i->[1] } ) /
-              ( name2freq( $i->[0] . $self->octave ) || $n->{ $i->[0] } ),
+              ( name2freq( $i->[1] . $self->octave ) || $self->_note_index->{ $i->[1] } ) /
+              ( name2freq( $i->[0] . $self->octave ) || $self->_note_index->{ $i->[0] } ),
         };
     }
 
