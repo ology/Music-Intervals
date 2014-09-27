@@ -5,6 +5,10 @@ use warnings;
 #> perl -Ilib -MMusic::Intervals::Ratios -le'$x=shift;print $Music::Intervals::Ratios::ratio->{$x}{name}' C
 #unison, perfect prime, tonic
 
+# TODO Integrate these:
+# http://en.wikipedia.org/wiki/List_of_pitch_intervals
+# http://xenharmonic.wikispaces.com/Gallery+of+Just+Intervals
+
 # Note ratios, names and descriptions:
 our $ratio = {
     C => {
