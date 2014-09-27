@@ -2,6 +2,7 @@ Revision history for Music-Intervals
 
 {{$NEXT}}
     - Added full tests for the C E G triad.
+    - Added a handy by_ratio() method.
 
 0.02  2014-09-27
     - Added the ratio() method.
