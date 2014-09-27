@@ -2,7 +2,7 @@ package Music::Intervals;
 # ABSTRACT: Mathematical breakdown of musical intervals
 use strict;
 use warnings;
-our $VERSION = '0.03';
+our $VERSION = '0.0301';
 
 use Moo;
 use Algorithm::Combinatorics qw( combinations );
