@@ -26,6 +26,7 @@ for my $n ( 0 .. @$scale - 1 )
 is_deeply $obj->ratio('C'), { ratio => '1/1', name => 'unison, perfect prime, tonic' }, 'ratio';
 is_deeply $obj->ratio('c'), undef, 'undef ratio';
 
+my $chord = 'C E G';
 $obj = Music::Intervals->new(
     chords => 1,
     justin => 1,
@@ -46,18 +47,18 @@ is_deeply $obj->natural_frequencies,
 is_deeply $obj->natural_intervals,
     { 'C E G' => { 'C E' => { '5/4' => 'major third' }, 'E G' => { '6/5' => 'minor third' }, 'C G' => { '3/2' => 'perfect fifth' } } },
     'natural_intervals';
-is_deeply $obj->natural_cents,
-    { 'C E G' => { 'C E' => '386.313713864835', 'E G' => '315.641287000553', 'C G' => '701.955000865387' } },
-    'natural_cents';
+is sprintf('%.3f', $obj->natural_cents->{$chord}{'C E'}), '386.314', 'natural_cents C E';
+is sprintf('%.3f', $obj->natural_cents->{$chord}{'C G'}), '701.955', 'natural_cents C G';
+is sprintf('%.3f', $obj->natural_cents->{$chord}{'E G'}), '315.641', 'natural_cents E G';
 is_deeply $obj->natural_prime_factors,
     { "C E G" => { "C E" => { "5/4" => "(5) / (2*2)" }, "C G" => { "3/2" => "(3) / (2)" }, "E G" => { "6/5" => "(2*3) / (5)" } } },
     'natural_prime_factors';
-is_deeply $obj->eq_tempered_frequencies,
-    { "C E G" => { C => "261.625565300599", E => "329.62755691287", G => "391.995435981749" } },
-    'eq_tempered_frequencies';
-is_deeply $obj->eq_tempered_intervals,
-    { "C E G" => { "C E" => "1.25992104989487", "C G" => "1.49830707687668", "E G" => "1.18920711500272" } },
-    'eq_tempered_intervals';
+is sprintf('%.3f', $obj->eq_tempered_frequencies->{$chord}{C}), '261.626', 'eq_tempered_frequencies C';
+is sprintf('%.3f', $obj->eq_tempered_frequencies->{$chord}{E}), '329.628', 'eq_tempered_frequencies E';
+is sprintf('%.3f', $obj->eq_tempered_frequencies->{$chord}{G}), '391.995', 'eq_tempered_frequencies G';
+is sprintf('%.3f', $obj->eq_tempered_intervals->{$chord}{'C E'}), '1.260', 'eq_tempered_intervals C E';
+is sprintf('%.3f', $obj->eq_tempered_intervals->{$chord}{'C G'}), '1.498', 'eq_tempered_intervals C G';
+is sprintf('%.3f', $obj->eq_tempered_intervals->{$chord}{'E G'}), '1.189', 'eq_tempered_intervals E G';
 is_deeply $obj->eq_tempered_cents,
     { 'C E G' => { 'C G' => '700', 'C E' => '400', 'E G' => '300' } },
     'eq_tempered_cents';
