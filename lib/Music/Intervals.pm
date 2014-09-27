@@ -38,8 +38,8 @@ use Music::Intervals::Ratios;
   $m->eq_tempered_intervals;
   $m->eq_tempered_cents;
 
-  # Show a known interval
-  $ratio = $m->ratio($interval_name);
+  # Find a known interval
+  $ratio = $m->by_name($interval_name);
 
   # Show all the known intervals (the "notes" attribute above):
   perl -MData::Dumper -MMusic::Intervals::Ratios -e'print Dumper $Music::Intervals::Ratios::ratio'
@@ -310,7 +310,7 @@ sub ratio_factorize {
         );
 }
 
-=head2 ratio()
+=head2 by_name()
 
  $ratio = $m->ratio('C');
  # { ratio => '1/1', name => 'unison, perfect prime, tonic' }
@@ -319,7 +319,7 @@ Return a known ratio or undef.
 
 =cut
 
-sub ratio
+sub by_name
 {
     my ( $self, $name ) = @_;
     return $Music::Intervals::Ratios::ratio->{$name};
