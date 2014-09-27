@@ -9,15 +9,19 @@ use_ok 'Music::Intervals';
 my $obj = Music::Intervals->new;
 isa_ok $obj, 'Music::Intervals', 'default args';
 
-is_deeply $obj->scale, [qw(
-    1
+my $scale = [qw(
+    1.000
     1.125
-    1.25
-    1.33333333333333
-    1.5
-    1.66666666666667
+    1.250
+    1.333
+    1.500
+    1.667
     1.875
-)], 'scale';
+)];
+for my $n ( 0 .. @$scale - 1 )
+{
+    is sprintf('%.3f', $obj->scale->[$n]), $scale->[$n], "scale $n";
+}
 
 $obj = Music::Intervals->new(
     chords => 1,
