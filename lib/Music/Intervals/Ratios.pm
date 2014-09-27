@@ -5,10 +5,6 @@ use warnings;
 #> perl -Ilib -MMusic::Intervals::Ratios -le'$x=shift;print $Music::Intervals::Ratios::ratio->{$x}{name}' C
 #unison, perfect prime, tonic
 
-# TODO Integrate these:
-# http://en.wikipedia.org/wiki/List_of_pitch_intervals
-# http://xenharmonic.wikispaces.com/Gallery+of+Just+Intervals
-
 # Note ratios, names and descriptions:
 our $ratio = {
     C => {
@@ -47,7 +43,7 @@ our $ratio = {
         ratio => '7/4',
         name => q|seventh harmonic|,
     },
-    st => {
+    stt => {
         ratio => '7/5',
         name => q|septimal or Huygens' tritone, BP fourth|,
     },
@@ -199,13 +195,25 @@ our $ratio = {
         ratio => '17/10',
         name => q|septendecimal diminished seventh|,
     },
+    ssm6 => {
+        ratio => '17/11',
+        name => q|septendecimal subminor sixth|,
+    },
     '2st' => {
         ratio => '17/12',
         name => q|2nd septendecimal tritone|,
     },
+    ss4 => {
+        ratio => '17/13',
+        name => q|septendecimal sub-fourth|,
+    },
     st => {
         ratio => '17/14',
         name => q|supraminor third|,
+    },
+    spwt => {
+        ratio => '17/15',
+        name => q|septendecimal whole tone|,
     },
     '17h' => {
         ratio => '17/16',
@@ -299,6 +307,14 @@ our $ratio = {
         ratio => '22/15',
         name => q|undecimal diminished fifth|,
     },
+    ssM3 => {
+        ratio => '22/17',
+        name => q|septendecimal supermajor third|,
+    },
+    mmt => {
+        ratio => '22/19',
+        name => q|minimal minor third, godzilla third|,
+    },
     ums => {
         ratio => '22/21',
         name => q|undecimal minor semitone, hard 1/2-step (Ptolemy, Avicenna, Safiud)|,
@@ -359,6 +375,10 @@ our $ratio = {
         ratio => '26/15',
         name => q|tridecimal semi-augmented sixth|,
     },
+    sds5 => {
+        ratio => '26/17',
+        name => q|septendecimal super-fifth|,
+    },
     '13t' => {
         ratio => '26/25',
         name => q|1/3-tone (Avicenna)|,
@@ -409,7 +429,7 @@ our $ratio = {
     },
     a13t => {
         ratio => '28/27',
-        name => q|Archytas' 1/3-tone, inferior quarter-tone (Archytas)|,
+        name => q|Archytas' 1/3-tone, inferior quarter-tone|,
     },
     '29h' => {
         ratio => '29/16',
@@ -419,9 +439,17 @@ our $ratio = {
         ratio => '30/19',
         name => q|smaller undevicesimal minor sixth|,
     },
+    sm7 => {
+        ratio => '30/17',
+        name => q|septendecimal minor seventh|,
+    },
     '31h' => {
         ratio => '31/16',
         name => q|31st harmonic|,
+    },
+    sen => {
+        ratio => '31/24',
+        name => q|sensi supermajor third|,
     },
     '31pc' => {
         ratio => '31/30',
@@ -498,6 +526,10 @@ our $ratio = {
     ssd4 => {
         ratio => '35/27',
         name => q|9/4-tone, septimal semi-diminished fourth|,
+    },
+    dwmt => {
+        ratio => '35/29',
+        name => q|doublewide minor third|,
     },
     '35h' => {
         ratio => '35/32',
@@ -603,6 +635,10 @@ our $ratio = {
         ratio => '49/40',
         name => q|larger approximation to neutral third|,
     },
+    wm2 => {
+        ratio => '49/44',
+        name => q|werckismic minor second|,
+    },
     bpms => {
         ratio => '49/45',
         name => q|BP minor semitone|,
@@ -647,6 +683,10 @@ our $ratio = {
         ratio => '54/49',
         name => q|Zalzal's mujannab|,
     },
+    keen => {
+        ratio => '55/48',
+        name => q|keenanismic supermajor second|,
+    },
     qeM2 => {
         ratio => '55/49',
         name => q|quasi-equal major second|,
@@ -654,6 +694,10 @@ our $ratio = {
     '55h' => {
         ratio => '55/64',
         name => q|55th harmonic|,
+    },
+    nps => {
+        ratio => '56/45',
+        name => q|narrow perde segah, marvelous major third|,
     },
     pe => {
         ratio => '56/55',
@@ -675,6 +719,14 @@ our $ratio = {
         ratio => '61/32',
         name => q|61st harmonic|,
     },
+    myn => {
+        ratio => '61/51',
+        name => q|myna third|,
+    },
+    orw => {
+        ratio => '62/53',
+        name => q|orwell subminor third|,
+    },
     qeM10 => {
         ratio => '63/25',
         name => q|quasi-equal major tenth, BP eleventh|,
@@ -690,6 +742,10 @@ our $ratio = {
     qeM3 => {
         ratio => '63/50',
         name => q|quasi-equal major third|,
+    },
+    werc => {
+        ratio => '63/55',
+        name => q|werckismic supermajor second|,
     },
     '33sh' => {
         ratio => '64/33',
@@ -715,6 +771,14 @@ our $ratio = {
         ratio => '64/49',
         name => q|2 septatones or septatonic major third|,
     },
+    kst => {
+        ratio => '64/55',
+        name => q|keenanismic subminor third, octave reduced 55th subharmonic|,
+    },
+    hms => {
+        ratio => '64/61',
+        name => q|harry minor semitone|,
+    },
     sc => {
         ratio => '64/63',
         name => q|septimal comma, Archytas' comma|,
@@ -722,6 +786,10 @@ our $ratio = {
     '65h' => {
         ratio => '65/64',
         name => q|13th-partial chroma, 65th harmonic|,
+    },
+    win => {
+        ratio => '66/65',
+        name => q|winmeanma|,
     },
     '67h' => {
         ratio => '67/64',
@@ -731,9 +799,17 @@ our $ratio = {
         ratio => '68/35',
         name => q|23/4-tone|,
     },
+    val => {
+        ratio => '68/65',
+        name => q|valentine semitone|,
+    },
     '69h' => {
         ratio => '69/64',
         name => q|69th harmonic|,
+    },
+    wit => {
+        ratio => '71/57',
+        name => q|witchcraft major third|,
     },
     '71h' => {
         ratio => '71/64',
@@ -743,6 +819,10 @@ our $ratio = {
         ratio => '72/49',
         name => q|Arabic lute grave fifth|,
     },
+    amit => {
+        ratio => '73/60',
+        name => q|amity supraminor third|,
+    },
     '73h' => {
         ratio => '73/64',
         name => q|73rd harmonic|,
@@ -751,13 +831,37 @@ our $ratio = {
         ratio => '75/49',
         name => q|BP fifth|,
     },
+    mv4 => {
+        ratio => '75/56',
+        name => q|marvelous fourth|,
+    },
     'D#' => {
         ratio => '75/64',
         name => q|classic augmented second|,
     },
+    mMt => {
+        ratio => '76/61',
+        name => q|magic major third|,
+    },
+    ssMt => {
+        ratio => '77/60',
+        name => q|swetismic supermajor third|,
+    },
+    k77h => {
+        ratio => '77/64',
+        name => q|keenanismic minor third, octave reduced 77th harmonic|,
+    },
+    use => {
+        ratio => '77/72',
+        name => q|undecimal secor|,
+    },
     a53tc => {
         ratio => '77/76',
         name => q|approximation to 53-tone comma|,
+    },
+    por => {
+        ratio => '78/71',
+        name => q|porcupine neutral second|,
     },
     '79h' => {
         ratio => '79/64',
@@ -778,6 +882,10 @@ our $ratio = {
     am6 => {
         ratio => '81/50',
         name => q|acute minor sixth|,
+    },
+    ucat => {
+        ratio => '81/55',
+        name => q|undecimal catafifth|,
     },
     pM3 => {
         ratio => '81/64',
@@ -807,6 +915,10 @@ our $ratio = {
         ratio => '87/64',
         name => q|87th harmonic|,
     },
+    wrck => {
+        ratio => '88/63',
+        name => q|werckismic augmented fourth|,
+    },
     '2un2' => {
         ratio => '88/81',
         name => q|2nd undecimal neutral second|,
@@ -818,6 +930,10 @@ our $ratio = {
     aes => {
         ratio => '89/84',
         name => q|approximation to equal semitone|,
+    },
+    swst => {
+        ratio => '90/77',
+        name => q|swetismic subminor third|,
     },
     '154t' => {
         ratio => '91/59',
@@ -834,6 +950,10 @@ our $ratio = {
     '95h' => {
         ratio => '95/64',
         name => q|95th harmonic|,
+    },
+    ups => {
+        ratio => '96/77',
+        name => q|undecimal perde segah, keenanismic major third|,
     },
     '19pc' => {
         ratio => '96/95',
@@ -857,7 +977,7 @@ our $ratio = {
     },
     suc => {
         ratio => '99/98',
-        name => q|small undecimal comma|,
+        name => q|small undecimal comma, Mothwellsma|,
     },
     qem6 => {
         ratio => '100/63',
@@ -867,7 +987,11 @@ our $ratio = {
         ratio => '100/81',
         name => q|grave major third|,
     },
-    pc => {
+    shr => {
+        ratio => '100/97',
+        name => q|shrutar quarter tone|,
+    },
+    ptc => {
         ratio => '100/99',
         name => q|Ptolemy's comma|,
     },
@@ -887,6 +1011,10 @@ our $ratio = {
         ratio => '107/64',
         name => q|107th harmonic|,
     },
+    swaf => {
+        ratio => '108/77',
+        name => q|swetismic augmented fourth|,
+    },
     '109h' => {
         ratio => '109/64',
         name => q|109th harmonic|,
@@ -894,6 +1022,10 @@ our $ratio = {
     '111h' => {
         ratio => '111/64',
         name => q|111th harmonic|,
+    },
+    mv5 => {
+        ratio => '112/75',
+        name => q|marvelous fifth|,
     },
     '113h' => {
         ratio => '113/64',
@@ -997,7 +1129,7 @@ our $ratio = {
     },
     osyc => {
         ratio => '160/81',
-        name => q|octave - syntonic comma|,
+        name => q|octave minus syntonic comma|,
     },
     '194t' => {
         ratio => '161/93',
@@ -1050,6 +1182,10 @@ our $ratio = {
     am3 => {
         ratio => '243/200',
         name => q|acute minor third|,
+    },
+    ssu => {
+        ratio => '243/224',
+        name => q|septimal subtone|,
     },
     n3c => {
         ratio => '243/242',
