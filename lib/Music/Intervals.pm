@@ -15,6 +15,9 @@ use Music::Intervals::Ratios;
 
 =head1 SYNOPSIS
 
+  # Available intervals (the "notes" attribute below):
+  perl -MData::Dumper -MMusic::Intervals::Ratios -e'print Dumper $Music::Intervals::Ratios::ratio'
+
   use Music::Intervals;
   $m = Music::Intervals->new(
     notes => [qw( C E G B )],
