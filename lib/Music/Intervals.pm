@@ -102,14 +102,31 @@ those of the common scale and even the Pythagorean intervals, too.
 
 A few examples:
 
- [qw( C E G )]
- [qw( C pM3 pM7 )]
- [qw( C D D\# )]
- [qw( C D Eb )]
- [qw( C D D\# Eb E E\# Fb F )]
- [qw( C 11h 7h )]
+ * [qw( C E G )]
+ * [qw( C D D# )]
+ * [qw( C D Eb )]
+ * [qw( C D D# Eb E E# Fb F )]
+ * [qw( C 11h 7h )]
+ * [qw( C pM3 pM7 )]
 
-Note that case matters.
+For natural_intervals() this example produces the following:
+
+ 'C pM3 pM7' => {
+   'C pM3' => { '81/64' => 'Pythagorean major third' },
+   'C pM7' => { '243/128' => 'Pythagorean major seventh' },
+   'pM3 pM7' => { '3/2' => 'perfect fifth' }
+ }
+
+For eq_tempered_cents() this is:
+
+ 'C pM3 pM7' => {
+   'pM3 pM7' => '701.955000865387',
+   'C pM7' => '-8527.85665190266',
+   'C pM3' => '-9229.81165276804'
+ }
+
+Note that case matters for interval names.  For example, "M" means major and "m"
+means minor.
 
 =back
 
