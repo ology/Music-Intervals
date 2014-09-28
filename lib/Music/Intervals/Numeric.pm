@@ -16,9 +16,9 @@ use Music::Intervals::Ratio;
   $m = Music::Intervals::Numeric->new(
     notes => [qw( 1/1 5/4 3/2 15/8 )],
     size => 3,
-    freqs => 1,
+    freq => 1,
     interval => 1,
-    cents => 1,
+    cent => 1,
     prime => 1,
   );
   $m->process;
@@ -52,9 +52,9 @@ intonation.
 
 =over
 
-=item cents: 0 - divisions of the octave
+=item cent: 0 - divisions of the octave
 
-=item freqs: 0 - frequencies
+=item freq: 0 - frequencies
 
 =item interval: 0 - note intervals
 
@@ -77,8 +77,8 @@ those of the common scale and even the Pythagorean intervals, too.
 =cut
 
 has notes     => ( is => 'ro', default => sub { [] } );
-has cents     => ( is => 'ro', default => sub { 0 } );
-has freqs     => ( is => 'ro', default => sub { 0 } );
+has cent     => ( is => 'ro', default => sub { 0 } );
+has freq     => ( is => 'ro', default => sub { 0 } );
 has interval  => ( is => 'ro', default => sub { 0 } );
 has prime     => ( is => 'ro', default => sub { 0 } );
 has size      => ( is => 'ro', default => sub { 3 } );
@@ -103,7 +103,7 @@ sub process
     {
         my %dyads = $self->dyads($c);
 
-        if ( $self->freqs )
+        if ( $self->freq )
         {
             $self->frequencies->{"@$c"} =
                 { map { $_ => $Music::Intervals::Ratio::ratio->{$_} } @$c };
@@ -119,7 +119,7 @@ sub process
             };
 
         }
-        if ( $self->cents )
+        if ( $self->cent )
         {
             $self->cent_vals->{"@$c"} = {
                 map {
