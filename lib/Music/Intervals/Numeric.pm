@@ -26,7 +26,7 @@ use Music::Intervals::Ratio;
   $m->frequencies;
   $m->intervals;
   $m->cent_vals;
-  $m->prime_factors;
+  $m->prime_factor;
 
   # Show all the known intervals (the "notes" attribute above):
   perl -MData::Dumper -MMusic::Intervals::Ratio -e'print Dumper $Music::Intervals::Ratio::ratio'
@@ -90,7 +90,7 @@ has temper    => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
 has frequencies => ( is => 'rw', default => sub { {} } );
 has intervals => ( is => 'rw', default => sub { {} } );
 has cent_vals => ( is => 'rw', default => sub { {} } );
-has prime_factors => ( is => 'rw', default => sub { {} } );
+has prime_factor => ( is => 'rw', default => sub { {} } );
 
 sub process
 {
@@ -129,7 +129,7 @@ sub process
         }
         if ( $self->prime )
         {
-            $self->prime_factors->{"@$c"} = {
+            $self->prime_factor->{"@$c"} = {
                 map {
                     $_ => {
                         $dyads{$_} => scalar ratio_factorize( $dyads{$_} )
