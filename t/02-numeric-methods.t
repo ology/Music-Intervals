@@ -11,9 +11,9 @@ isa_ok $obj, 'Music::Intervals::Numeric', 'default args';
 
 my $chord = '1/1 5/4 3/2';
 $obj = Music::Intervals::Numeric->new(
-    freqs => 1,
+    freq => 1,
     interval => 1,
-    cents => 1,
+    cent => 1,
     prime => 1,
     notes => [qw( 1/1 5/4 3/2 )],
 );
