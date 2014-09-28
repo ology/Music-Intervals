@@ -23,10 +23,10 @@ use Music::Intervals::Ratio;
   );
   $m->process;
   # Then print Dumper any of:
-  $m->natural_frequencies;
-  $m->natural_intervals;
-  $m->natural_cents;
-  $m->natural_prime_factors;
+  $m->frequencies;
+  $m->intervals;
+  $m->cents_vals;
+  $m->prime_factors;
 
   # Show all the known intervals (the "notes" attribute above):
   perl -MData::Dumper -MMusic::Intervals::Ratio -e'print Dumper $Music::Intervals::Ratio::ratio'
@@ -87,10 +87,10 @@ has temper    => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
     $self->semitones * 100 / log(2) },
 );
 
-has natural_frequencies => ( is => 'rw', default => sub { {} } );
-has natural_intervals => ( is => 'rw', default => sub { {} } );
-has natural_cents => ( is => 'rw', default => sub { {} } );
-has natural_prime_factors => ( is => 'rw', default => sub { {} } );
+has frequencies => ( is => 'rw', default => sub { {} } );
+has intervals => ( is => 'rw', default => sub { {} } );
+has cent_vals => ( is => 'rw', default => sub { {} } );
+has prime_factors => ( is => 'rw', default => sub { {} } );
 
 sub process
 {
@@ -105,12 +105,12 @@ sub process
 
         if ( $self->freqs )
         {
-            $self->natural_frequencies->{"@$c"} =
+            $self->frequencies->{"@$c"} =
                 { map { $_ => $Music::Intervals::Ratio::ratio->{$_} } @$c };
         }
         if ( $self->interval )
         {
-            $self->natural_intervals->{"@$c"} = {
+            $self->intervals->{"@$c"} = {
                 map {
                     $_ => {
                         $dyads{$_} => $Music::Intervals::Ratio::ratio->{ $dyads{$_} }
@@ -121,7 +121,7 @@ sub process
         }
         if ( $self->cents )
         {
-            $self->natural_cents->{"@$c"} = {
+            $self->cent_vals->{"@$c"} = {
                 map {
                     $_ => log( eval $dyads{$_} ) * $self->temper
                 } keys %dyads };
@@ -129,7 +129,7 @@ sub process
         }
         if ( $self->prime )
         {
-            $self->natural_prime_factors->{"@$c"} = {
+            $self->prime_factors->{"@$c"} = {
                 map {
                     $_ => {
                         $dyads{$_} => scalar ratio_factorize( $dyads{$_} )
@@ -154,7 +154,6 @@ sub dyads
         my $denominator = Number::Fraction->new( $i->[0] );
         my $fraction = $numerator / $denominator;
 
-        # Calculate natural temperament values for our ratio.
         $dyads{"@$i"} = $fraction->to_string();
     }
 
