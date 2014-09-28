@@ -37,9 +37,8 @@ A C<Music::Intervals> object shows the mathematical break-down of musical
 intervals and chords.
 
 This module reveals the "guts" of chords within a given tonality.  By guts I
-mean, the measurements of the notes and the intervals between them.  Both just
-intonation (ratio) and equal temperament (decimal) are handled, with over 400
-intervals, too!
+mean, the measurements of the notes and the intervals between them, in just
+intonation.
 
 =cut
 
@@ -114,7 +113,7 @@ sub process
             $self->natural_intervals->{"@$c"} = {
                 map {
                     $_ => {
-                        $dyads{$_}->{natural} => $Music::Intervals::Ratio::ratio->{ $dyads{$_}->{natural} }
+                        $dyads{$_} => $Music::Intervals::Ratio::ratio->{ $dyads{$_} }
                     }
                 } keys %dyads
             };
@@ -124,7 +123,7 @@ sub process
         {
             $self->natural_cents->{"@$c"} = {
                 map {
-                    $_ => log( eval $dyads{$_}->{natural} ) * $self->temper
+                    $_ => log( eval $dyads{$_} ) * $self->temper
                 } keys %dyads };
 
         }
@@ -133,7 +132,7 @@ sub process
             $self->natural_prime_factors->{"@$c"} = {
                 map {
                     $_ => {
-                        $dyads{$_}->{natural} => scalar ratio_factorize( $dyads{$_}->{natural} )
+                        $dyads{$_} => scalar ratio_factorize( $dyads{$_} )
                     }
                 } keys %dyads
             };
@@ -155,8 +154,8 @@ sub dyads
         my $denominator = Number::Fraction->new( $i->[0] );
         my $fraction = $numerator / $denominator;
 
-        # Calculate both natural and equal temperament values for our ratio.
-        $dyads{"@$i"} = { natural => $fraction->to_string() };
+        # Calculate natural temperament values for our ratio.
+        $dyads{"@$i"} = $fraction->to_string();
     }
 
     return %dyads;
