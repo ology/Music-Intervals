@@ -84,7 +84,6 @@ has freqs     => ( is => 'ro', default => sub { 0 } );
 has interval  => ( is => 'ro', default => sub { 0 } );
 has prime     => ( is => 'ro', default => sub { 0 } );
 has size      => ( is => 'ro', default => sub { 3 } );
-has tonic     => ( is => 'ro', default => sub { 'C' } );
 has semitones => ( is => 'ro', default => sub { 12 } );
 has temper    => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
     $self->semitones * 100 / log(2) },
