@@ -62,12 +62,6 @@ intervals, too!
 
 =item prime: 0 - prime factorization
 
-=item rootless: 0 - show chord names with no root
-
-=item octave: 4 - use the fourth octave
-
-=item concert: 440 - concert pitch
-
 =item size: 3 - chord size
 
 =item semitones: 12 - number of notes in the scale
@@ -89,9 +83,6 @@ has cents     => ( is => 'ro', default => sub { 0 } );
 has freqs     => ( is => 'ro', default => sub { 0 } );
 has interval  => ( is => 'ro', default => sub { 0 } );
 has prime     => ( is => 'ro', default => sub { 0 } );
-has rootless  => ( is => 'ro', default => sub { 0 } );
-has octave    => ( is => 'ro', default => sub { 4 } );
-has concert   => ( is => 'ro', default => sub { 440 } );
 has size      => ( is => 'ro', default => sub { 3 } );
 has tonic     => ( is => 'ro', default => sub { 'C' } );
 has semitones => ( is => 'ro', default => sub { 12 } );
