@@ -25,7 +25,7 @@ use Music::Intervals::Ratio;
   # Then print Dumper any of:
   $m->frequencies;
   $m->intervals;
-  $m->cents_vals;
+  $m->cent_vals;
   $m->prime_factors;
 
   # Show all the known intervals (the "notes" attribute above):
