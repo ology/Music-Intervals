@@ -86,10 +86,8 @@ those of the common scale and even the Pythagorean intervals, too.
 
 has notes     => ( is => 'ro', default => sub { [] } );
 has cents     => ( is => 'ro', default => sub { 0 } );
-has equalt    => ( is => 'ro', default => sub { 0 } );
 has freqs     => ( is => 'ro', default => sub { 0 } );
 has interval  => ( is => 'ro', default => sub { 0 } );
-has justin    => ( is => 'ro', default => sub { 0 } );
 has prime     => ( is => 'ro', default => sub { 0 } );
 has rootless  => ( is => 'ro', default => sub { 0 } );
 has octave    => ( is => 'ro', default => sub { 4 } );
