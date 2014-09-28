@@ -13,8 +13,8 @@ use Music::Intervals::Ratio;
 
 =head1 SYNOPSIS
 
-  use Music::Intervals;
-  $m = Music::Intervals->new(
+  use Music::Intervals::Numeric;
+  $m = Music::Intervals::Numeric->new(
     notes => [qw( 1/1 5/4 3/2 15/8 )],
     size => 3,
     freqs => 1,
