@@ -248,7 +248,7 @@ sub process
             {
                 $self->eq_tempered_frequencies->{"@$c"} = {
                     map {
-                        $_ => name2freq( $_ . $self->octave ) || eval $self->_ratio_index->{$_}
+                        $_ => name2freq( $_ . $self->octave ) || $self->concert * $self->_note_index->{$_}
                     } @$c
                 };
             }
@@ -291,9 +291,9 @@ sub dyads
             natural => $fraction->to_string(),
             # The value is either the known pitch ratio or the numerical evaluation of the fraction.
             eq_tempered =>
-              ( name2freq( $i->[1] . $self->octave ) || $self->_note_index->{ $i->[1] } )
+              ( name2freq( $i->[1] . $self->octave ) || ( $self->concert * $self->_note_index->{ $i->[1] } ) )
                 /
-              ( name2freq( $i->[0] . $self->octave ) || $self->_note_index->{ $i->[0] } ),
+              ( name2freq( $i->[0] . $self->octave ) || ( $self->concert * $self->_note_index->{ $i->[0] } ) ),
         };
     }
 
