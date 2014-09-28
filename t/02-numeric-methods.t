@@ -23,7 +23,7 @@ isa_ok $obj, 'Music::Intervals::Numeric';
 $obj->process;
 
 is_deeply $obj->natural_frequencies,
-    { "1/1 5/4 3/2" => { "1/1" => { "1/1" => "C unison, perfect prime, tonic" }, "3/2" => { "3/2" => "G perfect fifth" }, "5/4" => { "5/4" => "E major third" } } },
+    { "1/1 5/4 3/2" => { "1/1" => "C unison, perfect prime, tonic", "3/2" => "G perfect fifth", "5/4" => "E major third" } },
     'natural_frequencies';
 is_deeply $obj->natural_intervals,
     { "1/1 5/4 3/2" => { "1/1 3/2" => { "3/2" => "G perfect fifth" }, "1/1 5/4" => { "5/4" => "E major third" }, "5/4 3/2" => { "6/5" => "Eb minor third" } } },
