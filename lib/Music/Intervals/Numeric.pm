@@ -19,7 +19,6 @@ use Music::Intervals::Ratio;
     size => 3,
     chords => 1,
     justin => 1,
-    equalt => 1,
     freqs => 1,
     interval => 1,
     cents => 1,
@@ -31,9 +30,6 @@ use Music::Intervals::Ratio;
   $m->natural_intervals;
   $m->natural_cents;
   $m->natural_prime_factors;
-  $m->eq_tempered_frequencies;
-  $m->eq_tempered_intervals;
-  $m->eq_tempered_cents;
 
   # Show all the known intervals (the "notes" attribute above):
   perl -MData::Dumper -MMusic::Intervals::Ratio -e'print Dumper $Music::Intervals::Ratio::ratio'
