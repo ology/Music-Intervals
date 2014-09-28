@@ -121,14 +121,6 @@ For natural_intervals() this example produces the following:
    'pM3 pM7' => { '3/2' => 'perfect fifth' }
  }
 
-For eq_tempered_cents() this is:
-
- 'C pM3 pM7' => {
-   'pM3 pM7' => '701.955000865387',
-   'C pM7' => '-8527.85665190266',
-   'C pM3' => '-9229.81165276804'
- }
-
 Note that case matters for interval names.  For example, "M" means major and "m"
 means minor.
 
