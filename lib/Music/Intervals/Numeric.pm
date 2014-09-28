@@ -17,8 +17,6 @@ use Music::Intervals::Ratio;
   $m = Music::Intervals->new(
     notes => [qw( 1/1 5/4 3/2 15/8 )],
     size => 3,
-    chords => 1,
-    justin => 1,
     freqs => 1,
     interval => 1,
     cents => 1,
@@ -116,9 +114,6 @@ has natural_frequencies => ( is => 'rw', default => sub { {} } );
 has natural_intervals => ( is => 'rw', default => sub { {} } );
 has natural_cents => ( is => 'rw', default => sub { {} } );
 has natural_prime_factors => ( is => 'rw', default => sub { {} } );
-has eq_tempered_frequencies => ( is => 'rw', default => sub { {} } );
-has eq_tempered_intervals => ( is => 'rw', default => sub { {} } );
-has eq_tempered_cents => ( is => 'rw', default => sub { {} } );
 
 sub process
 {
@@ -131,42 +126,39 @@ sub process
     {
         my %dyads = $self->dyads($c);
 
-        if ( $self->justin )
+        if ( $self->freqs )
         {
-            if ( $self->freqs )
-            {
-                $self->natural_frequencies->{"@$c"} =
-                    { map { $_ => { $_ => $Music::Intervals::Ratio::ratio->{$_} } } @$c };
-            }
-            if ( $self->interval )
-            {
-                $self->natural_intervals->{"@$c"} = {
-                    map {
-                        $_ => {
-                            $dyads{$_}->{natural} => $Music::Intervals::Ratio::ratio->{ $dyads{$_}->{natural} }
-                        }
-                    } keys %dyads
-                };
+            $self->natural_frequencies->{"@$c"} =
+                { map { $_ => { $_ => $Music::Intervals::Ratio::ratio->{$_} } } @$c };
+        }
+        if ( $self->interval )
+        {
+            $self->natural_intervals->{"@$c"} = {
+                map {
+                    $_ => {
+                        $dyads{$_}->{natural} => $Music::Intervals::Ratio::ratio->{ $dyads{$_}->{natural} }
+                    }
+                } keys %dyads
+            };
 
-            }
-            if ( $self->cents )
-            {
-                $self->natural_cents->{"@$c"} = {
-                    map {
-                        $_ => log( eval $dyads{$_}->{natural} ) * $self->temper
-                    } keys %dyads };
+        }
+        if ( $self->cents )
+        {
+            $self->natural_cents->{"@$c"} = {
+                map {
+                    $_ => log( eval $dyads{$_}->{natural} ) * $self->temper
+                } keys %dyads };
 
-            }
-            if ( $self->prime )
-            {
-                $self->natural_prime_factors->{"@$c"} = {
-                    map {
-                        $_ => {
-                            $dyads{$_}->{natural} => scalar ratio_factorize( $dyads{$_}->{natural} )
-                        }
-                    } keys %dyads
-                };
-            }
+        }
+        if ( $self->prime )
+        {
+            $self->natural_prime_factors->{"@$c"} = {
+                map {
+                    $_ => {
+                        $dyads{$_}->{natural} => scalar ratio_factorize( $dyads{$_}->{natural} )
+                    }
+                } keys %dyads
+            };
         }
     }
 }
