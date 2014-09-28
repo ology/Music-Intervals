@@ -8,7 +8,6 @@ use Moo;
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
 use Number::Fraction;
-use Music::Scales;
 use Music::Intervals::Ratio;
 
 =head1 SYNOPSIS
