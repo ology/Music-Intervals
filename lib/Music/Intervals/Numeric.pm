@@ -129,7 +129,7 @@ sub process
         if ( $self->freqs )
         {
             $self->natural_frequencies->{"@$c"} =
-                { map { $_ => { $_ => $Music::Intervals::Ratio::ratio->{$_} } } @$c };
+                { map { $_ => $Music::Intervals::Ratio::ratio->{$_} } @$c };
         }
         if ( $self->interval )
         {
