@@ -56,13 +56,9 @@ intervals, too!
 
 =item cents: 0 - divisions of the octave
 
-=item equalt: 0 - equal temperament
-
 =item freqs: 0 - frequencies
 
 =item interval: 0 - note intervals
-
-=item justin: 0 - just intonation
 
 =item prime: 0 - prime factorization
 
@@ -73,11 +69,6 @@ intervals, too!
 =item concert: 440 - concert pitch
 
 =item size: 3 - chord size
-
-=item tonic: C - root of the computations
-
-* Currently (and for the foreseeable future) this will remain the only value
-that produces sane results.
 
 =item semitones: 12 - number of notes in the scale
 
