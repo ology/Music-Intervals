@@ -11,7 +11,6 @@ isa_ok $obj, 'Music::Intervals::Numeric', 'default args';
 
 my $chord = '1/1 5/4 3/2';
 $obj = Music::Intervals::Numeric->new(
-    chords => 1,
     justin => 1,
     freqs => 1,
     interval => 1,
@@ -23,7 +22,6 @@ $obj = Music::Intervals::Numeric->new(
 isa_ok $obj, 'Music::Intervals::Numeric';
 $obj->process;
 
-use Data::Dumper::Concise;
 is_deeply $obj->natural_frequencies,
     { "1/1 5/4 3/2" => { "1/1" => { "1/1" => "C unison, perfect prime, tonic" }, "3/2" => { "3/2" => "G perfect fifth" }, "5/4" => { "5/4" => "E major third" } } },
     'natural_frequencies';
@@ -36,6 +34,7 @@ is sprintf('%.3f', $obj->natural_cents->{$chord}{'5/4 3/2'}), '315.641', 'natura
 is_deeply $obj->natural_prime_factors,
     { "1/1 5/4 3/2" => { "1/1 3/2" => { "3/2" => "(3) / (2)" }, "1/1 5/4" => { "5/4" => "(5) / (2*2)" }, "5/4 3/2" => { "6/5" => "(2*3) / (5)" } } },
     'natural_prime_factors';
+#use Data::Dumper::Concise;
 #warn Dumper$obj->eq_tempered_cents;
 #is sprintf('%.3f', $obj->eq_tempered_frequencies->{$chord}{'1/1'}), '261.626', 'eq_tempered_frequencies 1/1';
 #is sprintf('%.3f', $obj->eq_tempered_frequencies->{$chord}{'5/4'}), '329.628', 'eq_tempered_frequencies 5/4';
