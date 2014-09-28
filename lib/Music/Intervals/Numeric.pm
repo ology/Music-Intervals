@@ -178,14 +178,7 @@ sub dyads
         my $fraction = $numerator / $denominator;
 
         # Calculate both natural and equal temperament values for our ratio.
-        $dyads{"@$i"} = {
-            natural => $fraction->to_string(),
-            # The value is either the known pitch ratio or the numerical evaluation of the fraction.
-            eq_tempered =>
-              ( name2freq( $i->[1] . $self->octave ) || eval $i->[1] )
-                /
-              ( name2freq( $i->[0] . $self->octave ) || eval $i->[0] ),
-        };
+        $dyads{"@$i"} = { natural => $fraction->to_string() };
     }
 
     return %dyads;
