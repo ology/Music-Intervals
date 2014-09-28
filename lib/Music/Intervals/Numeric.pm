@@ -7,7 +7,6 @@ our $VERSION = '0.04_01';
 use Moo;
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
-use MIDI::Pitch qw( name2freq );
 use Number::Fraction;
 use Music::Scales;
 use Music::Intervals::Ratio;
@@ -100,6 +99,7 @@ those of the common scale and even the Pythagorean intervals, too.
 
 =cut
 
+has notes     => ( is => 'ro', default => sub { [] } );
 has cents     => ( is => 'ro', default => sub { 0 } );
 has equalt    => ( is => 'ro', default => sub { 0 } );
 has freqs     => ( is => 'ro', default => sub { 0 } );
@@ -114,15 +114,6 @@ has tonic     => ( is => 'ro', default => sub { 'C' } );
 has semitones => ( is => 'ro', default => sub { 12 } );
 has temper    => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
     $self->semitones * 100 / log(2) },
-);
-has notes     => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    return [ get_scale_notes( $self->tonic ) ] },
-);
-has scale     => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    return [ map { eval $_ } @{ $self->notes } ] },
-);
-has _note_index  => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    return { map { $_ => eval $_ } @{ $self->notes } } },
 );
 
 has natural_frequencies => ( is => 'rw', default => sub { {} } );
@@ -177,34 +168,6 @@ sub process
                         $_ => {
                             $dyads{$_}->{natural} => scalar ratio_factorize( $dyads{$_}->{natural} )
                         }
-                    } keys %dyads
-                };
-            }
-        }
-
-        if ( $self->equalt )
-        {
-            if ( $self->freqs )
-            {
-                $self->eq_tempered_frequencies->{"@$c"} = {
-                    map {
-                        $_ => name2freq( $_ . $self->octave ) || eval $self->_ratio_index->{$_}
-                    } @$c
-                };
-            }
-            if ( $self->interval )
-            {
-                $self->eq_tempered_intervals->{"@$c"} = {
-                    map {
-                        $_ => $dyads{$_}->{eq_tempered}
-                    } keys %dyads
-                };
-            }
-            if ( $self->cents )
-            {
-                $self->eq_tempered_cents->{"@$c"} = {
-                    map {
-                        $_ => log( $dyads{$_}->{eq_tempered} ) * $self->temper
                     } keys %dyads
                 };
             }
