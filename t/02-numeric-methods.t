@@ -31,6 +31,6 @@ is sprintf('%.3f', $obj->cent_vals->{$chord}{'1/1 3/2'}), '701.955', 'cent_vals 
 is sprintf('%.3f', $obj->cent_vals->{$chord}{'5/4 3/2'}), '315.641', 'cent_vals 5/4 3/2';
 is_deeply $obj->prime_factor,
     { "1/1 5/4 3/2" => { "1/1 3/2" => { "3/2" => "(3) / (2)" }, "1/1 5/4" => { "5/4" => "(5) / (2*2)" }, "5/4 3/2" => { "6/5" => "(2*3) / (5)" } } },
-    'prime_factors';
+    'prime_factor';
 
 done_testing();
