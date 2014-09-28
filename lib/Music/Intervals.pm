@@ -8,6 +8,7 @@ use Moo;
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
 use Music::Chord::Namer qw( chordname );
+use MIDI::Pitch qw( name2freq );
 use Number::Fraction;
 use Music::Scales;
 use Music::Intervals::Ratios;
@@ -239,7 +240,7 @@ sub process
             {
                 $self->eq_tempered_frequencies->{"@$c"} = {
                     map {
-                        $_ => $self->concert * $self->_note_index->{$_}
+                        $_ => name2freq( $_ . $self->octave ) || $self->concert * $self->_note_index->{$_}
                     } @$c
                 };
             }
@@ -282,9 +283,9 @@ sub dyads
             natural => $fraction->to_string(),
             # The value is either the known pitch ratio or the numerical evaluation of the fraction.
             eq_tempered =>
-              ( $self->concert * $self->_note_index->{ $i->[1] } )
+              ( name2freq( $i->[1] . $self->octave ) || ( $self->concert * $self->_note_index->{ $i->[1] } ) )
                 /
-              ( $self->concert * $self->_note_index->{ $i->[0] } ),
+              ( name2freq( $i->[0] . $self->octave ) || ( $self->concert * $self->_note_index->{ $i->[0] } ) ),
         };
     }
 
