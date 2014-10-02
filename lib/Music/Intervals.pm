@@ -28,15 +28,17 @@ use Music::Intervals::Ratios;
     prime => 1,
   );
   $m->process;
-  # Then print Dumper any of:
-  $m->chord_names;
-  $m->natural_frequencies;
-  $m->natural_intervals;
-  $m->natural_cents;
-  $m->natural_prime_factors;
-  $m->eq_tempered_frequencies;
-  $m->eq_tempered_intervals;
-  $m->eq_tempered_cents;
+  # Then
+  print Dumper # any of:
+    $m->chord_names,
+    $m->natural_frequencies,
+    $m->natural_intervals,
+    $m->natural_cents,
+    $m->natural_prime_factors,
+    $m->eq_tempered_frequencies,
+    $m->eq_tempered_intervals,
+    $m->eq_tempered_cents,
+  ;
 
   # Find known intervals
   $name = $m->by_ratio($ratio);
@@ -65,7 +67,7 @@ intervals, too!
 
 =head2 Attributes and defaults
 
-=over
+=over 4
 
 =item cents: 0 - divisions of the octave
 
