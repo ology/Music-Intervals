@@ -166,14 +166,14 @@ has _ratio_name_index => ( is => 'ro', lazy => 1, default => sub { my $self = sh
         } keys %$Music::Intervals::Ratios::ratio } },
 );
 
-has chord_names => ( is => 'rw', default => sub { {} } );
-has natural_frequencies => ( is => 'rw', default => sub { {} } );
-has natural_intervals => ( is => 'rw', default => sub { {} } );
-has natural_cents => ( is => 'rw', default => sub { {} } );
-has natural_prime_factors => ( is => 'rw', default => sub { {} } );
-has eq_tempered_frequencies => ( is => 'rw', default => sub { {} } );
-has eq_tempered_intervals => ( is => 'rw', default => sub { {} } );
-has eq_tempered_cents => ( is => 'rw', default => sub { {} } );
+has chord_names => ( is => 'rw' );
+has natural_frequencies => ( is => 'rw' );
+has natural_intervals => ( is => 'rw' );
+has natural_cents => ( is => 'rw' );
+has natural_prime_factors => ( is => 'rw' );
+has eq_tempered_frequencies => ( is => 'rw' );
+has eq_tempered_intervals => ( is => 'rw' );
+has eq_tempered_cents => ( is => 'rw' );
 
 sub process
 {
