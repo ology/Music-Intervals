@@ -195,14 +195,14 @@ sub process
             @chordname = grep { !/no-root/ } @chordname unless $self->rootless;
 
             # Set the names of this chord combination.
-            $self->chord_names->{"@$c"} = \@chordname if @chordname;
+            $self->chord_names->{"@$c chord_names"} = \@chordname if @chordname;
         }
 
         if ( $self->justin )
         {
             if ( $self->freqs )
             {
-                $self->natural_frequencies->{"@$c"} = {
+                $self->natural_frequencies->{"@$c natural_frequencies"} = {
                     map {
                         $_ => {
 #                            $self->_ratio_index->{$_} => $Music::Intervals::Ratios::ratio->{$_}{name}
@@ -212,7 +212,7 @@ sub process
             }
             if ( $self->interval )
             {
-                $self->natural_intervals->{"@$c"} = {
+                $self->natural_intervals->{"@$c natural_intervals"} = {
                     map {
                         $_ => {
                             $dyads{$_}->{natural} => $self->_ratio_name_index->{ $dyads{$_}->{natural} }{name}
@@ -223,7 +223,7 @@ sub process
             }
             if ( $self->cents )
             {
-                $self->natural_cents->{"@$c"} = {
+                $self->natural_cents->{"@$c natural_cents"} = {
                     map {
                         $_ => log( eval $dyads{$_}->{natural} ) * $self->temper
                     } keys %dyads };
@@ -231,7 +231,7 @@ sub process
             }
             if ( $self->prime )
             {
-                $self->natural_prime_factors->{"@$c"} = {
+                $self->natural_prime_factors->{"@$c natural_prime_factors"} = {
                     map {
                         $_ => {
                             $dyads{$_}->{natural} => scalar ratio_factorize( $dyads{$_}->{natural} )
@@ -245,7 +245,7 @@ sub process
         {
             if ( $self->freqs )
             {
-                $self->eq_tempered_frequencies->{"@$c"} = {
+                $self->eq_tempered_frequencies->{"@$c eq_tempered_frequencies"} = {
                     map {
                         $_ => name2freq( $_ . $self->octave ) || $self->concert * $self->_note_index->{$_}
                     } @$c
@@ -253,7 +253,7 @@ sub process
             }
             if ( $self->interval )
             {
-                $self->eq_tempered_intervals->{"@$c"} = {
+                $self->eq_tempered_intervals->{"@$c eq_tempered_intervals"} = {
                     map {
                         $_ => $dyads{$_}->{eq_tempered}
                     } keys %dyads
@@ -261,7 +261,7 @@ sub process
             }
             if ( $self->cents )
             {
-                $self->eq_tempered_cents->{"@$c"} = {
+                $self->eq_tempered_cents->{"@$c eq_tempered_cents"} = {
                     map {
                         $_ => log( $dyads{$_}->{eq_tempered} ) * $self->temper
                     } keys %dyads
