@@ -1,6 +1,9 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - 
+
+0.04  2014-09-27
     - Added a nearly identical module for numeric-only notes.
 
 0.0301 2014-09-27
