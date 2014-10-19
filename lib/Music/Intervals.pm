@@ -53,9 +53,9 @@ A C<Music::Intervals> object shows the mathematical break-down of musical
 intervals and chords.
 
 This module reveals the "guts" of chords within a given tonality.  By guts I
-mean, the measurements of the notes and the intervals between them.  Both just
-intonation (ratio) and equal temperament (decimal) are handled, with over 400
-intervals, too!
+mean, the measurements of the notes and the intervals between them.
+
+* Sane equal temperament values are returned for the 12-tone scale only *
 
 =cut
 
@@ -234,7 +234,7 @@ sub process
                 $self->natural_prime_factors->{"@$c natural_prime_factors"} = {
                     map {
                         $_ => {
-                            $dyads{$_}->{natural} => scalar ratio_factorize( $dyads{$_}->{natural} )
+                            $dyads{$_}->{natural} => ratio_factorize( $dyads{$_}->{natural} )
                         }
                     } keys %dyads
                 };
@@ -288,7 +288,7 @@ sub dyads
         # Calculate both natural and equal temperament values for our ratio.
         $dyads{"@$i"} = {
             natural => $fraction->to_string(),
-            # The value is either the known pitch ratio or the numerical evaluation of the fraction.
+            # The value is either the known pitch ratio or ...
             eq_tempered =>
               ( name2freq( $i->[1] . $self->octave ) || ( $self->concert * $self->_note_index->{ $i->[1] } ) )
                 /
@@ -306,12 +306,10 @@ sub ratio_factorize {
     $numerator   = [ prime_factors($numerator) ];
     $denominator = [ prime_factors($denominator) ];
 
-    return wantarray
-        ? ( $numerator, $denominator )
-        : sprintf( '(%s) / (%s)',
-            join( '*', @$numerator ),
-            join( '*', @$denominator )
-        );
+    return sprintf( '(%s) / (%s)',
+        join( '*', @$numerator ),
+        join( '*', @$denominator )
+    );
 }
 
 =head2 by_name()
