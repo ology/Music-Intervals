@@ -943,6 +943,10 @@ our $ratio = {
         ratio => '91/64',
         name => q|91st harmonic|,
     },
+    supl => {
+        ratio => '91/90',
+        name => q|Superleap|,
+    },
     '93h' => {
         ratio => '93/64',
         name => q|93rd harmonic|,
@@ -1045,7 +1049,7 @@ our $ratio = {
     },
     u2c => {
         ratio => '121/120',
-        name => q|undecimal seconds comma|,
+        name => q|undecimal seconds comma, Biyatisma|,
     },
     '121h' => {
         ratio => '121/64',
@@ -1138,6 +1142,10 @@ our $ratio = {
     pn2 => {
         ratio => '162/149',
         name => q|Persian neutral second|,
+    },
+    vali => {
+        ratio => '176/175',
+        name => q|Valinorsma|,
     },
     cd6 => {
         ratio => '192/125',
@@ -1263,6 +1271,10 @@ our $ratio = {
         ratio => '405/256',
         name => q|wide augmented fifth|,
     },
+    werc => {
+        ratio => '441/440',
+        name => q|Werckisma|,
+    },
     st5 => {
         ratio => '512/343',
         name => q|3 septatones or septatonic fifth|,
@@ -1302,6 +1314,10 @@ our $ratio = {
     wa3 => {
         ratio => '675/512',
         name => q|wide augmented third|,
+    },
+    pari => {
+        ratio => '676/675',
+        name => q|Parizeksma|,
     },
     '114t' => {
         ratio => '687/500',
@@ -1453,7 +1469,11 @@ our $ratio = {
     },
     ssc => {
         ratio => '4000/3969',
-        name => q|septimal semicomma|,
+        name => q|septimal semicomma, Octagar|,
+    },
+    wiz => {
+        ratio => '4000/3993',
+        name => q|Wizardharry|,
     },
     pdo => {
         ratio => '4096/2187',
@@ -1490,6 +1510,10 @@ our $ratio = {
     osd => {
         ratio => '6144/3125',
         name => q|octave - small diesis|,
+    },
+    por => {
+        ratio => '6144/6125',
+        name => q|Porwell|,
     },
     pa5 => {
         ratio => '6561/4096',
@@ -1615,6 +1639,10 @@ our $ratio = {
         ratio => '65536/59049',
         name => q|Pythagorean diminished third|,
     },
+    orgo => {
+        ratio => '65536/65219',
+        name => q|Orgonisma|,
+    },
     msc => {
         ratio => '78732/78125',
         name => q|medium semicomma|,
@@ -1626,6 +1654,10 @@ our $ratio = {
     pa3 => {
         ratio => '177147/131072',
         name => q|Pythagorean augmented third|,
+    },
+    land => {
+        ratio => '250047/250000',
+        name => q|Landscape Comma|,
     },
     pd6 => {
         ratio => '262144/177147',
