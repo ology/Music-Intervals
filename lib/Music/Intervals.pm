@@ -165,6 +165,10 @@ has _ratio_name_index => ( is => 'ro', lazy => 1, default => sub { my $self = sh
             name   => $Music::Intervals::Ratios::ratio->{$_}{name} }
         } keys %$Music::Intervals::Ratios::ratio } },
 );
+has tonic_frequency => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
+        return $self->concert * (2 ** (1 / $self->semitones)) ** (-9) # XXX Hardcoding: 9th key above middle-C
+    },
+);
 
 has chord_names => ( is => 'rw', default => sub { {} } );
 has natural_frequencies => ( is => 'rw', default => sub { {} } );
@@ -203,7 +207,7 @@ sub process
                 $self->natural_frequencies->{"@$c natural_frequencies"} = {
                     map {
                         $_ => {
-                            $self->_ratio_index->{$_} => $Music::Intervals::Ratios::ratio->{$_}{name}
+                            $self->_ratio_index->{$_} => { $self->tonic_frequency * eval $self->_ratio_index->{$_} => $Music::Intervals::Ratios::ratio->{$_}{name} }
                         }
                     } @$c
                 };
