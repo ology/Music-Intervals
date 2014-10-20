@@ -179,8 +179,6 @@ sub process
 {
     my $self = shift;
 
-    my %x;
-
     my $iter = combinations( $self->notes, $self->size );
     while (my $c = $iter->next)
     {
