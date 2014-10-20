@@ -2,7 +2,7 @@ package Music::Intervals;
 # ABSTRACT: Mathematical breakdown of musical intervals
 use strict;
 use warnings;
-our $VERSION = '0.0401';
+our $VERSION = '0.0402';
 
 use Moo;
 use Algorithm::Combinatorics qw( combinations );
@@ -55,7 +55,7 @@ intervals and chords.
 This module reveals the "guts" of chords within a given tonality.  By guts I
 mean, the measurements of the notes and the intervals between them.
 
-* Sane equal temperament values are returned for the 12-tone scale only *
+* This module only handles equal temperament for the 12-tone scale only. *
 
 =cut
 
