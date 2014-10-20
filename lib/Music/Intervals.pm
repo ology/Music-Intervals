@@ -207,7 +207,7 @@ sub process
                 $self->natural_frequencies->{"@$c natural_frequencies"} = {
                     map {
                         $_ => {
-                            $self->_ratio_index->{$_} => { $self->tonic_frequency * eval $self->_ratio_index->{$_} => $Music::Intervals::Ratios::ratio->{$_}{name} }
+                             $self->tonic_frequency * eval $self->_ratio_index->{$_} => { $self->_ratio_index->{$_} => $Music::Intervals::Ratios::ratio->{$_}{name} }
                         }
                     } @$c
                 };
