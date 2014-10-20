@@ -53,10 +53,9 @@ A C<Music::Intervals> object shows the mathematical break-down of musical
 intervals and chords.
 
 This module reveals the "guts" of chords within a given tonality.  By guts I
-mean, the measurements of the notes and the intervals between them.  Both just
-intonation (ratio) and equal temperament (decimal) are handled, with over 400
-intervals, too!
+mean, the measurements of the notes and the intervals between them.
 
+* Tis module only handles equal temperament for the 12-tone scale only. *
 =cut
 
 =head1 METHODS
