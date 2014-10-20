@@ -55,7 +55,7 @@ intervals and chords.
 This module reveals the "guts" of chords within a given tonality.  By guts I
 mean, the measurements of the notes and the intervals between them.
 
-* Tis module only handles equal temperament for the 12-tone scale only. *
+* This module only handles equal temperament for the 12-tone scale only. *
 =cut
 
 =head1 METHODS
