@@ -1,7 +1,7 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
-    - 
+    - Clarified the limitations of equal temperament with this module.
 
 0.04  2014-09-27
     - Added a nearly identical module for numeric-only notes.
