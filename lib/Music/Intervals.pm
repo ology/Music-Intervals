@@ -26,6 +26,7 @@ use Music::Intervals::Ratios;
     interval => 1,
     cents => 1,
     prime => 1,
+    integer => 1,
   );
   $m->process;
   # Then
@@ -38,6 +39,7 @@ use Music::Intervals::Ratios;
     $m->eq_tempered_frequencies,
     $m->eq_tempered_intervals,
     $m->eq_tempered_cents,
+    $m->integer_notation,
   ;
 
   # Find known intervals
@@ -75,11 +77,13 @@ mean, the measurements of the notes and the intervals between them.
 
 =item equalt: 0 - equal temperament
 
+=item justin: 0 - just intonation
+
+=item integer: 0 - integer notation
+
 =item freqs: 0 - frequencies
 
 =item interval: 0 - note intervals
-
-=item justin: 0 - just intonation
 
 =item prime: 0 - prime factorization
 
