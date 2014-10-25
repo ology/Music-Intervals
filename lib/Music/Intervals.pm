@@ -144,6 +144,7 @@ has justin    => ( is => 'ro', default => sub { 0 } );
 has prime     => ( is => 'ro', default => sub { 0 } );
 has rootless  => ( is => 'ro', default => sub { 0 } );
 has octave    => ( is => 'ro', default => sub { 4 } );
+has midikey   => ( is => 'ro', default => sub { 69 } );
 has concert   => ( is => 'ro', default => sub { 440 } );
 has size      => ( is => 'ro', default => sub { 3 } );
 has tonic     => ( is => 'ro', default => sub { 'C' } );
@@ -210,7 +211,7 @@ sub process
         {
             $self->integer_notation->{"@$c integer_notation"} = {
                 map { $_ => 
-                    sprintf '%0.f', 69 + $self->semitones * log( ($self->tonic_frequency * (eval $self->_ratio_index->{$_})) / $self->concert ) / log(2)
+                    sprintf '%0.f', $self->midikey + $self->semitones * log( ($self->tonic_frequency * (eval $self->_ratio_index->{$_})) / $self->concert ) / log(2)
                 } @$c
             };
         }
