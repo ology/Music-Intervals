@@ -42,17 +42,22 @@ is_deeply $obj->natural_frequencies,
     { "C E G natural_frequencies" => {
         C => { "261.626" => { "1/1" => "unison, perfect prime, tonic" } },
         E => { "327.032" => { "5/4" => "major third" } },
-        G => { "392.438" => { "3/2" => "perfect fifth" } }
-    }},
+        G => { "392.438" => { "3/2" => "perfect fifth" } } } },
     'natural_frequencies';
 is_deeply $obj->natural_intervals,
-    { "$chord natural_intervals" => { 'C E' => { '5/4' => 'major third' }, 'E G' => { '6/5' => 'minor third' }, 'C G' => { '3/2' => 'perfect fifth' } } },
+    { "$chord natural_intervals" => {
+        'C E' => { '5/4' => 'major third' },
+        'E G' => { '6/5' => 'minor third' },
+        'C G' => { '3/2' => 'perfect fifth' } } },
     'natural_intervals';
 is sprintf('%.3f', $obj->natural_cents->{"$chord natural_cents"}{'C E'}), '386.314', 'natural_cents C E';
 is sprintf('%.3f', $obj->natural_cents->{"$chord natural_cents"}{'C G'}), '701.955', 'natural_cents C G';
 is sprintf('%.3f', $obj->natural_cents->{"$chord natural_cents"}{'E G'}), '315.641', 'natural_cents E G';
 is_deeply $obj->natural_prime_factors,
-    { "$chord natural_prime_factors"=> { 'C E' => { '5/4' => '(5) / (2*2)' }, 'C G' => { '3/2' => '(3) / (2)' }, 'E G' => { '6/5' => '(2*3) / (5)' } } },
+    { "$chord natural_prime_factors"=> {
+        'C E' => { '5/4' => '(5) / (2*2)' },
+        'C G' => { '3/2' => '(3) / (2)' },
+        'E G' => { '6/5' => '(2*3) / (5)' } } },
     'natural_prime_factors';
 is sprintf('%.3f', $obj->eq_tempered_frequencies->{"$chord eq_tempered_frequencies"}{C}), '261.626', 'eq_tempered_frequencies C';
 is sprintf('%.3f', $obj->eq_tempered_frequencies->{"$chord eq_tempered_frequencies"}{E}), '329.628', 'eq_tempered_frequencies E';
