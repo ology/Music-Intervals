@@ -38,9 +38,13 @@ isa_ok $obj, 'Music::Intervals';
 $obj->process;
 
 is_deeply $obj->chord_names, { "$chord chord_names" => [ 'C' ] }, 'chord_names';
-#is_deeply $obj->natural_frequencies,
-#    { "$chord natural_frequencies" => { C => { '1/1' => 'unison, perfect prime, tonic' }, E => { '5/4' => 'major third' }, G => { '3/2' => 'perfect fifth' } } },
-#    'natural_frequencies';
+is_deeply $obj->natural_frequencies,
+    { "C E G natural_frequencies" => {
+        C => { "261.626" => { "1/1" => "unison, perfect prime, tonic" } },
+        E => { "327.032" => { "5/4" => "major third" } },
+        G => { "392.438" => { "3/2" => "perfect fifth" } }
+    }},
+    'natural_frequencies';
 is_deeply $obj->natural_intervals,
     { "$chord natural_intervals" => { 'C E' => { '5/4' => 'major third' }, 'E G' => { '6/5' => 'minor third' }, 'C G' => { '3/2' => 'perfect fifth' } } },
     'natural_intervals';
