@@ -1,8 +1,12 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Added missing POD and Changes file item.
+
+0.05  2014-10-25
     - Clarified the limitations of equal temperament with this module.
     - Added named output, so blocks are labled.
+    - Added integer_notation
 
 0.04  2014-09-27
     - Added a nearly identical module for numeric-only notes.
