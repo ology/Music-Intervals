@@ -211,7 +211,7 @@ sub process
         {
             $self->integer_notation->{"@$c integer_notation"} = {
                 map { $_ => 
-                    sprintf '%0.f', $self->midikey + $self->semitones * log( ($self->tonic_frequency * (eval $self->_ratio_index->{$_})) / $self->concert ) / log(2)
+                    sprintf '%.0f', $self->midikey + $self->semitones * log( ($self->tonic_frequency * (eval $self->_ratio_index->{$_})) / $self->concert ) / log(2)
                 } @$c
             };
         }
@@ -223,7 +223,7 @@ sub process
                 $self->natural_frequencies->{"@$c natural_frequencies"} = {
                     map {
                         $_ => {
-                             $self->tonic_frequency * eval $self->_ratio_index->{$_} => { $self->_ratio_index->{$_} => $Music::Intervals::Ratios::ratio->{$_}{name} }
+                             sprintf('%.3f', $self->tonic_frequency * eval $self->_ratio_index->{$_}) => { $self->_ratio_index->{$_} => $Music::Intervals::Ratios::ratio->{$_}{name} }
                         }
                     } @$c
                 };
