@@ -135,6 +135,7 @@ has chords    => ( is => 'ro', default => sub { 0 } );
 has equalt    => ( is => 'ro', default => sub { 0 } );
 has freqs     => ( is => 'ro', default => sub { 0 } );
 has interval  => ( is => 'ro', default => sub { 0 } );
+has integer   => ( is => 'ro', default => sub { 0 } );
 has justin    => ( is => 'ro', default => sub { 0 } );
 has prime     => ( is => 'ro', default => sub { 0 } );
 has rootless  => ( is => 'ro', default => sub { 0 } );
@@ -178,6 +179,7 @@ has natural_prime_factors => ( is => 'rw', default => sub { {} } );
 has eq_tempered_frequencies => ( is => 'rw', default => sub { {} } );
 has eq_tempered_intervals => ( is => 'rw', default => sub { {} } );
 has eq_tempered_cents => ( is => 'rw', default => sub { {} } );
+has integer_notation => ( is => 'rw', default => sub { {} } );
 
 sub process
 {
@@ -198,6 +200,15 @@ sub process
 
             # Set the names of this chord combination.
             $self->chord_names->{"@$c chord_names"} = \@chordname if @chordname;
+        }
+
+        if ( $self->integer )
+        {
+            $self->integer_notation->{"@$c integer_notation"} = {
+                map { $_ => 
+                    sprintf '%0.f', 69 + $self->semitones * log( ($self->tonic_frequency * (eval $self->_ratio_index->{$_})) / $self->concert ) / log(2)
+                } @$c
+            };
         }
 
         if ( $self->justin )
