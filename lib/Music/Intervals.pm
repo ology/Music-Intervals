@@ -152,13 +152,13 @@ has semitones => ( is => 'ro', default => sub { 12 } );
 has temper    => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
     $self->semitones * 100 / log(2) },
 );
-has notes     => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
+has notes => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
     return [ get_scale_notes( $self->tonic ) ] },
 );
-has scale     => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
+has scale => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
     return [ map { eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } ] },
 );
-has _note_index  => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
+has _note_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
     return { map { $_ => eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } } },
 );
 has _ratio_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
