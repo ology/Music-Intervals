@@ -122,7 +122,7 @@ A few examples:
  * [qw( C 11h 7h )]
  * [qw( C pM3 pM7 )]
 
-For natural_intervals() this example produces the following:
+For natural_intervals() this last example produces the following:
 
  'C pM3 pM7' => {
    'C pM3' => { '81/64' => 'Pythagorean major third' },
