@@ -149,42 +149,77 @@ has concert   => ( is => 'ro', default => sub { 440 } );
 has size      => ( is => 'ro', default => sub { 3 } );
 has tonic     => ( is => 'ro', default => sub { 'C' } );
 has semitones => ( is => 'ro', default => sub { 12 } );
-has temper    => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    $self->semitones * 100 / log(2) },
+has temper    => (
+    is      => 'ro',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        $self->semitones * 100 / log(2);
+    },
 );
-has notes => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    return [ get_scale_notes( $self->tonic ) ] },
+has notes => (
+    is      => 'ro',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        return [ get_scale_notes( $self->tonic ) ]
+    },
 );
-has scale => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    return [ map { eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } ] },
+has scale => (
+    is      => 'ro',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        return [ map { eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } ]
+    },
 );
-has _note_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    return { map { $_ => eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } } },
+has _note_index => (
+    is      => 'ro',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        return { map { $_ => eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } }
+    },
 );
-has _ratio_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    return { map { $_ => $Music::Intervals::Ratios::ratio->{$_}{ratio} } @{ $self->notes } } },
+has _ratio_index => (
+    is      => 'ro',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        return { map { $_ => $Music::Intervals::Ratios::ratio->{$_}{ratio} } @{ $self->notes } }
+    },
 );
-has _ratio_name_index => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    return {
-        map { $Music::Intervals::Ratios::ratio->{$_}{ratio} => {
-            symbol => $_,
-            name   => $Music::Intervals::Ratios::ratio->{$_}{name} }
-        } keys %$Music::Intervals::Ratios::ratio } },
+has _ratio_name_index => (
+    is      => 'ro',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        return {
+            map { $Music::Intervals::Ratios::ratio->{$_}{ratio} => {
+                symbol => $_,
+                name   => $Music::Intervals::Ratios::ratio->{$_}{name} }
+            } keys %$Music::Intervals::Ratios::ratio
+        }
+    },
 );
-has tonic_frequency => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
+has tonic_frequency => (
+    is      => 'ro',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
         return $self->concert * (2 ** (1 / $self->semitones)) ** (-9) # XXX Hardcoding: 9th key above middle-C
     },
 );
 
-has chord_names => ( is => 'rw', default => sub { {} } );
-has natural_frequencies => ( is => 'rw', default => sub { {} } );
-has natural_intervals => ( is => 'rw', default => sub { {} } );
-has natural_cents => ( is => 'rw', default => sub { {} } );
-has natural_prime_factors => ( is => 'rw', default => sub { {} } );
+has chord_names             => ( is => 'rw', default => sub { {} } );
+has natural_frequencies     => ( is => 'rw', default => sub { {} } );
+has natural_intervals       => ( is => 'rw', default => sub { {} } );
+has natural_cents           => ( is => 'rw', default => sub { {} } );
+has natural_prime_factors   => ( is => 'rw', default => sub { {} } );
 has eq_tempered_frequencies => ( is => 'rw', default => sub { {} } );
-has eq_tempered_intervals => ( is => 'rw', default => sub { {} } );
-has eq_tempered_cents => ( is => 'rw', default => sub { {} } );
-has integer_notation => ( is => 'rw', default => sub { {} } );
+has eq_tempered_intervals   => ( is => 'rw', default => sub { {} } );
+has eq_tempered_cents       => ( is => 'rw', default => sub { {} } );
+has integer_notation        => ( is => 'rw', default => sub { {} } );
 
 sub process
 {
