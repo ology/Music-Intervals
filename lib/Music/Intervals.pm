@@ -149,7 +149,8 @@ has concert   => ( is => 'ro', default => sub { 440 } );
 has size      => ( is => 'ro', default => sub { 3 } );
 has tonic     => ( is => 'ro', default => sub { 'C' } );
 has semitones => ( is => 'ro', default => sub { 12 } );
-has temper    => (
+
+has temper => (
     is      => 'ro',
     lazy    => 1,
     default => sub {
