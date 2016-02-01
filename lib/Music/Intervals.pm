@@ -16,7 +16,8 @@ use Music::Intervals::Ratios;
 =head1 SYNOPSIS
 
   use Music::Intervals;
-  $m = Music::Intervals->new(
+
+  my $m = Music::Intervals->new(
     notes => [qw( C E G B )],
     size => 3,
     chords => 1,
@@ -28,7 +29,9 @@ use Music::Intervals::Ratios;
     prime => 1,
     integer => 1,
   );
+
   $m->process;
+
   # Then
   print Dumper # any of:
     $m->chord_names,
