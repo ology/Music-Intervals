@@ -1,7 +1,9 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
-    - Re-added natural_freqencies() test.
+
+0.0502 2014-10-25
+    - Re-added the natural_freqencies() test.
 
 0.0501 2014-10-25
     - Added missing POD and Changes file item.
