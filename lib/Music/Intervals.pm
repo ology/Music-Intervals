@@ -17,16 +17,16 @@ use Music::Intervals::Ratios;
   use Music::Intervals;
 
   my $m = Music::Intervals->new(
-    notes => [qw( C E G B )],
-    size => 3,
-    chords => 1,
-    justin => 1,
-    equalt => 1,
-    freqs => 1,
+    notes    => [qw( C E G B )],
+    size     => 3,
+    chords   => 1,
+    justin   => 1,
+    equalt   => 1,
+    freqs    => 1,
     interval => 1,
-    cents => 1,
-    prime => 1,
-    integer => 1,
+    cents    => 1,
+    prime    => 1,
+    integer  => 1,
   );
 
   $m->process;
@@ -45,7 +45,7 @@ use Music::Intervals::Ratios;
   ;
 
   # Find known intervals
-  $name = $m->by_ratio($ratio);
+  $name  = $m->by_ratio($ratio);
   $ratio = $m->by_name($interval_name);
 
   # Show all the known intervals (the "notes" attribute above):
