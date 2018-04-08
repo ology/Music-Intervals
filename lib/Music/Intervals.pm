@@ -10,6 +10,7 @@ use Math::Factor::XS qw( prime_factors );
 use Music::Chord::Namer qw( chordname );
 use MIDI::Pitch qw( name2freq );
 use Number::Fraction;
+use Music::Scales;
 use Music::Intervals::Ratios;
 
 =head1 SYNOPSIS
