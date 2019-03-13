@@ -404,12 +404,14 @@ __END__
 
 =head1 SEE ALSO
 
+The F<t/> tests in this distribution
+
 For the time being, you will need to look at the source of
 L<Music::Intervals::Ratios> for the note and interval names.
 
 L<Music::Intervals::Numeric> for numeric-only note-intervals
 
-L<https://github.com/ology/Music/blob/master/intervals>
+L<https://github.com/ology/Music/blob/master/intervals> - The predecessor to this module
 
 L<http://en.wikipedia.org/wiki/List_of_musical_intervals>
 
