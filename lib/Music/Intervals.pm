@@ -49,7 +49,7 @@ use Music::Intervals::Ratios;
   $name  = $m->by_ratio($ratio);
   $ratio = $m->by_name($interval_name);
 
-  # Show all the known intervals (the "notes" attribute above):
+  # Show all the known intervals:
   perl -MData::Dumper -MMusic::Intervals::Ratios -e'print Dumper $Music::Intervals::Ratios::ratio'
 
 =head1 DESCRIPTION
