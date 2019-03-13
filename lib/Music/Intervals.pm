@@ -62,52 +62,106 @@ mean, the measurements of the notes and the intervals between them.
 
 * This module only handles equal temperament for the 12-tone scale only. *
 
-=cut
+=head1 ATTRIBUTES
 
-=head1 METHODS
+=head2 cents
 
-=head2 new()
+Divisions of the octave.
 
-  $x = Music::Intervals->new(%arguments);
+Default: 0
 
-=head2 Attributes and defaults
+=head2 chords
 
-=over 4
+Show chord names.
 
-=item cents: 0 - divisions of the octave
+Default: 0
 
-=item chords: 0 - chord names
+=head2 rootless
 
-=item equalt: 0 - equal temperament
+Show chord names with no root.
 
-=item justin: 0 - just intonation
+Default: 0
 
-=item integer: 0 - integer notation
+=head2 equalt
 
-=item freqs: 0 - frequencies
+Use equal temperament.
 
-=item interval: 0 - note intervals
+Default: 0
 
-=item prime: 0 - prime factorization
+=head2 justin
 
-=item rootless: 0 - show chord names with no root
+Use just intonation.
 
-=item octave: 4 - use the fourth octave
+Default: 0
 
-=item concert: 440 - concert pitch
+=head2 integer
 
-=item size: 3 - chord size
+Use integer notation.
 
-=item tonic: C - root of the computations
+Default: 0
+
+=head2 freqs
+
+Show frequencies.
+
+Default: 0
+
+=head2 interval
+
+Show note intervals.
+
+Default: 0
+
+=head2 prime
+
+Show prime factorization.
+
+Default: 0
+
+=head2 octave
+
+The octave to use.
+
+Default: 4
+
+=head2 concert
+
+Concert pitch.
+
+Default: 440
+
+=head2 size
+
+Chord size
+
+Default: 3
+
+=head2 tonic
+
+The root of the computations.
+
+Default: C
 
 * Currently (and for the foreseeable future) this will remain the only value
 that produces sane results.
 
-=item semitones: 12 - number of notes in the scale
+=head2 semitones
 
-=item temper: semitones * 100 / log(2) - physical distance between notes
+Number of notes in the scale.
 
-=item notes: [ C D E F G A B ] - actual notes to use in the computation
+Default: 12
+
+=head2 temper
+
+Physical distance between notes.
+
+Default: semitones * 100 / log(2)
+
+=head2 notes
+
+The actual notes to use in the computation.
+
+Default: [ C D E F G A B ]
 
 The list of notes may be any of the keys in the L<Music::Intervals::Ratios>
 C<ratio> hashref.  This is very very long and contains useful intervals such as
@@ -122,7 +176,7 @@ A few examples:
  * [qw( C 11h 7h )]
  * [qw( C pM3 pM7 )]
 
-For natural_intervals() this last example produces the following:
+For B<natural_intervals> this last example produces the following:
 
  'C pM3 pM7' => {
    'C pM3' => { '81/64' => 'Pythagorean major third' },
@@ -133,7 +187,45 @@ For natural_intervals() this last example produces the following:
 Note that case matters for interval names.  For example, "M" means major and "m"
 means minor.
 
-=back
+=head2 midikey
+
+Default: 69
+
+=head2 chord_names
+
+Computed hashref
+
+=head2 eq_tempered_cents
+
+Computed hashref
+
+=head2 eq_tempered_frequencies
+
+Computed hashref
+
+=head2 eq_tempered_intervals
+
+Computed hashref
+
+=head2 integer_notation
+
+Computed hashref
+
+=head2 natural_cents
+
+Computed hashref
+
+=head2 natural_frequencies
+
+Computed hashref
+
+=head2 natural_intervals
+
+Computed hashref
+
+=head2 natural_prime_factors
+
+Computed hashref
 
 =cut
 
@@ -224,6 +316,20 @@ has eq_tempered_frequencies => ( is => 'rw', default => sub { {} } );
 has eq_tempered_intervals   => ( is => 'rw', default => sub { {} } );
 has eq_tempered_cents       => ( is => 'rw', default => sub { {} } );
 has integer_notation        => ( is => 'rw', default => sub { {} } );
+
+=head1 METHODS
+
+=head2 new()
+
+  $x = Music::Intervals->new(%arguments);
+
+Create a new C<Music::Intervals> object.
+
+=head2 process()
+
+Do the actual computations!
+
+=cut
 
 sub process
 {
@@ -328,6 +434,12 @@ sub process
     }
 }
 
+=head2 dyads()
+
+Return pairs of the given combinations with fractional and pitch ratio parts.
+
+=cut
+
 sub dyads
 {
     my $self = shift;
@@ -355,6 +467,12 @@ sub dyads
 
     return %dyads;
 }
+
+=head2 ratio_factorize()
+
+Return the dyadic fraction as a prime factored expression.
+
+=cut
 
 sub ratio_factorize {
     my $dyad = shift;
