@@ -386,7 +386,8 @@ sub by_name
 
 =head2 by_ratio()
 
- $name = $m->by_ratio($ratio);
+ $name = $m->by_ratio('1/1');
+ # { 'symbol' => 'C', 'name' => 'unison, perfect prime, tonic' }
 
 Return a known ratio name or undef.
 
