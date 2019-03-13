@@ -18,16 +18,16 @@ use Music::Intervals::Ratios;
   use Music::Intervals;
 
   my $m = Music::Intervals->new(
-    notes    => [qw( C E G B )],
-    size     => 3,
-    chords   => 1,
-    justin   => 1,
-    equalt   => 1,
-    freqs    => 1,
-    interval => 1,
-    cents    => 1,
-    prime    => 1,
-    integer  => 1,
+    notes    => [qw/C E G B/], # Required
+    size     => 3,             # Must be <= the notes
+    chords   => 1,             # Required for chord names
+    justin   => 1,             # Required for natural_*
+    equalt   => 1,             # Required for eq_tempered_*
+    freqs    => 1,             # Required for frequencies
+    interval => 1,             # Required for intervals
+    cents    => 1,             # Required for cents
+    prime    => 1,             # Required for prime form
+    integer  => 1,             # Required for integer notation
   );
 
   $m->process;
