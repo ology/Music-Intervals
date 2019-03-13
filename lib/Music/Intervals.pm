@@ -18,7 +18,7 @@ use Music::Intervals::Ratios;
   use Music::Intervals;
 
   my $m = Music::Intervals->new(
-    notes    => [qw/C E G B/], # Required
+    notes    => [qw/C E G B/], # Default: C major scale
     size     => 3,             # Must be <= the notes
     chords   => 1,             # Required for chord names
     justin   => 1,             # Required for natural_*
