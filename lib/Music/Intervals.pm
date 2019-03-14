@@ -26,7 +26,7 @@ use Music::Intervals::Ratios;
     freqs    => 1,             # Required for frequencies
     interval => 1,             # Required for intervals
     cents    => 1,             # Required for cents
-    prime    => 1,             # Required for prime form
+    prime    => 1,             # Required for prime factors
     integer  => 1,             # Required for integer notation
   );
 
