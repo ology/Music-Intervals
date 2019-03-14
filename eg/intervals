@@ -16,6 +16,7 @@ my $m = Music::Intervals->new(
     interval => 1,
     freqs    => 1,
     prime    => 1,
+    integer  => 1,
 );
 $m->process;
 print Dumper
@@ -27,4 +28,5 @@ print Dumper
     $m->eq_tempered_frequencies,
     $m->eq_tempered_intervals,
     $m->eq_tempered_cents,
+    $m->integer_notation,
 ;
