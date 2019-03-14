@@ -28,7 +28,7 @@ use Music::Intervals::Ratio;
   $m->cent_vals;
   $m->prime_factor;
 
-  # Show all the known intervals (the "notes" attribute above):
+  # Show all the known intervals:
   perl -MData::Dumper -MMusic::Intervals::Ratio -e'print Dumper $Music::Intervals::Ratio::ratio'
 
 =head1 DESCRIPTION
