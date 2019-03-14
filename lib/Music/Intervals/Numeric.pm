@@ -40,39 +40,75 @@ This module reveals the "guts" of chords within a given tonality.  By guts I
 mean, the measurements of the notes and the intervals between them, in just
 intonation.
 
-=cut
+=head1 ATTRIBUTES
 
-=head1 METHODS
+=head2 cent
 
-=head2 new()
+Show divisions of the octave
 
-  $x = Music::Intervals->new(%arguments);
+Default: 0
 
-=head2 Attributes and defaults
+=head2 freq
 
-=over
+Show frequencies
 
-=item cent: 0 - divisions of the octave
+Default: 0
 
-=item freq: 0 - frequencies
+=head2 interval
 
-=item interval: 0 - note intervals
+Show note intervals
 
-=item prime: 0 - prime factorization
+Default: 0
 
-=item size: 3 - chord size
+=head2 prime
 
-=item semitones: 12 - number of notes in the scale
+Show prime factorization
 
-=item temper: semitones * 100 / log(2) - physical distance between notes
+Default: 0
 
-=item notes: [ 1/1 5/4 3/2 ] - C E G - actual notes to use in the computation
+=head2 size
+
+Chord size
+
+Default: 3
+
+=head2 semitones
+
+Number of notes in the scale
+
+Default: 12
+
+=head2 temper
+
+Physical distance between notes
+
+Default: semitones * 100 / log(2)
+
+=head2 notes
+
+The actual notes to use in the computation
+
+Default: [ 1/1 5/4 3/2 ]  (C E G)
 
 The list of notes may be any of the keys in the L<Music::Intervals::Ratio>
 C<ratio> hashref.  This is very very long and contains useful intervals such as
 those of the common scale and even the Pythagorean intervals, too.
 
-=back
+=head2 cent_vals
+
+Computed hashref
+
+=head2 frequencies
+
+Computed hashref
+
+=head2 intervals
+
+Computed hashref
+
+=head2 prime_factor
+
+Computed hashref
 
 =cut
 
@@ -91,6 +127,20 @@ has frequencies => ( is => 'rw', default => sub { {} } );
 has intervals => ( is => 'rw', default => sub { {} } );
 has cent_vals => ( is => 'rw', default => sub { {} } );
 has prime_factor => ( is => 'rw', default => sub { {} } );
+
+=head1 METHODS
+
+=head2 new()
+
+  $x = Music::Intervals->new(%arguments);
+
+Create a new C<Music::Intervals> object.
+
+=head2 process()
+
+Do the actual computations!
+
+=cut
 
 sub process
 {
@@ -140,6 +190,12 @@ sub process
     }
 }
 
+=head2 dyads()
+
+Return pairs of the given combinations with fractional and pitch ratio parts.
+
+=cut
+
 sub dyads
 {
     my $self = shift;
@@ -159,6 +215,12 @@ sub dyads
 
     return %dyads;
 }
+
+=head2 ratio_factorize()
+
+Return the dyadic fraction as a prime factored expression.
+
+=cut
 
 sub ratio_factorize {
     my $dyad = shift;
