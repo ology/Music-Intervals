@@ -23,9 +23,9 @@ use Music::Intervals::Ratios;
     chords   => 1,             # Required for chord names
     justin   => 1,             # Required for natural_*
     equalt   => 1,             # Required for eq_tempered_*
-    freqs    => 1,             # Required for frequencies
-    interval => 1,             # Required for intervals
-    cents    => 1,             # Required for cents
+    freqs    => 1,             # Required for *_frequencies
+    interval => 1,             # Required for *_intervals
+    cents    => 1,             # Required for *_cents
     prime    => 1,             # Required for prime factors
     integer  => 1,             # Required for integer notation
   );
@@ -66,7 +66,7 @@ mean, the measurements of the notes and the intervals between them.
 
 =head2 cents
 
-Divisions of the octave.
+Show divisions of the octave.
 
 Default: 0
 
@@ -84,19 +84,19 @@ Default: 0
 
 =head2 equalt
 
-Use equal temperament.
+Show equal temperament.
 
 Default: 0
 
 =head2 justin
 
-Use just intonation.
+Show just intonation.
 
 Default: 0
 
 =head2 integer
 
-Use integer notation.
+Show integer notation.
 
 Default: 0
 
