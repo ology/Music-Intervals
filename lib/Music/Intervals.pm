@@ -57,21 +57,13 @@ use Music::Intervals::Ratios;
 
 =head1 DESCRIPTION
 
-A C<Music::Intervals> object shows the mathematical break-down of musical
+A C<Music::Intervals> object shows the mathematical break-down of musical notes,
 intervals and chords.
 
-This module reveals the "guts" of chords within a given tonality.  By guts I
-mean, the measurements of the notes and the intervals between them.
-
-* This module only handles equal temperament for the 12-tone scale only. *
+This module reveals the "guts" within a given tonality.  And by guts I mean, the
+measurements of the notes and the intervals between them.
 
 =head1 ATTRIBUTES
-
-=head2 cents
-
-Show divisions of the octave.
-
-Default: 0
 
 =head2 chords
 
@@ -100,6 +92,12 @@ Default: 0
 =head2 integer
 
 Show integer notation.
+
+Default: 0
+
+=head2 cents
+
+Show the logarithmic units of measure.
 
 Default: 0
 
