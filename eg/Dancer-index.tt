@@ -1,0 +1,68 @@
+<form action="/" method="post">
+    <label for="notes">Notes:</label>
+    <input type="text" name="notes" id="notes" value="[% notes %]">
+    <label for="size">Size:</label>
+    <input type="text" name="size" id="size" value="[% size %]" size="3">
+    <br>
+    <label for="chords">Chord names:</label>
+    <input type="checkbox" name="chords" id="chords" value="1" [% IF chords %]checked[% END %]>
+    <br>
+    <label for="justin">Just intonation:</label>
+    <input type="checkbox" name="justin" id="justin" value="1" [% IF justin %]checked[% END %]>
+    |
+    <label for="equalt">Equal temperament:</label>
+    <input type="checkbox" name="equalt" id="equalt" value="1" [% IF equalt %]checked[% END %]>
+    <br>
+    <label for="freqs">Frequencies:</label>
+    <input type="checkbox" name="freqs" id="freqs" value="1" [% IF freqs %]checked[% END %]>
+    |
+    <label for="interval">Intervals:</label>
+    <input type="checkbox" name="interval" id="interval" value="1" [% IF interval %]checked[% END %]>
+    |
+    <label for="cents">Cents:</label>
+    <input type="checkbox" name="cents" id="cents" value="1" [% IF cents %]checked[% END %]>
+    |
+    <label for="prime">Prime:</label>
+    <input type="checkbox" name="prime" id="prime" value="1" [% IF prime %]checked[% END %]>
+    <br>
+    <label for="integer">Integer:</label>
+    <input type="checkbox" name="integer" id="integer" value="1" [% IF integer %]checked[% END %]>
+    <br>
+    <input type="submit" name="submit" id="submit" value="Submit">
+</form>
+
+[% IF chord_names %]
+<pre>[% chord_names %]</pre>
+[% END %]
+
+[% IF natural_frequencies %]
+<pre>[% natural_frequencies %]</pre>
+[% END %]
+
+[% IF natural_intervals %]
+<pre>[% natural_intervals %]</pre>
+[% END %]
+
+[% IF natural_cents %]
+<pre>[% natural_cents %]</pre>
+[% END %]
+
+[% IF natural_prime_factors %]
+<pre>[% natural_prime_factors %]</pre>
+[% END %]
+
+[% IF eq_tempered_frequencies %]
+<pre>[% eq_tempered_frequencies %]</pre>
+[% END %]
+
+[% IF eq_tempered_intervals %]
+<pre>[% eq_tempered_intervals %]</pre>
+[% END %]
+
+[% IF eq_tempered_cents %]
+<pre>[% eq_tempered_cents %]</pre>
+[% END %]
+
+[% IF integer_notation %]
+<pre>[% integer_notation %]</pre>
+[% END %]
