@@ -1,6 +1,8 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+
+0.0505 2019-03-15 11:10:17
     - Dropped the NAME section from the eg/Dancer-App.pm example.
     - Improved documentation.
 
