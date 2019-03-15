@@ -1,6 +1,9 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Drop the NAME section from the eg/Dancer-App.pm example.
+
+0.0504 2019-03-15 10:43:12
     - Add webservice examples to eg/.
 
 0.0503 2019-03-14 14:27:39
