@@ -8,13 +8,9 @@ use Data::Dumper::Concise;
 
 our $VERSION = '0.01';
 
-=head1 NAME
-
-App::MusicIntervals - Show the mathematical break-down of musical notes
-
 =head1 DESCRIPTION
 
-A C<App::MusicIntervals> object shows the mathematical break-down of musical notes.
+An C<App::MusicIntervals> object shows the mathematical break-down of musical notes.
 
 =head1 ROUTES
 
