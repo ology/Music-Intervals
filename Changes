@@ -1,7 +1,10 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
-    - Add logic to handle the 2/1 octave ratio correctly.
+    - Made the eg/ Dancer example return JSON, instead of strings.
+
+0.0506 2019-03-16 12:38:17
+    - Added logic to handle the 2/1 octave ratio correctly.
 
 0.0505 2019-03-15 11:10:17
     - Dropped the NAME section from the eg/Dancer-App.pm example.
