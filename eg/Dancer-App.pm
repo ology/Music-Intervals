@@ -15,6 +15,7 @@ This API exposes the mathematical relationships between musical notes as JSON.
 
 Example:
 
+  > plackup bin/app.psgi # <- In one terminal. Then in another:
   > curl "http://localhost:5000/api/natural_intervals?notes=C+D+E&size=2"
 
 =head1 ROUTES
