@@ -1,70 +1,79 @@
 package App;
 
-# ABSTRACT: Show the mathematical break-down of musical notes
+# ABSTRACT: Exposes the mathematical relationships between musical notes
 
 use Dancer2;
 use Music::Intervals;
-use Data::Dumper::Concise;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 DESCRIPTION
 
-An C<App::MusicIntervals> object shows the mathematical break-down of musical notes.
+* This is the module for the Dancer2 framework.
+
+This API exposes the mathematical relationships between musical notes as JSON.
+
+Example:
+
+  > curl "http://localhost:5000/api/natural_intervals?notes=C+D+E&size=2"
 
 =head1 ROUTES
 
-=head2 /
+=head2 /api/:resultset
 
-Main form and results page.
+The endpoint for results.
+
+Possible resultsets:
+
+  eq_tempered_frequencies
+  eq_tempered_intervals
+  eq_tempered_cents
+  natural_frequencies
+  natural_intervals
+  natural_cents
+  natural_prime_factors
+  chord_names
+  integer_notation
 
 =cut
 
-any '/' => sub {
-    my $notes = body_parameters->get('notes') || 'C E G';
+get '/api/:resultset' => sub {
+    my $m = _instantiate(
+        query_parameters->get('notes'),
+        query_parameters->get('size'),
+    );
+
+    my $method = route_parameters->get('resultset');
+
+    my $json = {};
+    $json = $m->$method if keys %{ $m->$method };
+    encode_json($json);
+};
+
+sub _instantiate {
+    my ($notes, $size) = @_;
+
+    $notes ||= 'C E G';
     $notes = [ split /[\s,]+/, $notes ];
 
-    my $size = body_parameters->get('size') || 3;
+    $size ||= 3;
 
     my $m = Music::Intervals->new(
       notes    => $notes,
       size     => $size,
-      chords   => body_parameters->get('chords'),
-      justin   => body_parameters->get('justin'),
-      equalt   => body_parameters->get('equalt'),
-      freqs    => body_parameters->get('freqs'),
-      interval => body_parameters->get('interval'),
-      cents    => body_parameters->get('cents'),
-      prime    => body_parameters->get('prime'),
-      integer  => body_parameters->get('integer'),
+      chords   => 1,
+      justin   => 1,
+      equalt   => 1,
+      freqs    => 1,
+      interval => 1,
+      cents    => 1,
+      prime    => 1,
+      integer  => 1,
     );
      
     $m->process;
 
-    template 'index' => {
-        title => 'App::MusicIntervals',
-        # Input form
-        notes    => join( ' ', @{ $m->notes } ),
-        size     => $m->size,
-        chords   => $m->chords,
-        justin   => $m->justin,
-        equalt   => $m->equalt,
-        freqs    => $m->freqs,
-        interval => $m->interval,
-        cents    => $m->cents,
-        prime    => $m->prime,
-        integer  => $m->integer,
-        # Results
-        ( keys %{ $m->chord_names }             ? ( chord_names             => Dumper $m->chord_names ) : () ),
-        ( keys %{ $m->natural_frequencies }     ? ( natural_frequencies     => Dumper $m->natural_frequencies ) : () ),
-        ( keys %{ $m->natural_intervals }       ? ( natural_intervals       => Dumper $m->natural_intervals ) : () ),
-        ( keys %{ $m->natural_cents }           ? ( natural_cents           => Dumper $m->natural_cents ) : () ),
-        ( keys %{ $m->natural_prime_factors }   ? ( natural_prime_factors   => Dumper $m->natural_prime_factors ) : () ),
-        ( keys %{ $m->eq_tempered_frequencies } ? ( eq_tempered_frequencies => Dumper $m->eq_tempered_frequencies ) : () ),
-        ( keys %{ $m->eq_tempered_intervals }   ? ( eq_tempered_intervals   => Dumper $m->eq_tempered_intervals ) : () ),
-        ( keys %{ $m->eq_tempered_cents }       ? ( eq_tempered_cents       => Dumper $m->eq_tempered_cents ) : () ),
-        ( keys %{ $m->integer_notation }        ? ( integer_notation        => Dumper $m->integer_notation ) : () ),
-    };
+    return $m;
 };
 
 true;
@@ -76,7 +85,5 @@ __END__
 L<Dancer2>
 
 L<Music::Intervals>
-
-L<Data::Dumper::Concise>
 
 =cut
