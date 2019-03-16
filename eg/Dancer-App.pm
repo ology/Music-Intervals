@@ -3,6 +3,9 @@ package App;
 # ABSTRACT: Exposes the mathematical relationships between musical notes
 
 use Dancer2;
+
+set serializer => 'JSON';
+
 use Music::Intervals;
 
 our $VERSION = '0.02';
@@ -48,7 +51,8 @@ get '/api/:resultset' => sub {
 
     my $json = {};
     $json = $m->$method if keys %{ $m->$method };
-    encode_json($json);
+
+    return $json;
 };
 
 sub _instantiate {
