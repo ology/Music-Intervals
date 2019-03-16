@@ -5,7 +5,7 @@ package Music::Intervals;
 use strict;
 use warnings;
 
-our $VERSION = '0.0505';
+our $VERSION = '0.0506';
 
 use Moo;
 use Algorithm::Combinatorics qw( combinations );
@@ -455,9 +455,13 @@ sub dyads
         my $denominator = Number::Fraction->new( $self->_ratio_index->{ $i->[0] } );
         my $fraction = $numerator / $denominator;
 
+        my $str = $fraction->to_string();
+        # Handle the octave.
+        $str .= '/1' if $fraction->to_string() eq 2;
+
         # Calculate both natural and equal temperament values for our ratio.
         $dyads{"@$i"} = {
-            natural => $fraction->to_string(),
+            natural => $str,
             # The value is either the known pitch ratio or ...
             eq_tempered =>
               ( name2freq( $i->[1] . $self->octave ) || ( $self->concert * $self->_note_index->{ $i->[1] } ) )
