@@ -82,7 +82,7 @@ $obj->process;
 
 is_deeply $obj->natural_intervals,
     { "$chord natural_intervals" => {
-        "C C'" => { '2/1' => 'octave' } } },
+        $chord => { '2/1' => 'octave' } } },
     'octave';
 
 done_testing();
