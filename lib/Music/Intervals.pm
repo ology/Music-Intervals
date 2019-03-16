@@ -5,7 +5,7 @@ package Music::Intervals;
 use strict;
 use warnings;
 
-our $VERSION = '0.0506';
+our $VERSION = '0.0507';
 
 use Moo;
 use Algorithm::Combinatorics qw( combinations );
