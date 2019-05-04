@@ -1,6 +1,8 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+
+0.0507 2019-03-16 15:15:10
     - Made the eg/ Dancer example return JSON, instead of strings.
 
 0.0506 2019-03-16 12:38:17
