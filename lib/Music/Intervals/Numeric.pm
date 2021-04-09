@@ -29,7 +29,7 @@ use Music::Intervals::Ratios;
     $m->prime_factor,
   );
 
-  # Show all the known intervals:
+  # Show all the 447 known intervals:
   perl -MData::Dumper -MMusic::Intervals::Ratios -e'print Dumper $Music::Intervals::Ratios::ratio'
 
 =head1 DESCRIPTION
