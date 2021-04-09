@@ -36,7 +36,7 @@ use Music::Intervals::Ratios;
   $m->process;
 
   # Then
-  print Dumper # any of:
+  print Dumper(
     $m->chord_names,
     $m->natural_frequencies,
     $m->natural_intervals,
@@ -46,7 +46,7 @@ use Music::Intervals::Ratios;
     $m->eq_tempered_intervals,
     $m->eq_tempered_cents,
     $m->integer_notation,
-  ;
+  );
 
   # Find known intervals
   $name  = $m->by_ratio($ratio);
