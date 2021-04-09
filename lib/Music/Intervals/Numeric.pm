@@ -8,7 +8,7 @@ use Moo;
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
 use Number::Fraction;
-use Music::Intervals::Ratio;
+use Music::Intervals::Ratios;
 
 =head1 SYNOPSIS
 
@@ -110,6 +110,10 @@ Computed hashref
 
 Computed hashref
 
+=head2 ratios
+
+Computed hashref
+
 =cut
 
 has notes     => ( is => 'ro', default => sub { [] } );
@@ -127,6 +131,16 @@ has frequencies => ( is => 'rw', default => sub { {} } );
 has intervals => ( is => 'rw', default => sub { {} } );
 has cent_vals => ( is => 'rw', default => sub { {} } );
 has prime_factor => ( is => 'rw', default => sub { {} } );
+has ratios => ( is => 'rw', lazy => 1, builder => 1 );
+
+sub _build_ratios {
+  my ($self) = @_;
+  no warnings 'once';
+  my $ratios = { map {
+    $Music::Intervals::Ratios::ratio->{$_}{ratio} => $Music::Intervals::Ratios::ratio->{$_}{name}
+  } keys %$Music::Intervals::Ratios::ratio };
+  return $ratios;
+}
 
 =head1 METHODS
 
@@ -156,14 +170,14 @@ sub process
         if ( $self->freq )
         {
             $self->frequencies->{"@$c"} =
-                { map { $_ => $Music::Intervals::Ratio::ratio->{$_} } @$c };
+                { map { $_ => $self->ratios->{$_} } @$c };
         }
         if ( $self->interval )
         {
             $self->intervals->{"@$c"} = {
                 map {
                     $_ => {
-                        $dyads{$_} => $Music::Intervals::Ratio::ratio->{ $dyads{$_} }
+                        $dyads{$_} => $self->ratios->{ $dyads{$_} }
                     }
                 } keys %dyads
             };
