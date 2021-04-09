@@ -22,14 +22,15 @@ use Music::Intervals::Ratios;
     prime => 1,
   );
   $m->process;
-  # Then print Dumper any of:
-  $m->frequencies;
-  $m->intervals;
-  $m->cent_vals;
-  $m->prime_factor;
+  print Dumper(
+    $m->frequencies,
+    $m->intervals,
+    $m->cent_vals,
+    $m->prime_factor,
+  );
 
   # Show all the known intervals:
-  perl -MData::Dumper -MMusic::Intervals::Ratio -e'print Dumper $Music::Intervals::Ratio::ratio'
+  perl -MData::Dumper -MMusic::Intervals::Ratios -e'print Dumper $Music::Intervals::Ratios::ratio'
 
 =head1 DESCRIPTION
 
