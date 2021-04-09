@@ -20,11 +20,13 @@ $obj = Music::Intervals::Numeric->new(
 isa_ok $obj, 'Music::Intervals::Numeric';
 $obj->process;
 
+is scalar(keys %{ $obj->ratios} ), 447, 'ratios';
+
 is_deeply $obj->frequencies,
-    { "1/1 5/4 3/2" => { "1/1" => "C unison, perfect prime, tonic", "3/2" => "G perfect fifth", "5/4" => "E major third" } },
+    { "1/1 5/4 3/2" => { "1/1" => "unison, perfect prime, tonic", "3/2" => "perfect fifth", "5/4" => "major third" } },
     'frequencies';
 is_deeply $obj->intervals,
-    { "1/1 5/4 3/2" => { "1/1 3/2" => { "3/2" => "G perfect fifth" }, "1/1 5/4" => { "5/4" => "E major third" }, "5/4 3/2" => { "6/5" => "Eb minor third" } } },
+    { "1/1 5/4 3/2" => { "1/1 3/2" => { "3/2" => "perfect fifth" }, "1/1 5/4" => { "5/4" => "major third" }, "5/4 3/2" => { "6/5" => "minor third" } } },
     'intervals';
 is sprintf('%.3f', $obj->cent_vals->{$chord}{'1/1 5/4'}), '386.314', 'cent_vals 1/1 5/4';
 is sprintf('%.3f', $obj->cent_vals->{$chord}{'1/1 3/2'}), '701.955', 'cent_vals 1/1 3/2';
