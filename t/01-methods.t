@@ -73,6 +73,9 @@ is $got{'C E'}{natural}, '5/4', 'dyads';
 is $got{'C G'}{natural}, '3/2', 'dyads';
 is $got{'E G'}{natural}, '6/5', 'dyads';
 
+my $got = $obj->ratio_factorize('6/15');
+is $got, '(2*3) / (3*5)', 'ratio_factorize';
+
 $chord = "C C'";
 $obj = new_ok 'Music::Intervals' => [
     size => 2,
