@@ -16,7 +16,6 @@ $obj = new_ok 'Music::Intervals::Numeric' => [
     prime => 1,
     notes => [qw( 1/1 5/4 3/2 )],
 ];
-$obj->process;
 
 is scalar(keys %{ $obj->ratios}), 447, 'ratios';
 
