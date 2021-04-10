@@ -320,13 +320,13 @@ has integer_notation        => ( is => 'rw', default => sub { {} } );
 
 =head1 METHODS
 
-=head2 new()
+=head2 new
 
   $x = Music::Intervals->new(%arguments);
 
 Create a new C<Music::Intervals> object.
 
-=head2 process()
+=head2 process
 
 Do the actual computations!
 
@@ -435,7 +435,7 @@ sub process
     }
 }
 
-=head2 dyads()
+=head2 dyads
 
 Return pairs of the given combinations with fractional and pitch ratio parts.
 
@@ -455,9 +455,9 @@ sub dyads
         my $denominator = Number::Fraction->new( $self->_ratio_index->{ $i->[0] } );
         my $fraction = $numerator / $denominator;
 
-        my $str = $fraction->to_string();
+        my $str = $fraction->to_string;
         # Handle the octave.
-        $str .= '/1' if $fraction->to_string() eq 2;
+        $str .= '/1' if $fraction->to_string eq 2;
 
         # Calculate both natural and equal temperament values for our ratio.
         $dyads{"@$i"} = {
@@ -473,7 +473,7 @@ sub dyads
     return %dyads;
 }
 
-=head2 ratio_factorize()
+=head2 ratio_factorize
 
 Return the dyadic fraction as a prime factored expression.
 
@@ -492,7 +492,7 @@ sub ratio_factorize {
     );
 }
 
-=head2 by_name()
+=head2 by_name
 
  $ratio = $m->by_name('C');
  # { ratio => '1/1', name => 'unison, perfect prime, tonic' }
@@ -507,7 +507,7 @@ sub by_name
     return $Music::Intervals::Ratios::ratio->{$name};
 }
 
-=head2 by_ratio()
+=head2 by_ratio
 
  $name = $m->by_ratio('1/1');
  # { 'symbol' => 'C', 'name' => 'unison, perfect prime, tonic' }
