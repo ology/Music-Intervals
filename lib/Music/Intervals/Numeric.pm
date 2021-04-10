@@ -5,11 +5,13 @@ package Music::Intervals::Numeric;
 use strict;
 use warnings;
 
-use Moo;
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
 use Number::Fraction ();
 use Music::Intervals::Ratios;
+use Moo;
+use strictures 2;
+use namespace::clean;
 
 =head1 SYNOPSIS
 
