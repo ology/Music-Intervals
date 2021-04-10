@@ -5,11 +5,6 @@ package Music::Intervals::Ratios;
 use strict;
 use warnings;
 
-our $VERSION = '0.0100';
-
-#> perl -Ilib -MMusic::Intervals::Ratios -le'$x=shift;print $Music::Intervals::Ratios::ratio->{$x}{name}' C
-#unison, perfect prime, tonic
-
 # Note ratios, names and descriptions:
 our $ratio = {
     C => {
