@@ -149,14 +149,13 @@ sub _build_ratios {
 
 Create a new C<Music::Intervals> object.
 
-=head2 process
+=for Pod::Coverage process
 
-Do the actual computations!
+=for Pod::Coverage BUILD
 
 =cut
 
-sub process
-{
+sub BUILD {
     my $self = shift;
 
     my %x;
