@@ -22,7 +22,7 @@ is_deeply $obj->by_ratio('27/25'),
     'by_ratio';
 
 my $chord = 'C E G';
-$obj = Music::Intervals->new(
+$obj = new_ok 'Music::Intervals' => [
     chords => 1,
     justin => 1,
     freqs => 1,
@@ -32,7 +32,7 @@ $obj = Music::Intervals->new(
     equalt => 1,
     integer => 1,
     notes => [qw( C E G )],
-);
+];
 isa_ok $obj, 'Music::Intervals';
 $obj->process;
 
@@ -70,12 +70,12 @@ is_deeply $obj->eq_tempered_cents,
 is_deeply $obj->integer_notation, { "$chord integer_notation" => { 'G' => '67', 'E' => '64', 'C' => '60' } }, 'integer_notation';
 
 $chord = "C C'";
-$obj = Music::Intervals->new(
+$obj = new_ok 'Music::Intervals' => [
     size => 2,
     justin => 1,
     interval => 1,
     notes => [qw( C C' )],
-);
+];
 isa_ok $obj, 'Music::Intervals';
 $obj->process;
 
