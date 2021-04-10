@@ -398,7 +398,7 @@ sub process
                 $self->natural_prime_factors->{"@$c natural_prime_factors"} = {
                     map {
                         $_ => {
-                            $dyads{$_}->{natural} => ratio_factorize( $dyads{$_}->{natural} )
+                            $dyads{$_}->{natural} => $self->ratio_factorize( $dyads{$_}->{natural} )
                         }
                     } keys %dyads
                 };
@@ -480,7 +480,7 @@ Return the dyadic fraction as a prime factored expression.
 =cut
 
 sub ratio_factorize {
-    my $dyad = shift;
+    my ($self, $dyad) = @_;
 
     my ( $numerator, $denominator ) = split /\//, $dyad;
     $numerator   = [ prime_factors($numerator) ];
