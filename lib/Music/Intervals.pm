@@ -52,6 +52,9 @@ use namespace::clean;
   $name  = $m->by_ratio($ratio);
   $ratio = $m->by_name($interval_name);
 
+  perl -Ilib -MMusic::Intervals::Ratios -E'say $Music::Intervals::Ratios::ratio->{C}{name}'
+  # unison, perfect prime, tonic
+
   # Show all the 447 known intervals:
   perl -MData::Dumper -MMusic::Intervals::Ratios -e'print Dumper $Music::Intervals::Ratios::ratio'
 
