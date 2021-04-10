@@ -551,12 +551,12 @@ L<Music::Intervals::Ratios> for the note and interval names.
 
 L<Music::Intervals::Numeric> for numeric-only note-intervals
 
-L<https://github.com/ology/Music/blob/master/intervals> - The predecessor to this module
-
 L<http://en.wikipedia.org/wiki/List_of_musical_intervals>
 
 L<http://en.wikipedia.org/wiki/Equal_temperament>
 
 L<http://en.wikipedia.org/wiki/Just_intonation>
+
+L<Music::Scala> - A powerful module encompassing thousands of scales and the ratios therein
 
 =cut
