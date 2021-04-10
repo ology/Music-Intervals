@@ -4,6 +4,7 @@ Revision history for Music-Intervals
     - Lose the redundant Ratio module and compute the numeric ratios.
     - Make ratio_factorize() a proper method.
     - Replace the ->process method with ->BUILD.
+    - Use strictures and namespace::clean.
     - Improve documentation.
     - Improve tests.
 
