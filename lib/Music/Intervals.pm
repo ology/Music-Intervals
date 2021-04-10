@@ -7,7 +7,6 @@ use warnings;
 
 our $VERSION = '0.0507';
 
-use Moo;
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
 use Music::Chord::Namer qw( chordname );
@@ -15,6 +14,9 @@ use MIDI::Pitch qw( name2freq );
 use Number::Fraction;
 use Music::Scales;
 use Music::Intervals::Ratios;
+use Moo;
+use strictures 2;
+use namespace::clean;
 
 =head1 SYNOPSIS
 
