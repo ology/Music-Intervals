@@ -13,7 +13,8 @@ use Music::Intervals::Ratios;
 =head1 SYNOPSIS
 
   use Music::Intervals::Numeric;
-  $m = Music::Intervals::Numeric->new(
+
+  my $m = Music::Intervals::Numeric->new(
     notes => [qw( 1/1 5/4 3/2 15/8 )],
     size => 3,
     freq => 1,
@@ -21,7 +22,7 @@ use Music::Intervals::Ratios;
     cent => 1,
     prime => 1,
   );
-  $m->process;
+
   print Dumper(
     $m->frequencies,
     $m->intervals,
