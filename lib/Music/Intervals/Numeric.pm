@@ -5,6 +5,8 @@ package Music::Intervals::Numeric;
 use strict;
 use warnings;
 
+our $VERSION = '0.0201';
+
 use Moo;
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
