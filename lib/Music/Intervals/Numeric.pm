@@ -158,6 +158,8 @@ Create a new C<Music::Intervals> object.
 sub BUILD {
     my $self = shift;
 
+    return unless @{ $self->notes };
+
     my %x;
 
     my $iter = combinations( $self->notes, $self->size );
