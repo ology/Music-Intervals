@@ -10,7 +10,7 @@ our $VERSION = '0.0200';
 use Moo;
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
-use Number::Fraction;
+use Number::Fraction ();
 use Music::Intervals::Ratios;
 
 =head1 SYNOPSIS
