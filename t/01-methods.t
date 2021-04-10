@@ -69,6 +69,11 @@ is_deeply $obj->eq_tempered_cents,
     'eq_tempered_cents';
 is_deeply $obj->integer_notation, { "$chord integer_notation" => { 'G' => '67', 'E' => '64', 'C' => '60' } }, 'integer_notation';
 
+my %got = $obj->dyads([qw(C E G)]);
+is $got{'C E'}{natural}, '5/4', 'dyads';
+is $got{'C G'}{natural}, '3/2', 'dyads';
+is $got{'E G'}{natural}, '6/5', 'dyads';
+
 $chord = "C C'";
 $obj = new_ok 'Music::Intervals' => [
     size => 2,
