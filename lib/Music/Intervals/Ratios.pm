@@ -1,4 +1,7 @@
 package Music::Intervals::Ratios;
+
+# ABSTRACT: Musical ratios
+
 use strict;
 use warnings;
 
