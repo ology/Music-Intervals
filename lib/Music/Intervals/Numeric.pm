@@ -1,6 +1,6 @@
 package Music::Intervals::Numeric;
 
-# ABSTRACT: Breakdown of musical intervals
+# ABSTRACT: Breakdown of numeric musical intervals
 
 use strict;
 use warnings;
