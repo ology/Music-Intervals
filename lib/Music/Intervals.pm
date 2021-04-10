@@ -326,14 +326,15 @@ has integer_notation        => ( is => 'rw', default => sub { {} } );
 
 Create a new C<Music::Intervals> object.
 
-=head2 process
+=for Pod::Coverage process
 
-Do the actual computations!
+=for Pod::Coverage BUILD
 
 =cut
 
-sub process
-{
+sub process {}
+
+sub BUILD {
     my $self = shift;
 
     my $iter = combinations( $self->notes, $self->size );
