@@ -2,6 +2,7 @@ Revision history for Music-Intervals
 
 {{$NEXT}}
     - Lose the redundant Ratio module and compute the numeric ratios.
+    - Make ratio_factorize() a proper method.
     - Improve documentation.
     - Improve tests.
 
