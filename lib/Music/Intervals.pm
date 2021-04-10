@@ -437,7 +437,7 @@ sub process
 
 =head2 dyads
 
-Return pairs of the given combinations with fractional and pitch ratio parts.
+Return pairs of the given notes with fractional and pitch ratio parts.
 
 =cut
 
