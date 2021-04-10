@@ -5,6 +5,7 @@ Revision history for Music-Intervals
     - Make ratio_factorize() a proper method.
     - Replace the ->process method with ->BUILD.
     - Use strictures and namespace::clean.
+    - Use builder methods instead of default subs.
     - Improve documentation.
     - Improve tests.
 
