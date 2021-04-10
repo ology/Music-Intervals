@@ -249,64 +249,77 @@ has semitones => ( is => 'ro', default => sub { 12 } );
 has temper => (
     is      => 'ro',
     lazy    => 1,
-    default => sub {
-        my $self = shift;
-        $self->semitones * 100 / log(2);
-    },
+    builder => 1,
 );
+sub _build_temper {
+    my $self = shift;
+    $self->semitones * 100 / log(2);
+}
+
 has notes => (
     is      => 'ro',
     lazy    => 1,
-    default => sub {
-        my $self = shift;
-        return [ get_scale_notes( $self->tonic ) ]
-    },
+    builder => 1,
 );
+sub _build_notes {
+    my $self = shift;
+    return [ get_scale_notes( $self->tonic ) ];
+}
+
 has scale => (
     is      => 'ro',
     lazy    => 1,
-    default => sub {
-        my $self = shift;
-        return [ map { eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } ]
-    },
+    builder => 1,
 );
+sub _build_scale {
+    my $self = shift;
+    return [ map { eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } ];
+}
+
 has _note_index => (
     is      => 'ro',
     lazy    => 1,
-    default => sub {
-        my $self = shift;
-        return { map { $_ => eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } }
-    },
+    builder => 1,
 );
+sub _build__note_index {
+    my $self = shift;
+    return { map { $_ => eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } };
+}
+
 has _ratio_index => (
     is      => 'ro',
     lazy    => 1,
-    default => sub {
-        my $self = shift;
-        return { map { $_ => $Music::Intervals::Ratios::ratio->{$_}{ratio} } @{ $self->notes } }
-    },
+    builder => 1,
 );
+sub _build__ratio_index {
+    my $self = shift;
+    return { map { $_ => $Music::Intervals::Ratios::ratio->{$_}{ratio} } @{ $self->notes } };
+}
+
 has _ratio_name_index => (
     is      => 'ro',
     lazy    => 1,
-    default => sub {
-        my $self = shift;
-        return {
-            map { $Music::Intervals::Ratios::ratio->{$_}{ratio} => {
-                symbol => $_,
-                name   => $Music::Intervals::Ratios::ratio->{$_}{name} }
-            } keys %$Music::Intervals::Ratios::ratio
-        }
-    },
+    builder => 1,
 );
+sub _build__ratio_name_index {
+    my $self = shift;
+    return {
+        map { $Music::Intervals::Ratios::ratio->{$_}{ratio} => {
+            symbol => $_,
+            name   => $Music::Intervals::Ratios::ratio->{$_}{name} }
+        } keys %$Music::Intervals::Ratios::ratio
+    }
+}
+
 has tonic_frequency => (
     is      => 'ro',
     lazy    => 1,
-    default => sub {
-        my $self = shift;
-        return $self->concert * (2 ** (1 / $self->semitones)) ** (-9) # XXX Hardcoding: 9th key above middle-C
-    },
+    builder => 1,
 );
+sub _build_tonic_frequency {
+    my $self = shift;
+    return $self->concert * (2 ** (1 / $self->semitones)) ** (-9); # XXX Hardcoding: 9th key above middle-C
+}
 
 has chord_names             => ( is => 'rw', default => sub { {} } );
 has natural_frequencies     => ( is => 'rw', default => sub { {} } );
