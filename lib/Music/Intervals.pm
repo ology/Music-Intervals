@@ -1,6 +1,6 @@
 package Music::Intervals;
 
-# ABSTRACT: Breakdown of musical intervals
+# ABSTRACT: Breakdown of named musical intervals
 
 use strict;
 use warnings;
