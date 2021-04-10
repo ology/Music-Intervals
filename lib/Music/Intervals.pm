@@ -57,8 +57,8 @@ use Music::Intervals::Ratios;
 
 =head1 DESCRIPTION
 
-A C<Music::Intervals> object shows the breakdown of musical notes,
-intervals and chords.
+A C<Music::Intervals> object shows the breakdown of musical notes, intervals and
+chords.
 
 This module reveals the "guts" within a given tonality.  And by guts I mean, the
 measurements of the notes and the intervals between them.
@@ -170,12 +170,12 @@ those of the common scale and even the Pythagorean intervals, too.
 
 A few examples:
 
- * [qw( C E G )]
- * [qw( C D D# )]
- * [qw( C D Eb )]
- * [qw( C D D# Eb E E# Fb F )]
- * [qw( C 11h 7h )]
- * [qw( C pM3 pM7 )]
+ [qw( C E G )]
+ [qw( C D D# )]
+ [qw( C D Eb )]
+ [qw( C D D# Eb E E# Fb F )]
+ [qw( C 11h 7h )]
+ [qw( C pM3 pM7 )]
 
 For B<natural_intervals> this last example produces the following:
 
