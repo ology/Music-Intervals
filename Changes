@@ -2,6 +2,7 @@ Revision history for Music-Intervals
 
 {{$NEXT}}
     - Fix ABSTRACTs.
+    - Clean-up code slightly.
 
 0.0600 2021-04-09 19:56:35
     - Lose the redundant Ratio module and compute the numeric ratios.
