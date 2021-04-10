@@ -4,6 +4,7 @@ package Music::Intervals::Numeric;
 
 use strict;
 use warnings;
+
 our $VERSION = '0.0200';
 
 use Moo;
