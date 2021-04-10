@@ -9,8 +9,7 @@ use_ok 'Music::Intervals';
 my $obj = new_ok 'Music::Intervals';
 
 my $scale = [qw( 1.000 1.125 1.250 1.333 1.500 1.667 1.875)];
-for my $n ( 0 .. @$scale - 1 )
-{
+for my $n ( 0 .. @$scale - 1 ) {
     is sprintf('%.3f', $obj->scale->[$n]), $scale->[$n], "scale $n";
 }
 
