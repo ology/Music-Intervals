@@ -57,7 +57,7 @@ use Music::Intervals::Ratios;
 
 =head1 DESCRIPTION
 
-A C<Music::Intervals> object shows the mathematical break-down of musical notes,
+A C<Music::Intervals> object shows the breakdown of musical notes,
 intervals and chords.
 
 This module reveals the "guts" within a given tonality.  And by guts I mean, the
