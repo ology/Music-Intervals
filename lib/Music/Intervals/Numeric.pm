@@ -29,9 +29,6 @@ use Music::Intervals::Ratios;
     $m->prime_factor,
   );
 
-  # Show all the 447 known intervals:
-  perl -MData::Dumper -MMusic::Intervals::Ratios -e'print Dumper $Music::Intervals::Ratios::ratio'
-
 =head1 DESCRIPTION
 
 A C<Music::Intervals> object shows the mathematical break-down of musical
