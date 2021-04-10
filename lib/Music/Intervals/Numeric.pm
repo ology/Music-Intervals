@@ -142,13 +142,13 @@ sub _build_ratios {
 
 =head1 METHODS
 
-=head2 new()
+=head2 new
 
   $x = Music::Intervals->new(%arguments);
 
 Create a new C<Music::Intervals> object.
 
-=head2 process()
+=head2 process
 
 Do the actual computations!
 
@@ -202,7 +202,7 @@ sub process
     }
 }
 
-=head2 dyads()
+=head2 dyads
 
 Return pairs of the given combinations with fractional and pitch ratio parts.
 
@@ -222,13 +222,13 @@ sub dyads
         my $denominator = Number::Fraction->new( $i->[0] );
         my $fraction = $numerator / $denominator;
 
-        $dyads{"@$i"} = $fraction->to_string();
+        $dyads{"@$i"} = $fraction->to_string;
     }
 
     return %dyads;
 }
 
-=head2 ratio_factorize()
+=head2 ratio_factorize
 
 Return the dyadic fraction as a prime factored expression.
 
