@@ -33,8 +33,6 @@ use Music::Intervals::Ratios;
     integer  => 1,             # Required for integer notation
   );
 
-  $m->process;
-
   # Then
   print Dumper(
     $m->chord_names,
