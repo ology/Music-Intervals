@@ -1,6 +1,9 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Lose the redundant Ratio module and compute the numeric ratios.
+    - Improve documentation.
+    - Improve tests.
 
 0.0507 2019-03-16 15:15:10
     - Made the eg/ Dancer example return JSON, instead of strings.
