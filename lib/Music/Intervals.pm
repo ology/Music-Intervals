@@ -353,6 +353,8 @@ sub process {}
 sub BUILD {
     my $self = shift;
 
+    return unless @{ $self->notes };
+
     my $iter = combinations( $self->notes, $self->size );
     while (my $c = $iter->next) {
         my %dyads = $self->dyads($c);
