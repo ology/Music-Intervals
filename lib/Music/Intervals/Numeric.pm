@@ -168,17 +168,14 @@ sub BUILD {
     my %x;
 
     my $iter = combinations( $self->notes, $self->size );
-    while (my $c = $iter->next)
-    {
+    while (my $c = $iter->next) {
         my %dyads = $self->dyads($c);
 
-        if ( $self->freq )
-        {
+        if ( $self->freq ) {
             $self->frequencies->{"@$c"} =
                 { map { $_ => $self->ratios->{$_} } @$c };
         }
-        if ( $self->interval )
-        {
+        if ( $self->interval ) {
             $self->intervals->{"@$c"} = {
                 map {
                     $_ => {
@@ -188,16 +185,14 @@ sub BUILD {
             };
 
         }
-        if ( $self->cent )
-        {
+        if ( $self->cent ) {
             $self->cent_vals->{"@$c"} = {
                 map {
                     $_ => log( eval $dyads{$_} ) * $self->temper
                 } keys %dyads };
 
         }
-        if ( $self->prime )
-        {
+        if ( $self->prime ) {
             $self->prime_factor->{"@$c"} = {
                 map {
                     $_ => {
@@ -215,8 +210,7 @@ Return pairs of the given combinations with fractional and pitch ratio parts.
 
 =cut
 
-sub dyads
-{
+sub dyads {
     my $self = shift;
     my ($c) = @_;
 
