@@ -2,7 +2,7 @@ Revision history for Music-Intervals
 
 {{$NEXT}}
     - Clean-up code a bit.
-    - Improve numeric test slightly.
+    - Improve the numeric test slightly.
 
 0.0602 2021-04-09 21:21:11
     - Improve documentation.
