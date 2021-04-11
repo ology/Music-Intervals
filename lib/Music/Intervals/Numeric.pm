@@ -158,6 +158,8 @@ Create a new C<Music::Intervals> object.
 
 =cut
 
+sub process {}
+
 sub BUILD {
     my $self = shift;
 
