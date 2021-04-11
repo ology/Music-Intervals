@@ -32,7 +32,6 @@ $obj = new_ok 'Music::Intervals' => [
     integer => 1,
     notes => [qw( C E G )],
 ];
-isa_ok $obj, 'Music::Intervals';
 
 is_deeply $obj->chord_names, { "$chord chord_names" => [ 'C' ] }, 'chord_names';
 is_deeply $obj->natural_frequencies,
@@ -82,7 +81,6 @@ $obj = new_ok 'Music::Intervals' => [
     interval => 1,
     notes => [qw( C C' )],
 ];
-isa_ok $obj, 'Music::Intervals';
 
 is_deeply $obj->natural_intervals,
     { "$chord natural_intervals" => {
