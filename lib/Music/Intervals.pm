@@ -280,14 +280,6 @@ sub BUILD {
     while (my $c = $iter->next) {
         my %dyads = $self->dyads($c);
 
-        if ( $self->integer ) {
-            $self->integer_notation->{"@$c integer_notation"} = {
-                map { $_ => sprintf '%.0f',
-                    $self->midikey + $self->semitones * log( ($self->_tonic_frequency * (eval $self->_ratio_index->{$_})) / $self->concert ) / log(2)
-                } @$c
-            };
-        }
-
         if ( $self->justin ) {
             if ( $self->freqs ) {
                 $self->natural_frequencies->{"@$c natural_frequencies"} = {
@@ -388,6 +380,26 @@ sub chord_names {
 =head2 eq_tempered_intervals
 
 =head2 integer_notation
+
+=cut
+
+sub integer_notation {
+    my ($self) = @_;
+
+    my $integer_notation = {};
+
+    my $iter = combinations( $self->notes, $self->size );
+
+    while (my $c = $iter->next) {
+        $integer_notation->{"@$c integer_notation"} = {
+            map { $_ => sprintf '%.0f',
+                $self->midikey + $self->semitones * log( ($self->_tonic_frequency * (eval $self->_ratio_index->{$_})) / $self->concert ) / log(2)
+            } @$c
+        };
+    }
+
+    return $integer_notation;
+}
 
 =head2 natural_cents
 
