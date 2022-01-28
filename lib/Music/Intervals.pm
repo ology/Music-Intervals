@@ -23,8 +23,8 @@ use namespace::clean;
   use Music::Intervals;
 
   my $m = Music::Intervals->new(
-    notes    => [qw/C E G B/], # Default: major scale
-    size     => 3,             # Must be <= the notes
+    notes => [qw/C E G B/], # Default: major scale
+    size  => 3,             # Must be <= the notes
   );
 
   # Then any of:
