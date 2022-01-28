@@ -61,90 +61,9 @@ mean, the measurements of the notes and the intervals between them.
 For Western notes and intervals, this tonality begins with the C<C>
 note.  That is, all intervals are calculated from C<C>.  So, if you
 want to analyze a minor chord, either make it start on C<C> (like
-C<[C Eb G]>) or somewhere between C<C> and B<B> (like C<[D F A]>).
+C<[C Eb G]>) or somewhere between C<C> and C<B> (like C<[D F A]>).
 
 =head1 ATTRIBUTES
-
-=head2 rootless
-
-Show chord names with no root.
-
-Default: C<0>
-
-=cut
-
-has rootless => ( is => 'ro', default => sub { 0 } );
-
-=head2 octave
-
-The octave to use in internal computations.
-
-Default: C<4>
-
-=cut
-
-has octave => ( is => 'ro', default => sub { 4 } );
-
-=head2 concert
-
-Concert pitch to use in internal computations.
-
-Default: C<440>
-
-=cut
-
-has concert => ( is => 'ro', default => sub { 440 } );
-
-=head2 size
-
-Chord size
-
-Default: C<3>
-
-=cut
-
-has size => ( is => 'ro', default => sub { 3 } );
-
-=head2 tonic
-
-The root of the computations.
-
-Default: C<C>
-
-* Currently (and for the foreseeable future) this will remain the only value
-that produces sane results.
-
-=cut
-
-has tonic => ( is => 'ro', default => sub { 'C' } );
-
-=head2 semitones
-
-Number of notes in the scale, used in internal computations.
-
-Default: C<12>
-
-=cut
-
-has semitones => ( is => 'ro', default => sub { 12 } );
-
-=head2 temper
-
-Physical distance between notes, used in internal computations.
-
-Default: C<semitones * 100 / log(2)>
-
-=cut
-
-has temper => (
-    is      => 'ro',
-    lazy    => 1,
-    builder => 1,
-);
-sub _build_temper {
-    my $self = shift;
-    $self->semitones * 100 / log(2);
-}
 
 =head2 notes
 
@@ -188,13 +107,96 @@ sub _build_notes {
     return [ get_scale_notes( $self->tonic ) ];
 }
 
+=head2 size
+
+Chord size
+
+Default: C<3>
+
+=cut
+
+has size => ( is => 'ro', default => sub { 3 } );
+
+=head2 rootless
+
+Show chord names with no root.
+
+Default: C<0>
+
+=cut
+
+has rootless => ( is => 'ro', default => sub { 0 } );
+
+=head2 octave
+
+The octave to use in internal computations.
+
+Default: C<4>
+
+=cut
+
+has octave => ( is => 'ro', default => sub { 4 } );
+
+=head2 concert
+
+Concert pitch to use in internal computations.
+
+Default: C<440>
+
+=cut
+
+has concert => ( is => 'ro', default => sub { 440 } );
+
+=head2 tonic
+
+The root of the computations.
+
+Default: C<C>
+
+* Currently (and for the foreseeable future) this will remain the only value
+that produces sane results.
+
+=cut
+
+has tonic => ( is => 'ro', default => sub { 'C' } );
+
+=head2 semitones
+
+Number of notes in the scale, used in internal computations.
+
+Default: C<12>
+
+=cut
+
+has semitones => ( is => 'ro', default => sub { 12 } );
+
+=head2 temper
+
+Physical distance between notes, used in internal computations.
+
+Default: C<semitones * 100 / log(2)>
+
+=cut
+
+has temper => (
+    is      => 'ro',
+    lazy    => 1,
+    builder => 1,
+);
+sub _build_temper {
+    my $self = shift;
+    $self->semitones * 100 / log(2);
+}
+
 =head2 midikey
+
+Describe this...
 
 Default: C<69>
 
 =cut
 
-has midikey   => ( is => 'ro', default => sub { 69 } );
+has midikey => ( is => 'ro', default => sub { 69 } );
 
 =head2 scale
 
