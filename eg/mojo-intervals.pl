@@ -28,7 +28,7 @@ any '/' => sub {
         eq_tempered_frequencies eq_tempered_intervals eq_tempered_cents
         integer_notation
     /) {
-        $c->stash( $method => keys %{ $m->$method() } ? Dumper $m->$method() : '' );
+        $c->stash( $method => Dumper $m->$method() );
     }
 
     $c->render('index');
