@@ -23,8 +23,8 @@ use namespace::clean;
   use Music::Intervals;
 
   my $m = Music::Intervals->new(
-    notes => [qw/C E G B/], # Default: major scale
-    size  => 3,             # Must be <= the notes
+    notes => [qw/C E G B/],
+    size  => 3, # Must be <= the notes
   );
 
   # Then any of:
@@ -139,52 +139,8 @@ means minor.
 
 Default: C<69>
 
-=head2 chord_names
-
-Computed hashref
-
-=head2 eq_tempered_cents
-
-Computed hashref
-
-=head2 eq_tempered_frequencies
-
-Computed hashref
-
-=head2 eq_tempered_intervals
-
-Computed hashref
-
-=head2 integer_notation
-
-Computed hashref
-
-=head2 natural_cents
-
-Computed hashref
-
-=head2 natural_frequencies
-
-Computed hashref
-
-=head2 natural_intervals
-
-Computed hashref
-
-=head2 natural_prime_factors
-
-Computed hashref
-
 =cut
 
-has cents     => ( is => 'ro', default => sub { 0 } );
-has chords    => ( is => 'ro', default => sub { 0 } );
-has equalt    => ( is => 'ro', default => sub { 0 } );
-has freqs     => ( is => 'ro', default => sub { 0 } );
-has interval  => ( is => 'ro', default => sub { 0 } );
-has integer   => ( is => 'ro', default => sub { 0 } );
-has justin    => ( is => 'ro', default => sub { 0 } );
-has prime     => ( is => 'ro', default => sub { 0 } );
 has rootless  => ( is => 'ro', default => sub { 0 } );
 has octave    => ( is => 'ro', default => sub { 4 } );
 has midikey   => ( is => 'ro', default => sub { 69 } );
@@ -385,6 +341,24 @@ sub BUILD {
         }
     }
 }
+
+=head2 chord_names
+
+=head2 eq_tempered_cents
+
+=head2 eq_tempered_frequencies
+
+=head2 eq_tempered_intervals
+
+=head2 integer_notation
+
+=head2 natural_cents
+
+=head2 natural_frequencies
+
+=head2 natural_intervals
+
+=head2 natural_prime_factors
 
 =head2 dyads
 
