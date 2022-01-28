@@ -193,7 +193,7 @@ has midikey   => ( is => 'ro', default => sub { 69 } );
 
 =head2 scale
 
-TODO Describe this
+Describe this...
 
 =cut
 
