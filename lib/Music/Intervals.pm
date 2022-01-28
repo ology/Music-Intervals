@@ -115,7 +115,7 @@ has tonic => ( is => 'ro', default => sub { 'C' } );
 
 =head2 semitones
 
-Number of notes in the scale.
+Number of notes in the scale, used in internal computations.
 
 Default: C<12>
 
@@ -125,7 +125,7 @@ has semitones => ( is => 'ro', default => sub { 12 } );
 
 =head2 temper
 
-Physical distance between notes.
+Physical distance between notes, used in internal computations.
 
 Default: C<semitones * 100 / log(2)>
 
