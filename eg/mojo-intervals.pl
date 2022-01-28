@@ -16,8 +16,6 @@ any '/' => sub {
       notes => $notes,
       size  => $size,
     );
-     
-    $m->process;
 
     # Input form
     $c->stash( notes => join( ' ', @{ $m->notes } ) );
