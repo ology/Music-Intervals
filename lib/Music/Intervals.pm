@@ -373,12 +373,6 @@ sub chord_names {
     return $chord_names;
 }
 
-=head2 eq_tempered_cents
-
-=head2 eq_tempered_frequencies
-
-=head2 eq_tempered_intervals
-
 =head2 integer_notation
 
 =cut
@@ -400,6 +394,12 @@ sub integer_notation {
 
     return $integer_notation;
 }
+
+=head2 eq_tempered_cents
+
+=head2 eq_tempered_frequencies
+
+=head2 eq_tempered_intervals
 
 =head2 natural_cents
 
