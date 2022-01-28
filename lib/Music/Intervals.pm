@@ -325,7 +325,7 @@ sub eq_tempered_cents {
     while (my $c = $iter->next) {
         my %dyads = $self->dyads($c);
 
-        $self->eq_tempered_cents->{"@$c eq_tempered_cents"} = {
+        $eq_tempered_cents->{"@$c eq_tempered_cents"} = {
             map {
                 $_ => log( $dyads{$_}->{eq_tempered} ) * $self->temper
             } keys %dyads
