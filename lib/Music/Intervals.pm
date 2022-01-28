@@ -66,23 +66,39 @@ Show chord names with no root.
 
 Default: C<0>
 
+=cut
+
+has rootless => ( is => 'ro', default => sub { 0 } );
+
 =head2 octave
 
-The octave to use.
+The octave to use in interal computations.
 
 Default: C<4>
 
+=cut
+
+has octave => ( is => 'ro', default => sub { 4 } );
+
 =head2 concert
 
-Concert pitch.
+Concert pitch to use in interal computations.
 
 Default: C<440>
+
+=cut
+
+has concert => ( is => 'ro', default => sub { 440 } );
 
 =head2 size
 
 Chord size
 
 Default: C<3>
+
+=cut
+
+has size => ( is => 'ro', default => sub { 3 } );
 
 =head2 tonic
 
@@ -93,17 +109,37 @@ Default: C<C>
 * Currently (and for the foreseeable future) this will remain the only value
 that produces sane results.
 
+=cut
+
+has tonic => ( is => 'ro', default => sub { 'C' } );
+
 =head2 semitones
 
 Number of notes in the scale.
 
 Default: C<12>
 
+=cut
+
+has semitones => ( is => 'ro', default => sub { 12 } );
+
 =head2 temper
 
 Physical distance between notes.
 
 Default: C<semitones * 100 / log(2)>
+
+=cut
+
+has temper => (
+    is      => 'ro',
+    lazy    => 1,
+    builder => 1,
+);
+sub _build_temper {
+    my $self = shift;
+    $self->semitones * 100 / log(2);
+}
 
 =head2 notes
 
@@ -135,29 +171,7 @@ For B<natural_intervals> this last example produces the following:
 Note that case matters for interval names.  For example, "M" means major and "m"
 means minor.
 
-=head2 midikey
-
-Default: C<69>
-
 =cut
-
-has rootless  => ( is => 'ro', default => sub { 0 } );
-has octave    => ( is => 'ro', default => sub { 4 } );
-has midikey   => ( is => 'ro', default => sub { 69 } );
-has concert   => ( is => 'ro', default => sub { 440 } );
-has size      => ( is => 'ro', default => sub { 3 } );
-has tonic     => ( is => 'ro', default => sub { 'C' } );
-has semitones => ( is => 'ro', default => sub { 12 } );
-
-has temper => (
-    is      => 'ro',
-    lazy    => 1,
-    builder => 1,
-);
-sub _build_temper {
-    my $self = shift;
-    $self->semitones * 100 / log(2);
-}
 
 has notes => (
     is      => 'ro',
@@ -169,6 +183,20 @@ sub _build_notes {
     return [ get_scale_notes( $self->tonic ) ];
 }
 
+=head2 midikey
+
+Default: C<69>
+
+=cut
+
+has midikey   => ( is => 'ro', default => sub { 69 } );
+
+=head2 scale
+
+TODO Describe this
+
+=cut
+
 has scale => (
     is      => 'ro',
     lazy    => 1,
@@ -177,6 +205,16 @@ has scale => (
 sub _build_scale {
     my $self = shift;
     return [ map { eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } ];
+}
+
+has _tonic_frequency => (
+    is      => 'ro',
+    lazy    => 1,
+    builder => 1,
+);
+sub _build__tonic_frequency {
+    my $self = shift;
+    return $self->concert * (2 ** (1 / $self->semitones)) ** (-9); # XXX Hardcoding: 9th key above middle-C
 }
 
 has _note_index => (
@@ -212,16 +250,6 @@ sub _build__ratio_name_index {
             name   => $Music::Intervals::Ratios::ratio->{$_}{name} }
         } keys %$Music::Intervals::Ratios::ratio
     }
-}
-
-has tonic_frequency => (
-    is      => 'ro',
-    lazy    => 1,
-    builder => 1,
-);
-sub _build_tonic_frequency {
-    my $self = shift;
-    return $self->concert * (2 ** (1 / $self->semitones)) ** (-9); # XXX Hardcoding: 9th key above middle-C
 }
 
 has chord_names             => ( is => 'rw', default => sub { {} } );
@@ -273,7 +301,7 @@ sub BUILD {
         if ( $self->integer ) {
             $self->integer_notation->{"@$c integer_notation"} = {
                 map { $_ => sprintf '%.0f',
-                    $self->midikey + $self->semitones * log( ($self->tonic_frequency * (eval $self->_ratio_index->{$_})) / $self->concert ) / log(2)
+                    $self->midikey + $self->semitones * log( ($self->_tonic_frequency * (eval $self->_ratio_index->{$_})) / $self->concert ) / log(2)
                 } @$c
             };
         }
@@ -282,7 +310,7 @@ sub BUILD {
             if ( $self->freqs ) {
                 $self->natural_frequencies->{"@$c natural_frequencies"} = {
                     map { $_ => {
-                        sprintf('%.3f', $self->tonic_frequency * eval $self->_ratio_index->{$_})
+                        sprintf('%.3f', $self->_tonic_frequency * eval $self->_ratio_index->{$_})
                             => { $self->_ratio_index->{$_} => $Music::Intervals::Ratios::ratio->{$_}{name} }
                         }
                     } @$c
