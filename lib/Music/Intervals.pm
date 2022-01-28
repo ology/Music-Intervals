@@ -323,6 +323,7 @@ sub eq_tempered_cents {
     my $eq_tempered_cents = {};
 
     my $iter = combinations( $self->notes, $self->size );
+
     while (my $c = $iter->next) {
         my %dyads = $self->dyads($c);
 
