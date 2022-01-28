@@ -276,16 +276,14 @@ sub chord_names {
     while (my $c = $iter->next) {
         my %dyads = $self->dyads($c);
 
-        if ( $self->chords ) {
-            # Do we know any named chords?
-            my @chordname = eval { chordname(@$c) };
+        # Do we know any named chords?
+        my @chordname = eval { chordname(@$c) };
 
-            # Exclude "rootless" chords unless requested.
-            @chordname = grep { !/no-root/ } @chordname unless $self->rootless;
+        # Exclude "rootless" chords unless requested.
+        @chordname = grep { !/no-root/ } @chordname unless $self->rootless;
 
-            # Set the names of this chord combination.
-            $chord_names->{"@$c chord_names"} = \@chordname if @chordname;
-        }
+        # Set the names of this chord combination.
+        $chord_names->{"@$c chord_names"} = \@chordname if @chordname;
     }
 
     return $chord_names;
