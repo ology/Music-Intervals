@@ -255,7 +255,6 @@ sub _build__ratio_name_index {
 has natural_frequencies     => ( is => 'rw', default => sub { {} } );
 has natural_intervals       => ( is => 'rw', default => sub { {} } );
 has natural_cents           => ( is => 'rw', default => sub { {} } );
-has natural_prime_factors   => ( is => 'rw', default => sub { {} } );
 has eq_tempered_frequencies => ( is => 'rw', default => sub { {} } );
 has eq_tempered_intervals   => ( is => 'rw', default => sub { {} } );
 has eq_tempered_cents       => ( is => 'rw', default => sub { {} } );
@@ -306,15 +305,6 @@ sub BUILD {
                         $_ => log( eval $dyads{$_}->{natural} ) * $self->temper
                     } keys %dyads };
 
-            }
-            if ( $self->prime ) {
-                $self->natural_prime_factors->{"@$c natural_prime_factors"} = {
-                    map {
-                        $_ => {
-                            $dyads{$_}->{natural} => $self->ratio_factorize( $dyads{$_}->{natural} )
-                        }
-                    } keys %dyads
-                };
             }
         }
 
@@ -408,6 +398,32 @@ sub integer_notation {
 =head2 natural_intervals
 
 =head2 natural_prime_factors
+
+=cut
+
+sub natural_prime_factors {
+    my ($self) = @_;
+
+    my $natural_prime_factors = {};
+
+    my $iter = combinations( $self->notes, $self->size );
+
+    while (my $c = $iter->next) {
+        my %dyads = $self->dyads($c);
+
+        if ( $self->prime ) {
+            $natural_prime_factors->{"@$c natural_prime_factors"} = {
+                map {
+                    $_ => {
+                        $dyads{$_}->{natural} => $self->ratio_factorize( $dyads{$_}->{natural} )
+                    }
+                } keys %dyads
+            };
+        }
+    }
+
+    return $natural_prime_factors;
+}
 
 =head2 dyads
 
