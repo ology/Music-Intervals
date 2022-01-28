@@ -252,7 +252,6 @@ sub _build__ratio_name_index {
     }
 }
 
-has natural_cents           => ( is => 'rw', default => sub { {} } );
 has eq_tempered_frequencies => ( is => 'rw', default => sub { {} } );
 has eq_tempered_intervals   => ( is => 'rw', default => sub { {} } );
 has eq_tempered_cents       => ( is => 'rw', default => sub { {} } );
@@ -276,16 +275,6 @@ sub BUILD {
     my $iter = combinations( $self->notes, $self->size );
     while (my $c = $iter->next) {
         my %dyads = $self->dyads($c);
-
-        if ( $self->justin ) {
-            if ( $self->cents ) {
-                $self->natural_cents->{"@$c natural_cents"} = {
-                    map {
-                        $_ => log( eval $dyads{$_}->{natural} ) * $self->temper
-                    } keys %dyads };
-
-            }
-        }
 
         if ( $self->equalt ) {
             if ( $self->freqs ) {
@@ -371,6 +360,28 @@ sub integer_notation {
 =head2 eq_tempered_intervals
 
 =head2 natural_cents
+
+=cut
+
+sub natural_cents {
+    my ($self) = @_;
+
+    my $natural_cents = {};
+
+    my $iter = combinations( $self->notes, $self->size );
+
+    while (my $c = $iter->next) {
+        my %dyads = $self->dyads($c);
+
+        $natural_cents->{"@$c natural_cents"} = {
+            map {
+                $_ => log( eval $dyads{$_}->{natural} ) * $self->temper
+            } keys %dyads
+        };
+    }
+
+    return $natural_cents;
+}
 
 =head2 natural_frequencies
 
