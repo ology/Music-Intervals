@@ -469,15 +469,13 @@ sub natural_prime_factors {
     while (my $c = $iter->next) {
         my %dyads = $self->dyads($c);
 
-        if ( $self->prime ) {
-            $natural_prime_factors->{"@$c natural_prime_factors"} = {
-                map {
-                    $_ => {
-                        $dyads{$_}->{natural} => $self->ratio_factorize( $dyads{$_}->{natural} )
-                    }
-                } keys %dyads
-            };
-        }
+        $natural_prime_factors->{"@$c natural_prime_factors"} = {
+            map {
+                $_ => {
+                    $dyads{$_}->{natural} => $self->ratio_factorize( $dyads{$_}->{natural} )
+                }
+            } keys %dyads
+        };
     }
 
     return $natural_prime_factors;
