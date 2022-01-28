@@ -5,7 +5,7 @@ use warnings;
 use Data::Dumper::Concise;
 use Music::Intervals;
 
-my @notes = @ARGV ? @ARGV : qw(C E G);
+my @notes = @ARGV ? @ARGV : qw(C Eb G);
 
 my $m = Music::Intervals->new(notes => \@notes);
 
