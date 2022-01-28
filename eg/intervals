@@ -7,18 +7,8 @@ use Music::Intervals;
 
 my @notes = @ARGV ? @ARGV : qw(C E G);
 
-my $m = Music::Intervals->new(
-    notes    => \@notes,
-    justin   => 1,
-    equalt   => 1,
-    chords   => 1,
-    cents    => 1,
-    interval => 1,
-    freqs    => 1,
-    prime    => 1,
-    integer  => 1,
-);
-$m->process;
+my $m = Music::Intervals->new(notes => \@notes);
+
 print Dumper
     $m->chord_names,
     $m->natural_frequencies,
