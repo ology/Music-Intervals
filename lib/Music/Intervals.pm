@@ -252,9 +252,6 @@ sub _build__ratio_name_index {
     }
 }
 
-has eq_tempered_cents       => ( is => 'rw', default => sub { {} } );
-has integer_notation        => ( is => 'rw', default => sub { {} } );
-
 =head1 METHODS
 
 =head2 new
@@ -264,27 +261,6 @@ has integer_notation        => ( is => 'rw', default => sub { {} } );
 Create a new C<Music::Intervals> object.
 
 =cut
-
-sub BUILD {
-    my $self = shift;
-
-    return unless @{ $self->notes };
-
-    my $iter = combinations( $self->notes, $self->size );
-    while (my $c = $iter->next) {
-        my %dyads = $self->dyads($c);
-
-        if ( $self->equalt ) {
-            if ( $self->cents ) {
-                $self->eq_tempered_cents->{"@$c eq_tempered_cents"} = {
-                    map {
-                        $_ => log( $dyads{$_}->{eq_tempered} ) * $self->temper
-                    } keys %dyads
-                };
-            }
-        }
-    }
-}
 
 =head2 chord_names
 
@@ -338,6 +314,27 @@ sub integer_notation {
 }
 
 =head2 eq_tempered_cents
+
+=cut
+
+sub eq_tempered_cents {
+    my ($self) = @_;
+
+    my $eq_tempered_cents = {};
+
+    my $iter = combinations( $self->notes, $self->size );
+    while (my $c = $iter->next) {
+        my %dyads = $self->dyads($c);
+
+        $self->eq_tempered_cents->{"@$c eq_tempered_cents"} = {
+            map {
+                $_ => log( $dyads{$_}->{eq_tempered} ) * $self->temper
+            } keys %dyads
+        };
+    }
+
+    return $eq_tempered_cents;
+}
 
 =head2 eq_tempered_frequencies
 
