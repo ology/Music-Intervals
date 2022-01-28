@@ -58,6 +58,11 @@ chords.
 This module reveals the "guts" within a given tonality.  And by guts I mean, the
 measurements of the notes and the intervals between them.
 
+For Western notes and intervals, this tonality begins with the C<C>
+note.  That is, all intervals are calculated from C<C>.  So, if you
+want to analyze a minor chord, either make it start on C<C> (like
+C<[C Eb G]>) or somewhere between C<C> and B<B> (like C<[D F A]>).
+
 =head1 ATTRIBUTES
 
 =head2 rootless
