@@ -72,7 +72,7 @@ has rootless => ( is => 'ro', default => sub { 0 } );
 
 =head2 octave
 
-The octave to use in interal computations.
+The octave to use in internal computations.
 
 Default: C<4>
 
@@ -82,7 +82,7 @@ has octave => ( is => 'ro', default => sub { 4 } );
 
 =head2 concert
 
-Concert pitch to use in interal computations.
+Concert pitch to use in internal computations.
 
 Default: C<440>
 
