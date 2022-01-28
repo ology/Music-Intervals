@@ -22,14 +22,6 @@ is_deeply $obj->by_ratio('27/25'),
 
 my $chord = 'C E G';
 $obj = new_ok 'Music::Intervals' => [
-    chords => 1,
-    justin => 1,
-    freqs => 1,
-    interval => 1,
-    cents => 1,
-    prime => 1,
-    equalt => 1,
-    integer => 1,
     notes => [qw( C E G )],
 ];
 
@@ -77,8 +69,6 @@ is $got, '(2*3) / (3*5)', 'ratio_factorize';
 $chord = "C C'";
 $obj = new_ok 'Music::Intervals' => [
     size => 2,
-    justin => 1,
-    interval => 1,
     notes => [qw( C C' )],
 ];
 
