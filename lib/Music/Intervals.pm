@@ -252,7 +252,6 @@ sub _build__ratio_name_index {
     }
 }
 
-has chord_names             => ( is => 'rw', default => sub { {} } );
 has natural_frequencies     => ( is => 'rw', default => sub { {} } );
 has natural_intervals       => ( is => 'rw', default => sub { {} } );
 has natural_cents           => ( is => 'rw', default => sub { {} } );
@@ -270,13 +269,7 @@ has integer_notation        => ( is => 'rw', default => sub { {} } );
 
 Create a new C<Music::Intervals> object.
 
-=for Pod::Coverage process
-
-=for Pod::Coverage BUILD
-
 =cut
-
-sub process {}
 
 sub BUILD {
     my $self = shift;
@@ -286,17 +279,6 @@ sub BUILD {
     my $iter = combinations( $self->notes, $self->size );
     while (my $c = $iter->next) {
         my %dyads = $self->dyads($c);
-
-        if ( $self->chords ) {
-            # Do we know any named chords?
-            my @chordname = eval { chordname(@$c) };
-
-            # Exclude "rootless" chords unless requested.
-            @chordname = grep { !/no-root/ } @chordname unless $self->rootless;
-
-            # Set the names of this chord combination.
-            $self->chord_names->{"@$c chord_names"} = \@chordname if @chordname;
-        }
 
         if ( $self->integer ) {
             $self->integer_notation->{"@$c integer_notation"} = {
@@ -371,6 +353,33 @@ sub BUILD {
 }
 
 =head2 chord_names
+
+=cut
+
+sub chord_names {
+    my ($self) = @_;
+
+    my $chord_names = {};
+
+    my $iter = combinations( $self->notes, $self->size );
+
+    while (my $c = $iter->next) {
+        my %dyads = $self->dyads($c);
+
+        if ( $self->chords ) {
+            # Do we know any named chords?
+            my @chordname = eval { chordname(@$c) };
+
+            # Exclude "rootless" chords unless requested.
+            @chordname = grep { !/no-root/ } @chordname unless $self->rootless;
+
+            # Set the names of this chord combination.
+            $chord_names->{"@$c chord_names"} = \@chordname if @chordname;
+        }
+    }
+
+    return $chord_names;
+}
 
 =head2 eq_tempered_cents
 
