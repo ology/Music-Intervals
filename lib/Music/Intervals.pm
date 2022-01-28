@@ -23,19 +23,11 @@ use namespace::clean;
   use Music::Intervals;
 
   my $m = Music::Intervals->new(
-    notes    => [qw/C E G B/], # Default: C major scale
+    notes    => [qw/C E G B/], # Default: major scale
     size     => 3,             # Must be <= the notes
-    chords   => 1,             # Required for chord names
-    justin   => 1,             # Required for natural_*
-    equalt   => 1,             # Required for eq_tempered_*
-    freqs    => 1,             # Required for *_frequencies
-    interval => 1,             # Required for *_intervals
-    cents    => 1,             # Required for *_cents
-    prime    => 1,             # Required for prime factors
-    integer  => 1,             # Required for integer notation
   );
 
-  # Then
+  # Then any of:
   print Dumper(
     $m->chord_names,
     $m->natural_frequencies,
