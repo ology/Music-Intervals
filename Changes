@@ -1,6 +1,8 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+
+0.0700 2022-01-28 11:06:13
     - Completely refactor the interface and performance penalties.
 
 0.0603 2021-04-11 15:45:10
