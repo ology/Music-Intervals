@@ -371,7 +371,7 @@ sub eq_tempered_intervals {
     while (my $c = $iter->next) {
         my %dyads = $self->dyads($c);
 
-        $self->eq_tempered_intervals->{"@$c eq_tempered_intervals"} = {
+        $eq_tempered_intervals->{"@$c eq_tempered_intervals"} = {
             map {
                 $_ => $dyads{$_}->{eq_tempered}
             } keys %dyads
