@@ -1,6 +1,7 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Improve documentation.
 
 0.0701 2022-01-28 12:45:56
     - Fix-up the eg/* programs.
