@@ -252,7 +252,6 @@ sub _build__ratio_name_index {
     }
 }
 
-has eq_tempered_frequencies => ( is => 'rw', default => sub { {} } );
 has eq_tempered_intervals   => ( is => 'rw', default => sub { {} } );
 has eq_tempered_cents       => ( is => 'rw', default => sub { {} } );
 has integer_notation        => ( is => 'rw', default => sub { {} } );
@@ -277,13 +276,6 @@ sub BUILD {
         my %dyads = $self->dyads($c);
 
         if ( $self->equalt ) {
-            if ( $self->freqs ) {
-                $self->eq_tempered_frequencies->{"@$c eq_tempered_frequencies"} = {
-                    map {
-                        $_ => name2freq( $_ . $self->octave ) || $self->concert * $self->_note_index->{$_}
-                    } @$c
-                };
-            }
             if ( $self->interval ) {
                 $self->eq_tempered_intervals->{"@$c eq_tempered_intervals"} = {
                     map {
@@ -356,6 +348,26 @@ sub integer_notation {
 =head2 eq_tempered_cents
 
 =head2 eq_tempered_frequencies
+
+=cut
+
+sub eq_tempered_frequencies {
+    my ($self) = @_;
+
+    my $eq_tempered_frequencies = {};
+
+    my $iter = combinations( $self->notes, $self->size );
+
+    while (my $c = $iter->next) {
+        $eq_tempered_frequencies->{"@$c eq_tempered_frequencies"} = {
+            map {
+                $_ => name2freq( $_ . $self->octave ) || $self->concert * $self->_note_index->{$_}
+            } @$c
+        };
+    }
+
+    return $eq_tempered_frequencies;
+}
 
 =head2 eq_tempered_intervals
 
