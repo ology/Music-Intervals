@@ -271,6 +271,8 @@ Create a new C<Music::Intervals> object.
 
 =head2 chord_names
 
+Chord names of the B<size> note combinations.
+
 =cut
 
 sub chord_names {
@@ -298,6 +300,8 @@ sub chord_names {
 
 =head2 integer_notation
 
+Math!  See source...
+
 =cut
 
 sub integer_notation {
@@ -319,6 +323,8 @@ sub integer_notation {
 }
 
 =head2 eq_tempered_cents
+
+The Equal tempered cents.
 
 =cut
 
@@ -344,6 +350,8 @@ sub eq_tempered_cents {
 
 =head2 eq_tempered_frequencies
 
+The Equal tempered frequencies.
+
 =cut
 
 sub eq_tempered_frequencies {
@@ -365,6 +373,8 @@ sub eq_tempered_frequencies {
 }
 
 =head2 eq_tempered_intervals
+
+The Equal tempered intervals.
 
 =cut
 
@@ -390,6 +400,8 @@ sub eq_tempered_intervals {
 
 =head2 natural_cents
 
+Just intonation cents.
+
 =cut
 
 sub natural_cents {
@@ -414,6 +426,8 @@ sub natural_cents {
 
 =head2 natural_frequencies
 
+Just intonation frequencies.
+
 =cut
 
 sub natural_frequencies {
@@ -437,6 +451,8 @@ sub natural_frequencies {
 }
 
 =head2 natural_intervals
+
+Just intonation intervals.
 
 =cut
 
@@ -463,6 +479,8 @@ sub natural_intervals {
 }
 
 =head2 natural_prime_factors
+
+Just intonation prime factors.
 
 =cut
 
