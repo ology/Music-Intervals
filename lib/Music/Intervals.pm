@@ -252,7 +252,6 @@ sub _build__ratio_name_index {
     }
 }
 
-has natural_frequencies     => ( is => 'rw', default => sub { {} } );
 has natural_intervals       => ( is => 'rw', default => sub { {} } );
 has natural_cents           => ( is => 'rw', default => sub { {} } );
 has eq_tempered_frequencies => ( is => 'rw', default => sub { {} } );
@@ -280,15 +279,6 @@ sub BUILD {
         my %dyads = $self->dyads($c);
 
         if ( $self->justin ) {
-            if ( $self->freqs ) {
-                $self->natural_frequencies->{"@$c natural_frequencies"} = {
-                    map { $_ => {
-                        sprintf('%.3f', $self->_tonic_frequency * eval $self->_ratio_index->{$_})
-                            => { $self->_ratio_index->{$_} => $Music::Intervals::Ratios::ratio->{$_}{name} }
-                        }
-                    } @$c
-                };
-            }
             if ( $self->interval ) {
                 $self->natural_intervals->{"@$c natural_intervals"} = {
                     map {
@@ -394,6 +384,28 @@ sub integer_notation {
 =head2 natural_cents
 
 =head2 natural_frequencies
+
+=cut
+
+sub natural_frequencies {
+    my ($self) = @_;
+
+    my $natural_frequencies = {};
+
+    my $iter = combinations( $self->notes, $self->size );
+
+    while (my $c = $iter->next) {
+        $natural_frequencies->{"@$c natural_frequencies"} = {
+            map { $_ => {
+                sprintf('%.3f', $self->_tonic_frequency * eval $self->_ratio_index->{$_})
+                    => { $self->_ratio_index->{$_} => $Music::Intervals::Ratios::ratio->{$_}{name} }
+                }
+            } @$c
+        };
+    }
+
+    return $natural_frequencies;
+}
 
 =head2 natural_intervals
 
