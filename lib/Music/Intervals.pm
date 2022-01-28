@@ -252,7 +252,6 @@ sub _build__ratio_name_index {
     }
 }
 
-has eq_tempered_intervals   => ( is => 'rw', default => sub { {} } );
 has eq_tempered_cents       => ( is => 'rw', default => sub { {} } );
 has integer_notation        => ( is => 'rw', default => sub { {} } );
 
@@ -276,13 +275,6 @@ sub BUILD {
         my %dyads = $self->dyads($c);
 
         if ( $self->equalt ) {
-            if ( $self->interval ) {
-                $self->eq_tempered_intervals->{"@$c eq_tempered_intervals"} = {
-                    map {
-                        $_ => $dyads{$_}->{eq_tempered}
-                    } keys %dyads
-                };
-            }
             if ( $self->cents ) {
                 $self->eq_tempered_cents->{"@$c eq_tempered_cents"} = {
                     map {
@@ -370,6 +362,28 @@ sub eq_tempered_frequencies {
 }
 
 =head2 eq_tempered_intervals
+
+=cut
+
+sub eq_tempered_intervals {
+    my ($self) = @_;
+
+    my $eq_tempered_intervals = {};
+
+    my $iter = combinations( $self->notes, $self->size );
+
+    while (my $c = $iter->next) {
+        my %dyads = $self->dyads($c);
+
+        $self->eq_tempered_intervals->{"@$c eq_tempered_intervals"} = {
+            map {
+                $_ => $dyads{$_}->{eq_tempered}
+            } keys %dyads
+        };
+    }
+
+    return $eq_tempered_intervals;
+}
 
 =head2 natural_cents
 
