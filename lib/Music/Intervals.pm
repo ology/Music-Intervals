@@ -60,83 +60,35 @@ measurements of the notes and the intervals between them.
 
 =head1 ATTRIBUTES
 
-=head2 chords
-
-Show chord names.
-
-Default: 0
-
 =head2 rootless
 
 Show chord names with no root.
 
-Default: 0
-
-=head2 equalt
-
-Show equal temperament.
-
-Default: 0
-
-=head2 justin
-
-Show just intonation.
-
-Default: 0
-
-=head2 integer
-
-Show integer notation.
-
-Default: 0
-
-=head2 cents
-
-Show the logarithmic units of measure.
-
-Default: 0
-
-=head2 freqs
-
-Show frequencies.
-
-Default: 0
-
-=head2 interval
-
-Show note intervals.
-
-Default: 0
-
-=head2 prime
-
-Show prime factorization.
-
-Default: 0
+Default: C<0>
 
 =head2 octave
 
 The octave to use.
 
-Default: 4
+Default: C<4>
 
 =head2 concert
 
 Concert pitch.
 
-Default: 440
+Default: C<440>
 
 =head2 size
 
 Chord size
 
-Default: 3
+Default: C<3>
 
 =head2 tonic
 
 The root of the computations.
 
-Default: C
+Default: C<C>
 
 * Currently (and for the foreseeable future) this will remain the only value
 that produces sane results.
@@ -145,19 +97,19 @@ that produces sane results.
 
 Number of notes in the scale.
 
-Default: 12
+Default: C<12>
 
 =head2 temper
 
 Physical distance between notes.
 
-Default: semitones * 100 / log(2)
+Default: C<semitones * 100 / log(2)>
 
 =head2 notes
 
 The actual notes to use in the computation.
 
-Default: [ C D E F G A B ]
+Default: C<[ C D E F G A B ]>
 
 The list of notes may be any of the keys in the L<Music::Intervals::Ratios>
 C<ratio> hashref.  This is very very long and contains useful intervals such as
@@ -185,7 +137,7 @@ means minor.
 
 =head2 midikey
 
-Default: 69
+Default: C<69>
 
 =head2 chord_names
 
