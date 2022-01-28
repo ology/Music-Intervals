@@ -252,7 +252,6 @@ sub _build__ratio_name_index {
     }
 }
 
-has natural_intervals       => ( is => 'rw', default => sub { {} } );
 has natural_cents           => ( is => 'rw', default => sub { {} } );
 has eq_tempered_frequencies => ( is => 'rw', default => sub { {} } );
 has eq_tempered_intervals   => ( is => 'rw', default => sub { {} } );
@@ -279,16 +278,6 @@ sub BUILD {
         my %dyads = $self->dyads($c);
 
         if ( $self->justin ) {
-            if ( $self->interval ) {
-                $self->natural_intervals->{"@$c natural_intervals"} = {
-                    map {
-                        $_ => {
-                            $dyads{$_}->{natural} => $self->_ratio_name_index->{ $dyads{$_}->{natural} }{name}
-                        }
-                    } keys %dyads
-                };
-
-            }
             if ( $self->cents ) {
                 $self->natural_cents->{"@$c natural_cents"} = {
                     map {
@@ -408,6 +397,30 @@ sub natural_frequencies {
 }
 
 =head2 natural_intervals
+
+=cut
+
+sub natural_intervals {
+    my ($self) = @_;
+
+    my $natural_intervals = {};
+
+    my $iter = combinations( $self->notes, $self->size );
+
+    while (my $c = $iter->next) {
+        my %dyads = $self->dyads($c);
+
+        $natural_intervals->{"@$c natural_intervals"} = {
+            map {
+                $_ => {
+                    $dyads{$_}->{natural} => $self->_ratio_name_index->{ $dyads{$_}->{natural} }{name}
+                }
+            } keys %dyads
+        };
+    }
+
+    return $natural_intervals;
+}
 
 =head2 natural_prime_factors
 
