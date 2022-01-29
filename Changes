@@ -1,6 +1,8 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+
+0.0705 2022-01-28 20:12:40
     - Improve documentation.
     - Add a test!
     - Get frequency with a handy module, instead of ugly math!
