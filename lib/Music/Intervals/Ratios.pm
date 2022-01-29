@@ -429,7 +429,7 @@ our $ratio = {
     },
     a13t => {
         ratio => '28/27',
-        name => q|Archytas' 1/3-tone, inferior quarter-tone|,
+        name => q|septimal 1/3-tone, inferior quarter-tone|,
     },
     '29h' => {
         ratio => '29/16',
