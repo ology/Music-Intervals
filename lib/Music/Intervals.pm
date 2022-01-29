@@ -47,7 +47,7 @@ use namespace::clean;
   perl -Ilib -MMusic::Intervals::Ratios -E'say $Music::Intervals::Ratios::ratio->{C}{name}'
   # unison, perfect prime, tonic
 
-  # Show all the 447 known intervals:
+  # Show all the 400+ known intervals:
   perl -MData::Dumper -MMusic::Intervals::Ratios -e'print Dumper $Music::Intervals::Ratios::ratio'
 
 =head1 DESCRIPTION
