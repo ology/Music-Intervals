@@ -9,12 +9,12 @@ our $VERSION = '0.0703';
 
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
-use Music::Chord::Namer qw( chordname );
 use MIDI::Pitch qw( name2freq );
-use Number::Fraction ();
 use Moo;
-use Music::Scales qw( get_scale_notes );
+use Music::Chord::Namer qw( chordname );
 use Music::Intervals::Ratios;
+use Music::Scales qw( get_scale_notes );
+use Number::Fraction ();
 use strictures 2;
 use namespace::clean;
 
