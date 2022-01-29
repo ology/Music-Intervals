@@ -525,7 +525,7 @@ __END__
 
 =head1 SEE ALSO
 
-The F<t/> tests and F<eg/> example in this distribution
+The F<t/*> tests and F<eg/*> examples in this distribution
 
 For the time being, you will need to look at the source of
 L<Music::Intervals::Ratios> for the note and interval names.
