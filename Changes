@@ -3,7 +3,7 @@ Revision history for Music-Intervals
 {{$NEXT}}
     - Improve documentation.
     - Add a test!
-    - Use a module for frequency instead of ugly math!
+    - Get frequency with a handy module, instead of ugly math!
 
 0.0704 2022-01-28 19:43:12
     - Hide attributes that shouldn't be fooled-with anyway.
