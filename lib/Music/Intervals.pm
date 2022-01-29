@@ -41,8 +41,8 @@ use namespace::clean;
   );
 
   # Find known intervals
-  $name  = $m->by_ratio($ratio);
-  $ratio = $m->by_name($interval_name);
+  my $name  = $m->by_ratio('6/5');
+  my $ratio = $m->by_name('Eb');
 
   perl -Ilib -MMusic::Intervals::Ratios -E'say $Music::Intervals::Ratios::ratio->{C}{name}'
   # unison, perfect prime, tonic
