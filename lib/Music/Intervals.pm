@@ -13,6 +13,7 @@ use MIDI::Pitch qw( name2freq );
 use Moo;
 use Music::Chord::Namer qw( chordname );
 use Music::Intervals::Ratios;
+use Music::Note::Frequency;
 use Music::Scales qw( get_scale_notes );
 use Number::Fraction ();
 use strictures 2;
@@ -131,6 +132,7 @@ has _octave => ( is => 'ro', default => sub { 4 } );
 has _concert => ( is => 'ro', default => sub { 440 } );
 has _tonic => ( is => 'ro', default => sub { 'C' } );
 has _semitones => ( is => 'ro', default => sub { 12 } );
+has _midikey => ( is => 'ro', default => sub { 69 } );
 
 has _temper => (
     is      => 'ro',
@@ -142,8 +144,6 @@ sub _build__temper {
     $self->_semitones * 100 / log(2);
 }
 
-has _midikey => ( is => 'ro', default => sub { 69 } );
-
 has _tonic_frequency => (
     is      => 'ro',
     lazy    => 1,
@@ -151,7 +151,8 @@ has _tonic_frequency => (
 );
 sub _build__tonic_frequency {
     my $self = shift;
-    return $self->_concert * (2 ** (1 / $self->_semitones)) ** (-9); # XXX Hardcoding: 9th key above middle-C
+    my $note = Music::Note::Frequency->new($self->_tonic);
+    return $note->frequency;
 }
 
 has _note_index => (
