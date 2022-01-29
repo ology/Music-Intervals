@@ -24,7 +24,7 @@ use namespace::clean;
 
   my $m = Music::Intervals->new(
     notes => [qw/C E G B/],
-    size  => 3, # Must be <= the notes
+    size  => 3, # Must be <= notes
   );
 
   # Then any of:
