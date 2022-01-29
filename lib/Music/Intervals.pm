@@ -104,7 +104,7 @@ has notes => (
 );
 sub _build_notes {
     my $self = shift;
-    return [ get_scale_notes( $self->tonic ) ];
+    return [ get_scale_notes( $self->_tonic ) ];
 }
 
 =head2 size
@@ -127,92 +127,22 @@ Default: C<0>
 
 has rootless => ( is => 'ro', default => sub { 0 } );
 
-=head2 octave
+has _octave => ( is => 'ro', default => sub { 4 } );
+has _concert => ( is => 'ro', default => sub { 440 } );
+has _tonic => ( is => 'ro', default => sub { 'C' } );
+has _semitones => ( is => 'ro', default => sub { 12 } );
 
-The octave to use in internal computations.
-
-Default: C<4>
-
-=cut
-
-has octave => ( is => 'ro', default => sub { 4 } );
-
-=head2 concert
-
-Concert pitch to use in internal computations.
-
-Default: C<440>
-
-=cut
-
-has concert => ( is => 'ro', default => sub { 440 } );
-
-=head2 tonic
-
-The root of the computations.
-
-Default: C<C>
-
-* Currently (and for the foreseeable future) this will remain the only value
-that produces sane results.
-
-=cut
-
-has tonic => ( is => 'ro', default => sub { 'C' } );
-
-=head2 semitones
-
-Number of notes in the scale, used in internal computations.
-
-Default: C<12>
-
-=cut
-
-has semitones => ( is => 'ro', default => sub { 12 } );
-
-=head2 temper
-
-Physical distance between notes, used in internal computations.
-
-Default: C<semitones * 100 / log(2)>
-
-=cut
-
-has temper => (
+has _temper => (
     is      => 'ro',
     lazy    => 1,
     builder => 1,
 );
-sub _build_temper {
+sub _build__temper {
     my $self = shift;
-    $self->semitones * 100 / log(2);
+    $self->_semitones * 100 / log(2);
 }
 
-=head2 midikey
-
-Describe this...
-
-Default: C<69>
-
-=cut
-
-has midikey => ( is => 'ro', default => sub { 69 } );
-
-=head2 scale
-
-Describe this...
-
-=cut
-
-has scale => (
-    is      => 'ro',
-    lazy    => 1,
-    builder => 1,
-);
-sub _build_scale {
-    my $self = shift;
-    return [ map { eval "$Music::Intervals::Ratios::ratio->{$_}{ratio}" } @{ $self->notes } ];
-}
+has _midikey => ( is => 'ro', default => sub { 69 } );
 
 has _tonic_frequency => (
     is      => 'ro',
@@ -221,7 +151,7 @@ has _tonic_frequency => (
 );
 sub _build__tonic_frequency {
     my $self = shift;
-    return $self->concert * (2 ** (1 / $self->semitones)) ** (-9); # XXX Hardcoding: 9th key above middle-C
+    return $self->_concert * (2 ** (1 / $self->_semitones)) ** (-9); # XXX Hardcoding: 9th key above middle-C
 }
 
 has _note_index => (
@@ -314,7 +244,7 @@ sub integer_notation {
     while (my $c = $iter->next) {
         $integer_notation->{"@$c integer_notation"} = {
             map { $_ => sprintf '%.0f',
-                $self->midikey + $self->semitones * log( ($self->_tonic_frequency * (eval $self->_ratio_index->{$_})) / $self->concert ) / log(2)
+                $self->_midikey + $self->_semitones * log( ($self->_tonic_frequency * (eval $self->_ratio_index->{$_})) / $self->_concert ) / log(2)
             } @$c
         };
     }
@@ -340,7 +270,7 @@ sub eq_tempered_cents {
 
         $eq_tempered_cents->{"@$c eq_tempered_cents"} = {
             map {
-                $_ => log( $dyads{$_}->{eq_tempered} ) * $self->temper
+                $_ => log( $dyads{$_}->{eq_tempered} ) * $self->_temper
             } keys %dyads
         };
     }
@@ -364,7 +294,7 @@ sub eq_tempered_frequencies {
     while (my $c = $iter->next) {
         $eq_tempered_frequencies->{"@$c eq_tempered_frequencies"} = {
             map {
-                $_ => name2freq( $_ . $self->octave ) || $self->concert * $self->_note_index->{$_}
+                $_ => name2freq( $_ . $self->_octave ) || $self->_concert * $self->_note_index->{$_}
             } @$c
         };
     }
@@ -416,7 +346,7 @@ sub natural_cents {
 
         $natural_cents->{"@$c natural_cents"} = {
             map {
-                $_ => log( eval $dyads{$_}->{natural} ) * $self->temper
+                $_ => log( eval $dyads{$_}->{natural} ) * $self->_temper
             } keys %dyads
         };
     }
@@ -534,9 +464,9 @@ sub dyads {
             natural => $str,
             # The value is either the known pitch ratio or ...
             eq_tempered =>
-              ( name2freq( $i->[1] . $self->octave ) || ( $self->concert * $self->_note_index->{ $i->[1] } ) )
+              ( name2freq( $i->[1] . $self->_octave ) || ( $self->_concert * $self->_note_index->{ $i->[1] } ) )
                 /
-              ( name2freq( $i->[0] . $self->octave ) || ( $self->concert * $self->_note_index->{ $i->[0] } ) ),
+              ( name2freq( $i->[0] . $self->_octave ) || ( $self->_concert * $self->_note_index->{ $i->[0] } ) ),
         };
     }
 
