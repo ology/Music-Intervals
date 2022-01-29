@@ -150,7 +150,7 @@ has _tonic_frequency => (
 );
 sub _build__tonic_frequency {
     my $self = shift;
-    return name2freq($self->_tonic . 4);
+    return name2freq($self->_tonic . $self->_octave);
 }
 
 has _note_index => (
