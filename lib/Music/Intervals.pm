@@ -12,7 +12,7 @@ use Math::Factor::XS qw( prime_factors );
 use Music::Chord::Namer qw( chordname );
 use MIDI::Pitch qw( name2freq );
 use Number::Fraction ();
-use Music::Scales qw(get_scale_notes);
+use Music::Scales qw( get_scale_notes );
 use Music::Intervals::Ratios;
 use Moo;
 use strictures 2;
