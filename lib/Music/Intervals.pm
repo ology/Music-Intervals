@@ -532,7 +532,7 @@ L<Music::Intervals::Ratios> for the note and interval names.
 
 L<Music::Intervals::Numeric> for numeric-only note-intervals
 
-L<http://en.wikipedia.org/wiki/List_of_musical_intervals>
+L<https://en.wikipedia.org/wiki/Interval_(music)#Main_intervals>
 
 L<http://en.wikipedia.org/wiki/Equal_temperament>
 
