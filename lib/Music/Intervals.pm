@@ -13,7 +13,6 @@ use MIDI::Pitch qw( name2freq );
 use Moo;
 use Music::Chord::Namer qw( chordname );
 use Music::Intervals::Ratios;
-use Music::Note::Frequency;
 use Music::Scales qw( get_scale_notes );
 use Number::Fraction ();
 use strictures 2;
@@ -151,8 +150,7 @@ has _tonic_frequency => (
 );
 sub _build__tonic_frequency {
     my $self = shift;
-    my $note = Music::Note::Frequency->new($self->_tonic);
-    return $note->frequency;
+    return name2freq($self->_tonic . 4);
 }
 
 has _note_index => (
