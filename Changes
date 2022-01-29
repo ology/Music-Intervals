@@ -2,6 +2,7 @@ Revision history for Music-Intervals
 
 {{$NEXT}}
     - Improve documentation.
+    - Add test.
 
 0.0704 2022-01-28 19:43:12
     - Hide attributes that shouldn't be fooled-with anyway.
