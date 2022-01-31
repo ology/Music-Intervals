@@ -29,6 +29,8 @@ use namespace::clean;
     $m->prime_factor,
   );
 
+  my interval = $m->ratios->{'5/4'};
+
 =head1 DESCRIPTION
 
 A C<Music::Intervals> object shows the mathematical break-down of musical
