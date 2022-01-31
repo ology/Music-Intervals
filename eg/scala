@@ -8,7 +8,7 @@ use Data::Dumper::Compact qw(ddc);
 use Music::Scala ();
 use Music::Intervals::Numeric;
 
-my $file = shift || "$ENV{HOME}/Music/scl/werck1.scl"; # ellis_r.scl
+my $file = shift || "$ENV{HOME}/Music/scl/werck1.scl";
 
 my $m = Music::Intervals::Numeric->new;
 
