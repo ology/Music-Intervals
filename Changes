@@ -2,6 +2,7 @@ Revision history for Music-Intervals
 
 {{$NEXT}}
     - Make the ratios attribute not-private!
+    - Add the eg/scala example program.
 
 0.0706 2022-01-30 16:48:46
     Modernize the Numeric module, too.
