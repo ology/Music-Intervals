@@ -1,6 +1,8 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+
+0.0707 2022-01-30 17:28:08
     - Make the ratios attribute not-private!
     - Add the eg/scala example program.
 
