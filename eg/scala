@@ -17,5 +17,6 @@ my $scala = Music::Scala->new(file => $file);
 print $scala->get_description, "\n";
 
 for my $interval ($scala->get_notes) {
-    print "\t$interval: ", $m->ratios->{$interval}, "\n";
+    my $name = $m->ratios->{$interval} || '?';
+    print "\t$interval: $name\n";
 }
