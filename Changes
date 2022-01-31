@@ -1,6 +1,7 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    Modernize the Numeric module, too.
 
 0.0705 2022-01-28 20:12:40
     - Improve documentation.
