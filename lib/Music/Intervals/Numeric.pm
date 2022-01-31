@@ -52,20 +52,20 @@ Chord size
 
 Default: 3
 
+=head2 ratios
+
+Musical ratios keyed by interval fractions.
+
 =cut
 
 has notes => ( is => 'ro', default => sub { [] } );
 has size  => ( is => 'ro', default => sub { 3 } );
 
-has _semitones => ( is => 'ro', default => sub { 12 } );
-has _temper    => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
-    $self->_semitones * 100 / log(2) },
-);
-has _ratios => (
+has ratios => (
     is      => 'ro',
     builder => 1,
 );
-sub _build__ratios {
+sub _build_ratios {
   my ($self) = @_;
   no warnings 'once';
   my $ratios = { map {
@@ -73,6 +73,11 @@ sub _build__ratios {
   } keys %$Music::Intervals::Ratios::ratio };
   return $ratios;
 }
+
+has _semitones => ( is => 'ro', default => sub { 12 } );
+has _temper    => ( is => 'ro', lazy => 1, default => sub { my $self = shift;
+    $self->_semitones * 100 / log(2) },
+);
 
 =head1 METHODS
 
@@ -108,7 +113,7 @@ sub frequencies {
     my $iter = combinations( $self->notes, $self->size );
 
     while (my $c = $iter->next) {
-        $frequencies->{"@$c"} = { map { $_ => $self->_ratios->{$_} } @$c };
+        $frequencies->{"@$c"} = { map { $_ => $self->ratios->{$_} } @$c };
     }
 
     return $frequencies;
@@ -127,7 +132,7 @@ sub intervals {
         $intervals->{"@$c"} = {
             map {
                 $_ => {
-                    $dyads{$_} => $self->_ratios->{ $dyads{$_} }
+                    $dyads{$_} => $self->ratios->{ $dyads{$_} }
                 }
             } keys %dyads
         };
