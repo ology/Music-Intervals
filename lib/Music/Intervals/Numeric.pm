@@ -29,7 +29,7 @@ use namespace::clean;
     $m->prime_factor,
   );
 
-  my interval = $m->ratios->{'5/4'};
+  my $interval = $m->ratios->{'5/4'};
 
 =head1 DESCRIPTION
 
