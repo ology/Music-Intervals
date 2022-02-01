@@ -7,7 +7,10 @@ use Music::Intervals;
 
 my @notes = @ARGV ? @ARGV : qw(C Eb G);
 
-my $m = Music::Intervals->new(notes => \@notes);
+my $m = Music::Intervals->new(
+    notes => \@notes,
+    size  => 2,
+);
 
 print Dumper
     $m->chord_names,
