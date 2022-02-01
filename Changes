@@ -1,6 +1,7 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Improve documentation.
 
 0.0709 2022-02-01 12:02:03
     - And update the *::Numeric side too!
