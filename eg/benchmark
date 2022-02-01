@@ -14,7 +14,7 @@ timethese( $i, {
 });
 
 sub sub_freqs {
-    my $note = Music::Note::Frequency->new('C2', 'ISO');
+    my $note = Music::Note::Frequency->new('C4', 'ISO');
     my $freq = $note->frequency;
 }
 
