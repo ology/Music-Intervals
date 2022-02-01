@@ -42,7 +42,7 @@ intervals and chords given as integer ratios.
 
 The actual notes to use in the computation
 
-Default: [ 1/1 5/4 3/2 ]  (C E G)
+Default: C<[ 1/1 5/4 3/2 ]>  (C E G)
 
 The list of notes may be any of the keys in the L<Music::Intervals::Ratio>
 C<ratio> hashref.  This is very very long and contains useful intervals such as
@@ -52,11 +52,12 @@ those of the common scale and even the Pythagorean intervals, too.
 
 Chord size
 
-Default: 3
+Default: C<3>
 
 =head2 ratios
 
-Musical ratios keyed by interval fractions.
+Musical ratios keyed by interval fractions. Computed attribute if not
+given.
 
 =cut
 
