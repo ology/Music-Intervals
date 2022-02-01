@@ -535,6 +535,8 @@ L<Music::Intervals::Numeric> for numeric-only note-intervals
 
 L<https://en.wikipedia.org/wiki/Interval_(music)#Main_intervals>
 
+L<https://en.wikipedia.org/wiki/List_of_pitch_intervals>
+
 L<http://en.wikipedia.org/wiki/Equal_temperament>
 
 L<http://en.wikipedia.org/wiki/Just_intonation>
