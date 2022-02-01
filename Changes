@@ -1,6 +1,9 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - And update the *::Numeric side too!
+
+0.0708 2022-02-01 11:47:34
     - Allow single notes too!
 
 0.0707 2022-01-30 17:28:08
