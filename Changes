@@ -1,6 +1,9 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Add the eg/benchmark program, just because I was curious.
+
+0.0710 2022-02-01 12:08:22
     - Improve documentation.
 
 0.0709 2022-02-01 12:02:03
