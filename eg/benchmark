@@ -8,7 +8,7 @@ use Music::Note::Frequency;
 
 my $i = 1_000_000;
 
-timethese( $i, {
+timethese($i, {
     Frequency => \&sub_freqs,
     Intervals => \&sub_ints,
 });
