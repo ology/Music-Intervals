@@ -3,6 +3,7 @@ use strict;
 use warnings;
 
 use Test::More;
+use Test::Exception;
 
 use_ok 'Music::Intervals';
 
@@ -74,5 +75,19 @@ is_deeply $obj->natural_intervals,
     { "$chord natural_intervals" => {
         $chord => { '2/1' => 'octave' } } },
     'octave';
+
+$obj = new_ok 'Music::Intervals' => [
+    notes => ['C'],
+    size  => 1,
+];
+lives_ok { $obj->chord_names } 'chord_names';
+lives_ok { $obj->natural_frequencies } 'natural_frequencies';
+lives_ok { $obj->natural_intervals } 'natural_intervals';
+lives_ok { $obj->natural_cents } 'natural_cents';
+lives_ok { $obj->natural_prime_factors } 'natural_prime_factors';
+lives_ok { $obj->eq_tempered_frequencies } 'eq_tempered_frequencies';
+lives_ok { $obj->eq_tempered_intervals } 'eq_tempered_intervals';
+lives_ok { $obj->eq_tempered_cents } 'eq_tempered_cents';
+lives_ok { $obj->integer_notation } 'integer_notation';
 
 done_testing();
