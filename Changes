@@ -2,6 +2,7 @@ Revision history for Music-Intervals
 
 {{$NEXT}}
     - Add the eg/benchmark program, just because I was curious.
+    - Remove the method names from the keys.
 
 0.0710 2022-02-01 12:08:22
     - Improve documentation.
