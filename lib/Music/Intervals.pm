@@ -445,6 +445,8 @@ sub dyads {
     my $self = shift;
     my ($c) = @_;
 
+    return () if @$c <= 1;
+
     my @pairs = combinations( $c, 2 );
 
     my %dyads;
