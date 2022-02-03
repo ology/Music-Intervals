@@ -12,12 +12,12 @@ my $m = Music::Intervals->new(
     size  => 2,
 );
 
-print 'Chord names: ', ddc $m->chord_names;
-print 'Natural freqs: ', ddc $m->natural_frequencies;
-print 'Natural intervals: ', ddc $m->natural_intervals;
-print 'Natural cents: ', ddc $m->natural_cents;
+print 'Chord names: ',           ddc $m->chord_names;
+print 'Natural freqs: ',         ddc $m->natural_frequencies;
+print 'Natural intervals: ',     ddc $m->natural_intervals;
+print 'Natural cents: ',         ddc $m->natural_cents;
 print 'Natural prime factors: ', ddc $m->natural_prime_factors;
-print 'EQ Tempered freqs: ', ddc $m->eq_tempered_frequencies;
+print 'EQ Tempered freqs: ',     ddc $m->eq_tempered_frequencies;
 print 'EQ Tempered intervals: ', ddc $m->eq_tempered_intervals;
-print 'EQ Tempered cents: ', ddc $m->eq_tempered_cents;
-print 'Integer notation: ', ddc $m->integer_notation;
+print 'EQ Tempered cents: ',     ddc $m->eq_tempered_cents;
+print 'Integer notation: ',      ddc $m->integer_notation;
