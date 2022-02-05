@@ -20,6 +20,7 @@ my $i = 0;
 
 for my $interval ($scala->get_notes) {
     $i++;
+    my $approx = eval $interval;
     my $name = $m->ratios->{$interval} || '?';
-    print "\t$i. $interval: $name\n";
+    printf "\t%d. %s (%.4f) %s\n", $i, $interval, $approx, $name;
 }
