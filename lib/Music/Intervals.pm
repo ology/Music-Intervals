@@ -11,7 +11,6 @@ use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
 use MIDI::Pitch qw( name2freq );
 use Moo;
-use Music::Chord::Namer qw( chordname );
 use Music::Intervals::Ratios;
 use Music::Scales qw( get_scale_notes );
 use Number::Fraction ();
@@ -24,12 +23,10 @@ use namespace::clean;
 
   my $m = Music::Intervals->new(
     notes => [qw/C E G B/],
-    size  => 3, # Must be <= notes
   );
 
   # Then any of:
   print Dumper(
-    $m->chord_names,
     $m->natural_frequencies,
     $m->natural_intervals,
     $m->natural_cents,
@@ -86,14 +83,14 @@ A few examples:
 
 For B<natural_intervals> this last example produces the following:
 
- 'C pM3 pM7' => {
+ {
    'C pM3' => { '81/64' => 'Pythagorean major third' },
    'C pM7' => { '243/128' => 'Pythagorean major seventh' },
    'pM3 pM7' => { '3/2' => 'perfect fifth' }
  }
 
-Note that case matters for interval names.  For example, "M" means major and "m"
-means minor.
+Note that case matters for interval names.  For example, "M" means
+major and "m" means minor.
 
 =cut
 
@@ -107,25 +104,16 @@ sub _build_notes {
     return [ get_scale_notes( $self->_tonic ) ];
 }
 
-=head2 size
-
-Chord size
-
-Default: C<3>
-
-=cut
-
-has size => ( is => 'ro', default => sub { 3 } );
-
-=head2 rootless
-
-Show chord names with no root.
-
-Default: C<0>
-
-=cut
-
-has rootless => ( is => 'ro', default => sub { 0 } );
+has _dyads => (
+    is      => 'ro',
+    lazy    => 1,
+    builder => 1,
+);
+sub _build__dyads {
+    my $self = shift;
+    my %dyads = $self->dyads($self->notes);
+    return \%dyads;
+}
 
 has _octave => ( is => 'ro', default => sub { 4 } );
 has _concert => ( is => 'ro', default => sub { 440 } );
@@ -196,37 +184,6 @@ sub _build__ratio_name_index {
 
 Create a new C<Music::Intervals> object.
 
-=cut
-
-=head2 chord_names
-
-Chord names of the B<size> note combinations.
-
-=cut
-
-sub chord_names {
-    my ($self) = @_;
-
-    my $chord_names = {};
-
-    my $iter = combinations( $self->notes, $self->size );
-
-    while (my $c = $iter->next) {
-        my %dyads = $self->dyads($c);
-
-        # Do we know any named chords?
-        my @chordname = eval { chordname(@$c) };
-
-        # Exclude "rootless" chords unless requested.
-        @chordname = grep { !/no-root/ } @chordname unless $self->rootless;
-
-        # Set the names of this chord combination.
-        $chord_names->{"@$c"} = \@chordname if @chordname;
-    }
-
-    return $chord_names;
-}
-
 =head2 integer_notation
 
 Math!  See source...
@@ -236,19 +193,12 @@ Math!  See source...
 sub integer_notation {
     my ($self) = @_;
 
-    my $integer_notation = {};
+    my %integer_notation = map { $_ => sprintf '%.0f',
+        $self->_midikey + $self->_semitones
+        * log( ($self->_tonic_frequency * (eval $self->_ratio_index->{$_})) / $self->_concert ) / log(2)
+    } @{ $self->notes };
 
-    my $iter = combinations( $self->notes, $self->size );
-
-    while (my $c = $iter->next) {
-        $integer_notation->{"@$c"} = {
-            map { $_ => sprintf '%.0f',
-                $self->_midikey + $self->_semitones * log( ($self->_tonic_frequency * (eval $self->_ratio_index->{$_})) / $self->_concert ) / log(2)
-            } @$c
-        };
-    }
-
-    return $integer_notation;
+    return \%integer_notation;
 }
 
 =head2 eq_tempered_cents
@@ -260,21 +210,13 @@ The Equal tempered cents.
 sub eq_tempered_cents {
     my ($self) = @_;
 
-    my $eq_tempered_cents = {};
+    my %dyads = %{ $self->_dyads };
 
-    my $iter = combinations( $self->notes, $self->size );
+    my %eq_tempered_cents = map {
+        $_ => log( $dyads{$_}->{eq_tempered} ) * $self->_temper
+    } keys %dyads;
 
-    while (my $c = $iter->next) {
-        my %dyads = $self->dyads($c);
-
-        $eq_tempered_cents->{"@$c"} = {
-            map {
-                $_ => log( $dyads{$_}->{eq_tempered} ) * $self->_temper
-            } keys %dyads
-        };
-    }
-
-    return $eq_tempered_cents;
+    return \%eq_tempered_cents;
 }
 
 =head2 eq_tempered_frequencies
@@ -286,19 +228,11 @@ The Equal tempered frequencies.
 sub eq_tempered_frequencies {
     my ($self) = @_;
 
-    my $eq_tempered_frequencies = {};
+    my %eq_tempered_frequencies = map {
+        $_ => name2freq( $_ . $self->_octave ) || $self->_concert * $self->_note_index->{$_}
+    } @{ $self->notes };
 
-    my $iter = combinations( $self->notes, $self->size );
-
-    while (my $c = $iter->next) {
-        $eq_tempered_frequencies->{"@$c"} = {
-            map {
-                $_ => name2freq( $_ . $self->_octave ) || $self->_concert * $self->_note_index->{$_}
-            } @$c
-        };
-    }
-
-    return $eq_tempered_frequencies;
+    return \%eq_tempered_frequencies;
 }
 
 =head2 eq_tempered_intervals
@@ -310,21 +244,13 @@ The Equal tempered intervals.
 sub eq_tempered_intervals {
     my ($self) = @_;
 
-    my $eq_tempered_intervals = {};
+    my %dyads = %{ $self->_dyads };
 
-    my $iter = combinations( $self->notes, $self->size );
+    my %eq_tempered_intervals = map {
+        $_ => $dyads{$_}->{eq_tempered}
+    } keys %dyads;
 
-    while (my $c = $iter->next) {
-        my %dyads = $self->dyads($c);
-
-        $eq_tempered_intervals->{"@$c"} = {
-            map {
-                $_ => $dyads{$_}->{eq_tempered}
-            } keys %dyads
-        };
-    }
-
-    return $eq_tempered_intervals;
+    return \%eq_tempered_intervals;
 }
 
 =head2 natural_cents
@@ -336,21 +262,13 @@ Just intonation cents.
 sub natural_cents {
     my ($self) = @_;
 
-    my $natural_cents = {};
+    my %dyads = %{ $self->_dyads };
 
-    my $iter = combinations( $self->notes, $self->size );
+    my %natural_cents = map {
+        $_ => log( eval $dyads{$_}->{natural} ) * $self->_temper
+    } keys %dyads;
 
-    while (my $c = $iter->next) {
-        my %dyads = $self->dyads($c);
-
-        $natural_cents->{"@$c"} = {
-            map {
-                $_ => log( eval $dyads{$_}->{natural} ) * $self->_temper
-            } keys %dyads
-        };
-    }
-
-    return $natural_cents;
+    return \%natural_cents;
 }
 
 =head2 natural_frequencies
@@ -362,21 +280,14 @@ Just intonation frequencies.
 sub natural_frequencies {
     my ($self) = @_;
 
-    my $natural_frequencies = {};
+    my %natural_frequencies = map {
+        $_ => {
+            $self->_tonic_frequency * eval $self->_ratio_index->{$_} . ''
+                => { $self->_ratio_index->{$_} => $Music::Intervals::Ratios::ratio->{$_}{name} }
+        }
+    } @{ $self->notes };
 
-    my $iter = combinations( $self->notes, $self->size );
-
-    while (my $c = $iter->next) {
-        $natural_frequencies->{"@$c"} = {
-            map { $_ => {
-                sprintf('%.3f', $self->_tonic_frequency * eval $self->_ratio_index->{$_})
-                    => { $self->_ratio_index->{$_} => $Music::Intervals::Ratios::ratio->{$_}{name} }
-                }
-            } @$c
-        };
-    }
-
-    return $natural_frequencies;
+    return \%natural_frequencies;
 }
 
 =head2 natural_intervals
@@ -388,23 +299,15 @@ Just intonation intervals.
 sub natural_intervals {
     my ($self) = @_;
 
-    my $natural_intervals = {};
+    my %dyads = %{ $self->_dyads };
 
-    my $iter = combinations( $self->notes, $self->size );
+    my %natural_intervals = map {
+        $_ => {
+            $dyads{$_}->{natural} => $self->_ratio_name_index->{ $dyads{$_}->{natural} }{name}
+        }
+    } keys %dyads;
 
-    while (my $c = $iter->next) {
-        my %dyads = $self->dyads($c);
-
-        $natural_intervals->{"@$c"} = {
-            map {
-                $_ => {
-                    $dyads{$_}->{natural} => $self->_ratio_name_index->{ $dyads{$_}->{natural} }{name}
-                }
-            } keys %dyads
-        };
-    }
-
-    return $natural_intervals;
+    return \%natural_intervals;
 }
 
 =head2 natural_prime_factors
@@ -416,23 +319,15 @@ Just intonation prime factors.
 sub natural_prime_factors {
     my ($self) = @_;
 
-    my $natural_prime_factors = {};
+    my %dyads = %{ $self->_dyads };
 
-    my $iter = combinations( $self->notes, $self->size );
+    my %natural_prime_factors = map {
+        $_ => {
+            $dyads{$_}->{natural} => $self->ratio_factorize( $dyads{$_}->{natural} )
+        }
+    } keys %dyads;
 
-    while (my $c = $iter->next) {
-        my %dyads = $self->dyads($c);
-
-        $natural_prime_factors->{"@$c"} = {
-            map {
-                $_ => {
-                    $dyads{$_}->{natural} => $self->ratio_factorize( $dyads{$_}->{natural} )
-                }
-            } keys %dyads
-        };
-    }
-
-    return $natural_prime_factors;
+    return \%natural_prime_factors;
 }
 
 =head2 dyads
