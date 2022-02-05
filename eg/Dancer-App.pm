@@ -36,7 +36,6 @@ Possible resultsets:
   natural_intervals
   natural_cents
   natural_prime_factors
-  chord_names
   integer_notation
 
 =cut
