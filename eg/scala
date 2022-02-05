@@ -9,7 +9,6 @@ use Music::Scala ();
 use Music::Intervals::Numeric;
 
 my $file = shift || "$ENV{HOME}/Music/scl/werck1.scl";
-
 die "File: $file does not exist\n" unless -e $file;
 
 my $scala = Music::Scala->new(file => $file);
