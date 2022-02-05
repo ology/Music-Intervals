@@ -1,6 +1,7 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    * This is a fundamental change to the output.
     - Remove the chord aspect and just focus on intervals.
     - Improve documentation.
     - Improve the eg/intervals program.
