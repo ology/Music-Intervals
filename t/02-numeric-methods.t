@@ -9,7 +9,6 @@ use_ok 'Music::Intervals::Numeric';
 
 my $obj = new_ok 'Music::Intervals::Numeric';
 
-my $chord = '1/1 5/4 3/2';
 $obj = new_ok 'Music::Intervals::Numeric' => [
     notes => [qw( 1/1 5/4 3/2 )],
 ];
