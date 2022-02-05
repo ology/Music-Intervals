@@ -1165,7 +1165,7 @@ our $ratio = {
     },
     sk => {
         ratio => '225/224',
-        name => q|septimal kleisma|,
+        name => q|septimal kleisma, marvel comma|,
     },
     '54t' => {
         ratio => '231/200',
@@ -1445,7 +1445,7 @@ our $ratio = {
     },
     br => {
         ratio => '2401/2400',
-        name => q|Breedsma|,
+        name => q|breedsma|,
     },
     gm3 => {
         ratio => '2560/2187',
