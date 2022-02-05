@@ -16,7 +16,6 @@ is_deeply $obj->by_ratio('27/25'),
     { symbol => 'Db', name => 'large limma, BP small semitone (minor second), alternate Renaissance half-step' },
     'by_ratio';
 
-my $chord = 'C E G';
 $obj = new_ok 'Music::Intervals' => [
     notes => [qw( C E G )],
 ];
@@ -56,7 +55,6 @@ is $got{'E G'}{natural}, '6/5', 'dyads';
 my $got = $obj->ratio_factorize('6/15');
 is $got, '(2*3) / (3*5)', 'ratio_factorize';
 
-$chord = "C C'";
 $obj = new_ok 'Music::Intervals' => [
     size => 2,
     notes => [qw( C C' )],
@@ -64,7 +62,7 @@ $obj = new_ok 'Music::Intervals' => [
 
 is_deeply $obj->natural_intervals,
     {
-        $chord => { '2/1' => 'octave' } },
+        "C C'" => { '2/1' => 'octave' } },
     'octave';
 
 $obj = new_ok 'Music::Intervals' => [
