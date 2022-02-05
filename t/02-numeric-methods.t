@@ -28,7 +28,6 @@ is_deeply $obj->prime_factor,
 
 $obj = new_ok 'Music::Intervals::Numeric' => [
     notes => ['1/1'],
-    size  => 1,
 ];
 lives_ok { $obj->frequencies } 'frequencies';
 lives_ok { $obj->intervals } 'intervals';
