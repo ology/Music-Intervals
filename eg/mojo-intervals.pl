@@ -23,7 +23,6 @@ any '/' => sub {
 
     # Results
     for my $method (qw/
-        chord_names
         natural_frequencies natural_intervals natural_cents natural_prime_factors
         eq_tempered_frequencies eq_tempered_intervals eq_tempered_cents
         integer_notation
@@ -46,10 +45,6 @@ __DATA__
     <br>
     <input type="submit" name="submit" id="submit" value="Submit">
 </form>
-
-% if ($chord_names) {
-<pre><%= $chord_names %></pre>
-% }
 
 % if ($natural_frequencies) {
 <pre><%= $natural_frequencies %></pre>
