@@ -17,11 +17,11 @@ my $m = Music::Intervals::Numeric->new(notes => [$scala->get_notes]);
 
 my $i = 0;
 
-for my $interval ($scala->get_notes) {
+for my $note ($scala->get_notes) {
     $i++;
-    my $approx = eval $interval;
-    my $name = $m->ratios->{$interval} || '?';
-    printf "\t%d. %s (%.4f) %s\n", $i, $interval, $approx, $name;
+    my $approx = eval $note;
+    my $name = $m->ratios->{$note} || '?';
+    printf "\t%d. %s (%.4f) %s\n", $i, $note, $approx, $name;
 }
 
 print 'Intervals: ', ddc $m->intervals, { max_width => 256 };
