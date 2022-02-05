@@ -439,4 +439,20 @@ L<http://en.wikipedia.org/wiki/Just_intonation>
 
 L<Music::Scala> - A powerful module encompassing thousands of scales and the ratios therein
 
+=head2 DEPENDENCIES
+
+L<Algorithm::Combinatorics>
+
+L<Math::Factor::XS>
+
+L<MIDI::Pitch>
+
+L<Moo>
+
+L<Music::Intervals::Ratios>
+
+L<Music::Scales>
+
+L<Number::Fraction>
+
 =cut
