@@ -8,7 +8,7 @@ set serializer => 'JSON';
 
 use Music::Intervals;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 DESCRIPTION
 
@@ -43,7 +43,6 @@ Possible resultsets:
 get '/api/:resultset' => sub {
     my $m = _instantiate(
         query_parameters->get('notes'),
-        query_parameters->get('size'),
     );
 
     my $method = route_parameters->get('resultset');
@@ -55,17 +54,12 @@ get '/api/:resultset' => sub {
 };
 
 sub _instantiate {
-    my ($notes, $size) = @_;
+    my ($notes) = @_;
 
     $notes ||= 'C E G';
     $notes = [ split /[\s,]+/, $notes ];
 
-    $size ||= 3;
-
-    my $m = Music::Intervals->new(
-      notes => $notes,
-      size  => $size,
-    );
+    my $m = Music::Intervals->new(notes => $notes);
      
     return $m;
 };
