@@ -9,9 +9,7 @@ use_ok 'Music::Intervals::Numeric';
 
 my $obj = new_ok 'Music::Intervals::Numeric';
 
-$obj = new_ok 'Music::Intervals::Numeric' => [
-    notes => [qw( 1/1 5/4 3/2 )],
-];
+$obj = new_ok 'Music::Intervals::Numeric' => [ notes => [qw( 1/1 5/4 3/2 )] ];
 
 is_deeply $obj->frequencies,
     { "1/1" => "unison, perfect prime, tonic", "3/2" => "perfect fifth", "5/4" => "major third" },
@@ -26,9 +24,7 @@ is_deeply $obj->prime_factor,
     { "1/1 3/2" => { "3/2" => "(3) / (2)" }, "1/1 5/4" => { "5/4" => "(5) / (2*2)" }, "5/4 3/2" => { "6/5" => "(2*3) / (5)" } },
     'prime_factor';
 
-$obj = new_ok 'Music::Intervals::Numeric' => [
-    notes => ['1/1'],
-];
+$obj = new_ok 'Music::Intervals::Numeric' => [ notes => ['1/1'] ];
 lives_ok { $obj->frequencies } 'frequencies';
 lives_ok { $obj->intervals } 'intervals';
 lives_ok { $obj->cent_vals } 'cent_vals';
