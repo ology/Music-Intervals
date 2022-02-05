@@ -10,11 +10,10 @@ use Music::Intervals::Numeric;
 
 my $file = shift || "$ENV{HOME}/Music/scl/werck1.scl";
 
-my $m = Music::Intervals::Numeric->new;
-
 my $scala = Music::Scala->new(file => $file);
-
 print $scala->get_description, "\n";
+
+my $m = Music::Intervals::Numeric->new(notes => [$scala->get_notes]);
 
 my $i = 0;
 
@@ -24,3 +23,5 @@ for my $interval ($scala->get_notes) {
     my $name = $m->ratios->{$interval} || '?';
     printf "\t%d. %s (%.4f) %s\n", $i, $interval, $approx, $name;
 }
+
+print 'Intervals: ', ddc $m->intervals, { max_width => 256 };
