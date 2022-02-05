@@ -50,7 +50,8 @@ use namespace::clean;
 =head1 DESCRIPTION
 
 A C<Music::Intervals> object shows the breakdown of musical notes,
-intervals and chords.
+intervals and chords.  (See L<Music::Intervals::Numeric> to use
+integer ratios instead of named notes.)
 
 This module reveals the "guts" within a given tonality.  And by guts I
 mean, the measurements of the notes and the intervals between them.
