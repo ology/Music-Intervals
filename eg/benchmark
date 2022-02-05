@@ -20,5 +20,5 @@ sub sub_freqs {
 
 sub sub_ints {
     my $note = Music::Intervals->new(notes => ['C'], size => 1);
-    my $freq = $note->eq_tempered_frequencies->{C}{C};
+    my $freq = $note->eq_tempered_frequencies->{C};
 }
