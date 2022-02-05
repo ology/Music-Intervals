@@ -5,14 +5,11 @@ use warnings;
 use Data::Dumper::Compact qw(ddc);
 use Music::Intervals;
 
-my @notes = @ARGV ? @ARGV : qw(C Eb G);
+my @notes = @ARGV ? @ARGV : qw(C D E F G A B);
+#my @notes = @ARGV ? @ARGV : qw(C Db C# D Eb D# E Fb E# F Gb F# G Ab G# A Bb A# B Cb B#);
 
-my $m = Music::Intervals->new(
-    notes => \@notes,
-    size  => 2,
-);
+my $m = Music::Intervals->new(notes => \@notes);
 
-print 'Chord names: ',           ddc $m->chord_names;
 print 'Natural freqs: ',         ddc $m->natural_frequencies;
 print 'Natural intervals: ',     ddc $m->natural_intervals;
 print 'Natural cents: ',         ddc $m->natural_cents;
