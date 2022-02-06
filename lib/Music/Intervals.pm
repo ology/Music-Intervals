@@ -447,8 +447,6 @@ L<MIDI::Pitch>
 
 L<Moo>
 
-L<Music::Intervals::Ratios>
-
 L<Music::Scales>
 
 L<Number::Fraction>
