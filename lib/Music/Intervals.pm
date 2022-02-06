@@ -437,8 +437,6 @@ L<http://en.wikipedia.org/wiki/Equal_temperament>
 
 L<http://en.wikipedia.org/wiki/Just_intonation>
 
-L<Music::Scala> - A powerful module encompassing thousands of scales and the ratios therein
-
 =head2 DEPENDENCIES
 
 L<Algorithm::Combinatorics>
