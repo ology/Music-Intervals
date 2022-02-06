@@ -1,6 +1,9 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Copy the just-intonation scala file to eg/.
+
+0.0802 2022-02-05 07:52:01
     - Fix the eg/* programs a bit more.
 
 0.0801 2022-02-05 07:03:16
