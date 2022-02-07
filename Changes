@@ -1,6 +1,7 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Add the by_description method.
 
 0.0804 2022-02-07 07:32:27
     - Fix the notes attribute default.

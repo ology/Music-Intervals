@@ -35,8 +35,9 @@ use namespace::clean;
   );
 
   # Find known intervals
-  my $name  = $m->by_ratio('6/5');
+  my $name = $m->by_ratio('6/5');
   my $ratio = $m->by_name('Eb');
+  my $intervals = $m->by_description('pythagorean');
 
   perl -Ilib -MMusic::Intervals::Ratios -E'say $Music::Intervals::Ratios::ratio->{C}{name}'
   # unison, perfect prime, tonic
@@ -407,6 +408,26 @@ Return a known ratio name or undef.
 sub by_ratio {
     my ( $self, $ratio ) = @_;
     return $self->_ratio_name_index->{$ratio};
+}
+
+=head2 by_description
+
+  $intervals = $m->by_description('pythagorean');
+
+Search the description of every ratio for the given string.
+
+=cut
+
+sub by_description {
+    my ( $self, $string ) = @_;
+    $string = lc $string;
+    my %matches;
+    for my $ratio (keys %$Music::Intervals::Ratios::ratio) {
+        my $found = $Music::Intervals::Ratios::ratio->{$ratio};
+        $matches{$ratio} = $found
+            if lc($found->{name}) =~ /$string/;
+    }
+    return \%matches;
 }
 
 1;

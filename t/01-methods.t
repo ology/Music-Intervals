@@ -11,6 +11,7 @@ my $obj = new_ok 'Music::Intervals';
 
 is_deeply $obj->by_name('C'), { ratio => '1/1', name => 'unison, perfect prime, tonic' }, 'by_name';
 is_deeply $obj->by_name('c'), undef, 'undef by_name';
+is_deeply [sort keys %{ $obj->by_description('limma') }], [qw(Db Mp enlc pm2)], 'by_description';
 
 is_deeply $obj->by_ratio('27/25'),
     { symbol => 'Db', name => 'large limma, BP small semitone (minor second), alternate Renaissance half-step' },
