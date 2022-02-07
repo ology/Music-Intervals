@@ -20,7 +20,7 @@ use namespace::clean;
 
   use Music::Intervals;
 
-  my $m = Music::Intervals->new(notes => [qw/C E G B/]);
+  my $m = Music::Intervals->new(notes => [qw/C Eb G B/]);
 
   # Then any of:
   print Dumper(
