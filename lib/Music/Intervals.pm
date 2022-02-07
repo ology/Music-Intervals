@@ -5,14 +5,13 @@ package Music::Intervals;
 use strict;
 use warnings;
 
-our $VERSION = '0.0803';
+our $VERSION = '0.0804';
 
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
 use MIDI::Pitch qw( name2freq );
 use Moo;
 use Music::Intervals::Ratios;
-use Music::Scales qw( get_scale_notes );
 use Number::Fraction ();
 use strictures 2;
 use namespace::clean;
@@ -65,7 +64,7 @@ C<[C Eb G]>) or somewhere between C<C> and C<B> (like C<[D F A]>).
 
 The actual notes to use in the computation.
 
-Default: C<[ C D E F G A B ]>
+Default: C<[ C E G ]>
 
 The list of notes may be any of the keys in the L<Music::Intervals::Ratios>
 C<ratio> hashref.  This is very very long and contains useful intervals such as
@@ -95,13 +94,8 @@ major and "m" means minor.
 
 has notes => (
     is      => 'ro',
-    lazy    => 1,
-    builder => 1,
+    default => sub { [qw( C E G )] },
 );
-sub _build_notes {
-    my $self = shift;
-    return [ get_scale_notes( $self->_tonic ) ];
-}
 
 has _dyads => (
     is      => 'ro',

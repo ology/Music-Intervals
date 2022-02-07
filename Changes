@@ -1,6 +1,9 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Fix the notes attribute default.
+
+0.0803 2022-02-06 04:50:06
     - Copy the just-intonation scala file to eg/.
     - Improve documentation.
 

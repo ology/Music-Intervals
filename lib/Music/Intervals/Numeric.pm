@@ -49,7 +49,10 @@ those of the common scale and even the Pythagorean intervals, too.
 
 =cut
 
-has notes => ( is => 'ro', default => sub { [] } );
+has notes => (
+    is => 'ro',
+    default => sub { [qw( 1/1 5/4 3/2 )] },
+);
 
 =head2 ratios
 

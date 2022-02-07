@@ -9,8 +9,6 @@ use_ok 'Music::Intervals::Numeric';
 
 my $obj = new_ok 'Music::Intervals::Numeric';
 
-$obj = new_ok 'Music::Intervals::Numeric' => [ notes => [qw( 1/1 5/4 3/2 )] ];
-
 is_deeply $obj->frequencies,
     { "1/1" => "unison, perfect prime, tonic",
       "3/2" => "perfect fifth",
