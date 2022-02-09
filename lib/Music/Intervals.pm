@@ -5,7 +5,7 @@ package Music::Intervals;
 use strict;
 use warnings;
 
-our $VERSION = '0.0900';
+our $VERSION = '0.0901';
 
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
