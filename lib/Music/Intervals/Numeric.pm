@@ -18,7 +18,7 @@ use namespace::clean;
   use Music::Intervals::Numeric;
 
   my $m = Music::Intervals::Numeric->new(
-    notes => [qw( 1/1 5/4 3/2 15/8 )],
+    notes => [qw( 1/1 6/5 3/2 15/8 )],
   );
 
   print Dumper(
