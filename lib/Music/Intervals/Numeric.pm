@@ -33,7 +33,7 @@ use namespace::clean;
 =head1 DESCRIPTION
 
 A C<Music::Intervals> object shows the mathematical break-down of musical
-intervals and chords given as integer ratios.
+intervals given as integer ratios.
 
 =head1 ATTRIBUTES
 
