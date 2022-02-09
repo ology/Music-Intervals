@@ -11,4 +11,13 @@ my $intervals = Music::Intervals->by_description('pythagorean');
 
 my $m = Music::Intervals->new(notes => [keys %$intervals]);
 
-print ddc $m->natural_intervals, {max_width => 256};
+my $naturals = $m->natural_intervals;
+#print ddc $naturals, {max_width => 256};
+
+my %named;
+for my $natural (keys %$naturals) {
+    my $name = (values %{ $naturals->{$natural} })[0];
+    $named{$natural} = $naturals->{$natural}
+        if defined $name;
+}
+print ddc \%named, {max_width => 256};
