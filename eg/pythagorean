@@ -7,7 +7,7 @@ use Music::Intervals;
 
 my $string = shift || 'pythagorean';
 
-my $intervals = Music::Intervals->by_description('pythagorean');
+my $intervals = Music::Intervals->by_description($string);
 
 my $m = Music::Intervals->new(notes => [keys %$intervals]);
 
