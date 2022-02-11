@@ -8,6 +8,7 @@ use Music::Intervals;
 my $string = shift || 'pythagorean';
 
 my $intervals = Music::Intervals->by_description($string);
+print ddc $intervals, {max_width => 256};
 
 my $m = Music::Intervals->new(notes => [keys %$intervals]);
 
