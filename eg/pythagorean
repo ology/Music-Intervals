@@ -17,7 +17,13 @@ my $naturals = $m->natural_intervals;
 my %named;
 for my $natural (keys %$naturals) {
     my $name = (values %{ $naturals->{$natural} })[0];
-    $named{$natural} = $naturals->{$natural}
-        if defined $name;
+    next unless defined $name;
+    $named{$natural} = $naturals->{$natural};
+    my $ratio = (keys %{ $named{$natural} })[0];
+    $named{$natural}->{float} = eval $ratio;
 }
-print ddc \%named, {max_width => 256};
+#print ddc \%named, {max_width => 256};
+
+for my $key (sort { $named{$a}->{float} <=> $named{$b}->{float} } keys %named) {
+    print $key, ': ', ddc $named{$key}, {max_width => 256};
+}
