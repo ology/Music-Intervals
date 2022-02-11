@@ -25,5 +25,5 @@ for my $natural (keys %$naturals) {
 #print ddc \%named, {max_width => 256};
 
 for my $key (sort { $named{$a}->{float} <=> $named{$b}->{float} } keys %named) {
-    print $key, ': ', ddc $named{$key}, {max_width => 256};
+    printf "%-9s: %s", $key, ddc($named{$key}, {max_width => 256});
 }
