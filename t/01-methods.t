@@ -24,7 +24,7 @@ $obj = new_ok 'Music::Intervals' => [
 
 is_deeply [ sort keys %{ $obj->natural_frequencies } ], [qw(C E G)], 'natural_frequencies';
 is_deeply $obj->natural_intervals,
-    { 'C E' => { '5/4' => 'major third' },
+    { 'C E' => { '5/4' => '5-limit major third, 5th harmonic' },
       'C G' => { '3/2' => 'perfect fifth' },
       'E G' => { '6/5' => 'minor third' } },
     'natural_intervals';
