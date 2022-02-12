@@ -5,7 +5,7 @@ use warnings;
 use Data::Dumper::Compact qw(ddc);
 use Music::Intervals;
 
-my $string = shift || 'pythagorean';
+my $string = shift || 'pythagorean'; # comma, minor, harmonic, etc.
 
 my $intervals = Music::Intervals->by_description($string);
 
