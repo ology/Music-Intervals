@@ -5,7 +5,7 @@ package Music::Intervals;
 use strict;
 use warnings;
 
-our $VERSION = '0.0904';
+our $VERSION = '0.0905';
 
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
@@ -39,7 +39,7 @@ use namespace::clean;
   my $ratio = $m->by_name('Eb');
   my $intervals = $m->by_description('pythagorean');
 
-  perl -Ilib -MMusic::Intervals::Ratios -E'say $Music::Intervals::Ratios::ratio->{C}{name}'
+  perl -MMusic::Intervals::Ratios -E'say $Music::Intervals::Ratios::ratio->{C}{name}'
   # unison, perfect prime, tonic
 
   # Show all the 400+ known intervals:
