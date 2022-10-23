@@ -7,13 +7,15 @@ use warnings;
 
 our $VERSION = '0.0905';
 
+use Moo;
+use strictures 2;
+
 use Algorithm::Combinatorics qw( combinations );
 use Math::Factor::XS qw( prime_factors );
 use MIDI::Pitch qw( name2freq );
-use Moo;
 use Music::Intervals::Ratios;
 use Number::Fraction ();
-use strictures 2;
+
 use namespace::clean;
 
 =head1 SYNOPSIS
