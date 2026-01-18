@@ -3,6 +3,7 @@ use strict;
 use warnings;
 
 use Test::More;
+use Test::Approximate;
 use Test::Exception;
 
 use_ok 'Music::Intervals';
@@ -97,20 +98,26 @@ subtest tension => sub {
     my $obj = new_ok 'Music::Intervals' => [
         notes => [qw( C E )],
     ];
-    is_deeply $obj->cope, {}, 'cope';
-    is_deeply $obj->tenney, {}, 'tenney';
+    my $got = $obj->cope;
+    is_approx $got->{'C E'}, 0.2, 'cope';
+    $got = $obj->tenney;
+    is_approx $got->{'C E'}, 4.322, 'tenney';
 
     $obj = new_ok 'Music::Intervals' => [
         notes => [qw( E G )],
     ];
-    is_deeply $obj->cope, {}, 'cope';
-    is_deeply $obj->tenney, {}, 'tenney';
+    my $got = $obj->cope;
+    is_approx $got->{'E G'}, 0.225, 'cope';
+    $got = $obj->tenney;
+    is_approx $got->{'E G'}, 4.907, 'tenney';
 
     $obj = new_ok 'Music::Intervals' => [
         notes => [qw( C G )],
     ];
-    is_deeply $obj->cope, {}, 'cope';
-    is_deeply $obj->tenney, {}, 'tenney';
+    my $got = $obj->cope;
+    is_approx $got->{'C G'}, 0.1, 'cope';
+    $got = $obj->tenney;
+    is_approx $got->{'C G'}, 2.585, 'tenney';
 };
 
 subtest lives => sub {
