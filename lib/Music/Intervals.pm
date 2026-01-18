@@ -18,7 +18,7 @@ use namespace::clean;
 
 =head1 SYNOPSIS
 
-  use Music::Intervals;
+  use Music::Intervals ();
 
   my $m = Music::Intervals->new(notes => [qw/C Eb G B/]);
 
@@ -32,6 +32,8 @@ use namespace::clean;
     $m->eq_tempered_intervals,
     $m->eq_tempered_cents,
     $m->integer_notation,
+    $m->cope,
+    $m->tenney,
   );
 
   # Find known intervals
