@@ -430,6 +430,32 @@ sub by_description {
     return \%matches;
 }
 
+=head2 cope
+
+  $intervals = $m->cope;
+
+TBD
+
+=cut
+
+sub cope {
+    my ($self) = @_;
+    return {};
+}
+
+=head2 tenney
+
+  $intervals = $m->tenney;
+
+TBD
+
+=cut
+
+sub tenney {
+    my ($self) = @_;
+    return {};
+}
+
 1;
 __END__
 

@@ -94,9 +94,6 @@ subtest misc => sub {
 };
 
 subtest tension => sub {
-SKIP: {
-    skip 'TBD', 9;
-
     my $obj = new_ok 'Music::Intervals' => [
         notes => [qw( C E )],
     ];
@@ -114,7 +111,6 @@ SKIP: {
     ];
     is_deeply $obj->cope, {}, 'cope';
     is_deeply $obj->tenney, {}, 'tenney';
-};
 };
 
 subtest lives => sub {
