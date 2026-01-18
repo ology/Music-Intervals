@@ -93,6 +93,30 @@ subtest misc => sub {
     is $got, '(2*3) / (3*5)', 'ratio_factorize';
 };
 
+subtest tension => sub {
+SKIP: {
+    skip 'TBD', 9;
+
+    my $obj = new_ok 'Music::Intervals' => [
+        notes => [qw( C E )],
+    ];
+    is_deeply $obj->cope, {}, 'cope';
+    is_deeply $obj->tenney, {}, 'tenney';
+
+    $obj = new_ok 'Music::Intervals' => [
+        notes => [qw( E G )],
+    ];
+    is_deeply $obj->cope, {}, 'cope';
+    is_deeply $obj->tenney, {}, 'tenney';
+
+    $obj = new_ok 'Music::Intervals' => [
+        notes => [qw( C G )],
+    ];
+    is_deeply $obj->cope, {}, 'cope';
+    is_deeply $obj->tenney, {}, 'tenney';
+};
+};
+
 subtest lives => sub {
     my $obj = new_ok 'Music::Intervals' => [
         notes => ['C'],
