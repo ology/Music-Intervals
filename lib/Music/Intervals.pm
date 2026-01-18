@@ -9,11 +9,15 @@ our $VERSION = '0.0905';
 
 use strictures 2;
 use Algorithm::Combinatorics qw( combinations );
+use Data::Dumper::Compact qw(ddc);
+use List::Util qw(first);
 use Math::Factor::XS qw( prime_factors );
 use MIDI::Pitch qw( name2freq );
 use Moo;
 use Music::Intervals::Ratios;
+use Music::Tension::Cope ();
 use Number::Fraction ();
+use POSIX qw(log2);
 use namespace::clean;
 
 =head1 SYNOPSIS
@@ -354,10 +358,9 @@ sub dyads {
         # Calculate both natural and equal temperament values for our ratio.
         $dyads{"@$i"} = {
             natural => $str,
-            # The value is either the known pitch ratio or ...
+            # The value is either the known pitch ratio or a calculation
             eq_tempered =>
-              ( name2freq( $i->[1] . $self->_octave ) || ( $self->_concert * $self->_note_index->{ $i->[1] } ) )
-                /
+              ( name2freq( $i->[1] . $self->_octave ) || ( $self->_concert * $self->_note_index->{ $i->[1] } ) ) /
               ( name2freq( $i->[0] . $self->_octave ) || ( $self->_concert * $self->_note_index->{ $i->[0] } ) ),
         };
     }
@@ -434,28 +437,50 @@ sub by_description {
 
 =head2 cope
 
-  $intervals = $m->cope;
+  $tension = $m->cope;
 
-TBD
+Return the L<Music::Tension::Cope> C<vertical> measure for each dyad.
 
 =cut
 
 sub cope {
     my ($self) = @_;
-    return {};
+    my $dyads = $self->_dyads;
+    my $midi = $self->integer_notation;
+    my %cope;
+    my $tension = Music::Tension::Cope->new;
+    for my $d (keys %$dyads) {
+        my ($i, $j) = split / /, $d;
+        $cope{$d} = $tension->vertical([ $midi->{$i}, $midi->{$j} ]);
+    }
+    return \%cope;
 }
 
 =head2 tenney
 
-  $intervals = $m->tenney;
+  $tension = $m->tenney;
 
-TBD
+Compute the Tenney dissonance metric for the intervals.
 
 =cut
 
 sub tenney {
     my ($self) = @_;
-    return {};
+    my $dyads = $self->_dyads;
+    my %interval;
+    for my $d (keys %$dyads) {
+        my $first = first { $Music::Intervals::Ratios::ratio->{$_}{ratio} eq $dyads->{$d}{natural} } keys %$Music::Intervals::Ratios::ratio;
+        $interval{$first} = {
+            ratio => $Music::Intervals::Ratios::ratio->{$first}{ratio},
+            dyad  => $d,
+        };
+    }
+    my %tenney;
+    for my $int (keys %interval) {
+        my ($i, $j) = split /\//, $interval{$int}{ratio};
+        $tenney{ $interval{$int}{dyad} } = log2($i * $j);
+    }
+    return \%tenney;
 }
 
 1;
