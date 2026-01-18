@@ -1,6 +1,7 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Add the cope() and tenney() methods.
 
 0.0905 2022-04-03 06:18:07
     - Fix documentation.
