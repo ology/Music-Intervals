@@ -39,6 +39,7 @@ use namespace::clean;
     $m->integer_notation,
     $m->cope,
     $m->tenney,
+    $m->suavitatis,
   );
 
   # Find known intervals
