@@ -1,6 +1,7 @@
 Revision history for Music-Intervals
 
 {{$NEXT}}
+    - Fix tenney() and suavitatis() when interval is zero.
 
 0.1100 2026-01-18 16:48:04
     - Add Euler's Gradus suavitatis() method.
