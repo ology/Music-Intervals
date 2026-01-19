@@ -472,15 +472,16 @@ sub tenney {
     my %interval;
     for my $d (keys %$dyads) {
         my $first = first { $Music::Intervals::Ratios::ratio->{$_}{ratio} eq $dyads->{$d}{natural} } keys %$Music::Intervals::Ratios::ratio;
+        $first = 0 unless $first;
         $interval{$first} = {
-            ratio => $Music::Intervals::Ratios::ratio->{$first}{ratio},
+            ratio => $first ? $Music::Intervals::Ratios::ratio->{$first}{ratio} : '0/0',
             dyad  => $d,
         };
     }
     my %tenney;
     for my $int (keys %interval) {
         my ($i, $j) = split /\//, $interval{$int}{ratio};
-        $tenney{ $interval{$int}{dyad} } = log2($i * $j);
+        $tenney{ $interval{$int}{dyad} } = !($i && $j) ? 0 : log2($i * $j);
     }
     return \%tenney;
 }
