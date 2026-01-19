@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use Data::Dumper::Compact qw(ddc);
+# use Data::Dumper::Compact qw(ddc);
 use Test::More;
 use Test::Approximate;
 use Test::Exception;
