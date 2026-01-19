@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 
+use Data::Dumper::Compact qw(ddc);
 use Test::More;
 use Test::Approximate;
 use Test::Exception;
@@ -102,6 +103,8 @@ subtest tension => sub {
     is_approx $got->{'C E'}, 0.2, 'cope';
     $got = $obj->tenney;
     is_approx $got->{'C E'}, 4.322, 'tenney';
+    $got = $obj->suavitatis;
+    is_approx $got->{'C E'}, 7, 'suavitatis';
 
     $obj = new_ok 'Music::Intervals' => [
         notes => [qw( E G )],
@@ -110,6 +113,8 @@ subtest tension => sub {
     is_approx $got->{'E G'}, 0.225, 'cope';
     $got = $obj->tenney;
     is_approx $got->{'E G'}, 4.907, 'tenney';
+    $got = $obj->suavitatis;
+    is_approx $got->{'E G'}, 8, 'suavitatis';
 
     $obj = new_ok 'Music::Intervals' => [
         notes => [qw( C G )],
@@ -118,6 +123,8 @@ subtest tension => sub {
     is_approx $got->{'C G'}, 0.1, 'cope';
     $got = $obj->tenney;
     is_approx $got->{'C G'}, 2.585, 'tenney';
+    $got = $obj->suavitatis;
+    is_approx $got->{'C G'}, 4, 'suavitatis';
 };
 
 subtest lives => sub {

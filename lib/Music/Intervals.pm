@@ -11,6 +11,7 @@ use strictures 2;
 use Algorithm::Combinatorics qw( combinations );
 use Data::Dumper::Compact qw(ddc);
 use List::Util qw(first);
+use Math::Prime::Util qw(factor lcm);
 use Math::Factor::XS qw( prime_factors );
 use MIDI::Pitch qw( name2freq );
 use Moo;
@@ -481,6 +482,37 @@ sub tenney {
         $tenney{ $interval{$int}{dyad} } = log2($i * $j);
     }
     return \%tenney;
+}
+
+=head2 suavitatis
+
+  $tension = $m->suavitatis;
+
+Euler's Gradus Suavitatis ("Degree of Agreeability").
+
+=cut
+
+sub suavitatis {
+    my ($self) = @_;
+    my $dyads = $self->_dyads;
+    my %interval;
+    for my $d (keys %$dyads) {
+        my $first = first { $Music::Intervals::Ratios::ratio->{$_}{ratio} eq $dyads->{$d}{natural} } keys %$Music::Intervals::Ratios::ratio;
+        $interval{$first} = {
+            ratio => $Music::Intervals::Ratios::ratio->{$first}{ratio},
+            dyad  => $d,
+        };
+    }
+    my %suavitatis;
+    for my $int (keys %interval) {
+        my ($i, $j) = split /\//, $interval{$int}{ratio};
+        my $lcm = lcm($i, $j);
+        my @factors = factor($lcm);
+        my $sum = 0;
+        $sum += $_ - 1 for @factors;
+        $suavitatis{ $interval{$int}{dyad} } = 1 + $sum;
+    }
+    return \%suavitatis;
 }
 
 1;
