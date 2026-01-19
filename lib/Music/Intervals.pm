@@ -500,8 +500,9 @@ sub suavitatis {
     my %interval;
     for my $d (keys %$dyads) {
         my $first = first { $Music::Intervals::Ratios::ratio->{$_}{ratio} eq $dyads->{$d}{natural} } keys %$Music::Intervals::Ratios::ratio;
+        $first = 0 unless $first;
         $interval{$first} = {
-            ratio => $Music::Intervals::Ratios::ratio->{$first}{ratio},
+            ratio => $first ? $Music::Intervals::Ratios::ratio->{$first}{ratio} : '0/0',
             dyad  => $d,
         };
     }

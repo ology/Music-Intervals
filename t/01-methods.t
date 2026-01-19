@@ -97,6 +97,16 @@ subtest misc => sub {
 
 subtest tension => sub {
     my $obj = new_ok 'Music::Intervals' => [
+        notes => [qw( C C )],
+    ];
+    my $got = $obj->cope;
+    is_approx $got->{'C C'}, 0, 'cope';
+    $got = $obj->tenney;
+    is_approx $got->{'C C'}, 0, 'tenney';
+    $got = $obj->suavitatis;
+    is_approx $got->{'C C'}, 0, 'suavitatis';
+
+    my $obj = new_ok 'Music::Intervals' => [
         notes => [qw( C E )],
     ];
     my $got = $obj->cope;
